@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>@yield('title', 'AnimeReview | オススメのアニメを教えてください')</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js'])
     {{-- <script src="{{ asset('js/app.js') }}" defer="defer"></script> --}}
 
     {{-- <link rel="stylesheet" href="{{ asset(mix('css/app-'.htmldir().'.css')) }}"> --}}
@@ -23,7 +23,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+    
     {{-- 不要なら削除する --}}
     {{-- <script>
       window.Laravel = {!! \Safe\json_encode([
