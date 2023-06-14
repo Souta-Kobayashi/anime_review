@@ -1,8 +1,11 @@
-<script>
-export default {
-};
+<script setup>
+import BaseHeader from "../components/BaseHeader.vue";
+import BaseSidebar from "../components/BaseSidebar.vue";
+import BaseFooter from "../components/BaseFooter.vue";
 </script>
 
 <template>
-    <div></div>
+  <base-header />
+  <h1>Top</h1>
+  <router-link to="/anime">to anime</router-link>
 </template>
