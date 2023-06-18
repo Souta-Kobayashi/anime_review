@@ -1,7 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router';
+import BaseHeader from "./components/BaseHeader.vue";
+import { RouterLink, RouterView, useRouter, useRoute } from "vue-router";
 </script>
 
 <template>
-    <router-view></router-view>
+  <base-header />
+  <router-view></router-view>
 </template>

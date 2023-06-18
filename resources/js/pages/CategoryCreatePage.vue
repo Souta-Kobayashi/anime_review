@@ -1,7 +1,8 @@
-<script>
-export default {
-};
+<script setup>
+import BaseSidebar from "../components/BaseSidebar.vue";
+import BaseFooter from "../components/BaseFooter.vue";
 </script>
 
 <template>
+  <h1>category create</h1>
 </template>
