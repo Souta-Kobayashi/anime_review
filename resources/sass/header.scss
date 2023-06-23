@@ -1,5 +1,4 @@
-$text-opacity: .8;
-$link-color: rgba(var(--bs-white-rgb), $text-opacity);
+$link-color: rgba(var(--bs-white-rgb), .8);
 
 nav {
   .nav-link {
@@ -9,8 +8,6 @@ nav {
       @media (hover: hover) {
         color: $link-color;
       }
-      // SP
-      color: rgba(255, 255, 255, 0.5);
     }
   }
 

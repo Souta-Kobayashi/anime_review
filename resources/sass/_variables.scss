@@ -9,7 +9,7 @@
 
 /* custom */
 
-/* theme */
+/* color */
 // テーマカラーの設定
 $primary:   #0d6efd;
 $secondary: #6c757d;
@@ -19,14 +19,11 @@ $warning:   #ffc107;
 $danger:    #dc3545;
 $light:     #f8f9fa;
 $dark:      #212529;
-
 // リンクの文字色
 $link-color: #0d6efd;
-
 // bodyの背景、文字色
 $body-bg:    #fdfdfd;
 $body-color: #212529;
-
 // input-groupのaddonの背景色
 $input-group-addon-bg: #e9ecef;
 
@@ -39,29 +36,24 @@ $alert-color-scale:  40%;
 // フォントファミリーの設定
 $font-family-sans-serif: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-
 // 基本のフォントサイズの設定 1rem = 16px
 $font-size-base: 1rem;
-
 // 行間の設定
 $line-height-base: 1.5;
 $line-height-sm:   1.25;
 $line-height-lg:   2;
-
 // 見出しフォントの太さ
 $headings-font-weight: 500;
 
 /* border */
 // ボーダーの太さ
 $border-width: 1px;
-
 // ボーダーの色
 $border-color: #dee2e6;
 
 /* radius */
 // 角丸の設定 true=有効 false=無効
 $enable-rounded: true;
-
 // 角丸の大きさの設定
 $border-radius:      .25rem;
 $border-radius-sm:   .2rem;
@@ -71,13 +63,11 @@ $border-radius-pill: 50rem;
 /* shadow */
 // 影の設定 true=有効 false=無効
 $enable-shadows: true;
-
 // 影の色や大きさの設定
 $box-shadow:       0 .5rem 1rem rgba(#000, .15);
 $box-shadow-sm:    0 .125rem .25rem rgba(#000, .075);
 $box-shadow-lg:    0 1rem 3rem rgba(#000, .175);
 $box-shadow-inset: inset 0 1px 2px rgba(#000, .075);
-
 // コンポーネント別の影の設定
 $card-box-shadow:        $box-shadow; // 初期値:null
 $btn-box-shadow:         $box-shadow; // 初期値:inset 0 1px 0 rgba($white, .15), 0 1px 1px rgba($black, .075);
@@ -88,17 +78,14 @@ $form-select-box-shadow: $box-shadow; // 初期値:$box-shadow-inset
 /* space */
 // スペーサーの広さの設定
 $spacer: 1rem;
-
 // 段落とアラートの下のマージン設定
 $paragraph-margin-bottom: 1rem;
 $alert-margin-bottom:     1rem;
-
 // テーブルセルのパディング
 $table-cell-padding-y:    .5rem;
 $table-cell-padding-x:    .5rem;
 $table-cell-padding-y-sm: .25rem;
 $table-cell-padding-x-sm: .25rem;
-
 // インプット、ボタンのパディング
 $input-btn-padding-y:    .375rem;
 $input-btn-padding-x:    .75rem;
@@ -106,7 +93,6 @@ $input-btn-padding-y-sm: .25rem;
 $input-btn-padding-x-sm: .5rem;
 $input-btn-padding-y-lg: .5rem;
 $input-btn-padding-x-lg: 1rem;
-
 // バッジのパディング
 $badge-padding-y: .35em;
 $badge-padding-x: .65em;
@@ -114,6 +100,5 @@ $badge-padding-x: .65em;
 /* gradient */
 // グラデーションの設定 true=有効 false=無効
 $enable-gradients: true;
-
 // グラデーションの強さの設定
 $gradient: linear-gradient(180deg, rgba(#fff, .15), rgba(#fff, 0));
