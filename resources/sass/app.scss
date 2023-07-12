@@ -10,3 +10,19 @@
 @import 'mixin';
 @import 'header';
 @import 'footer';
+@import 'form';
+
+.display-flex-responsive {
+  display: flex;
+  @include sp {
+    display: block;
+  }
+}
+
+.display-block {
+  display: block;
+}
+
+.display-flex {
+  display: flex;
+}

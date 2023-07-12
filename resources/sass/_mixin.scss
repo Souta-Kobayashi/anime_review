@@ -10,7 +10,7 @@ $sp: 480px;
 }
 
 @mixin tab {
-  @media screen and (max-width: ($tab)) {
+  @media screen and (min-width: ($sp)) and (max-width: ($tab)) {
     @content;
   }
 }
