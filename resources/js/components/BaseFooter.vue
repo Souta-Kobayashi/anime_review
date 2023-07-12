@@ -1,5 +1,5 @@
 <template>
-  <footer class="text-center text-white">
+  <footer class="mt-3 text-center text-white">
     <!-- SNS Icons -->
     <div class="container pt-4">
       <section class="mb-4">

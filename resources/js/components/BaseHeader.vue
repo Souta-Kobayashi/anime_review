@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="mb-3">
     <nav class="navbar navbar-expand-lg bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap w-100 align-items-center justify-content-lg-start justify-content-between">
