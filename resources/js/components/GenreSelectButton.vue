@@ -4,7 +4,7 @@
     v-show="!toggleGenre"
     id="animeGenre"
     class="display-flex form-control select-list-flex"
-    @click="setActiveClass($event)"
+    @click="setTargetId($event)"
   >
     <button
       type="button"
@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { useSetSelectedId } from '../lib/setSelectedId';
 
 defineProps({
   toggleGenre: {
@@ -43,6 +43,5 @@ defineProps({
   },
 });
 
-// 親componentからデータ注入
-const { selectedGenreButton, setActiveClass } = inject('genre');
+const { selectedGenreButton, setTargetId } = useSetSelectedId();
 </script>

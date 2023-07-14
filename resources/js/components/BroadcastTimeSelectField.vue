@@ -18,7 +18,7 @@
     <div
       class="d-flex form-control select-list-flex"
       id="broadcastSeason"
-      @click="setActiveClass($event)"
+      @click="setTargetId($event)"
     >
       <button
         type="button"
@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { inject } from 'vue';
+import { useSetSelectedId } from '../lib/setSelectedId';
 
 defineProps({
   toggleBroadcastTime: {
@@ -78,8 +78,7 @@ defineProps({
   },
 });
 
-// 親componentからデータ注入
-const { selectedSeasonButton, setActiveClass } = inject('season');
+const { selectedSeasonButton, setTargetId } = useSetSelectedId();
 
 // 放送時期の西暦プルダウン作成
 const currentYear = new Date().getFullYear(); // 本年
