@@ -1,4 +1,5 @@
 <template>
+  <BaseHeader />
   <main role="main">
     <div class="container">
       <form>
@@ -34,6 +35,7 @@
       </form>
     </div>
   </main>
+  <BaseFooter />
 </template>
 
 <script setup>

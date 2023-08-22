@@ -9,7 +9,7 @@
           href="https://twitter.com/soutaAppservice"
           target="_blank" rel="noopener noreferrer"
           role="button"
-          ><font-awesome-icon :icon="['fab', 'twitter']" />
+          ><FontAwesomeIcon :icon="['fab', 'twitter']" />
         </a>
         <!-- Github -->
         <a
@@ -17,7 +17,7 @@
           href="https://github.com/Souta-Kobayashi"
           target="_blank" rel="noopener noreferrer"
           role="button"
-          ><font-awesome-icon :icon="['fab', 'github']" />
+          ><FontAwesomeIcon :icon="['fab', 'github']" />
         </a>
       </section>
     </div>

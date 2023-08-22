@@ -9,6 +9,16 @@ import HomePage from './pages/HomePage.vue';
 
 const routes = [
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('./pages/Login.vue'),
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('./pages/Register.vue'),
+  },
+  {
     path: '/',
     name: 'home',
     component: HomePage,
