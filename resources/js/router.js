@@ -5,23 +5,24 @@ const BASE_URL = '/'
 // import About from './components/About.vue'
 // import Item from './components/Item.vue'
 // import NotFound from './components/404.vue'
-import HomePage from './pages/HomePage.vue';
+// import HomePage from './pages/HomePage.vue';
 
 const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('./pages/Login.vue'),
+    component: () => import('./pages/LoginPage.vue'),
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('./pages/Register.vue'),
+    component: () => import('./pages/RegisterPage.vue'),
   },
   {
     path: '/',
     name: 'home',
-    component: HomePage,
+    component: () => import('./pages/HomePage.vue'),
+    // component: HomePage,
   },
   {
     // アニメ一覧
