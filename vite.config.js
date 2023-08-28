@@ -1,10 +1,23 @@
-import { defineConfig } from 'vite';
+import { splitVendorChunkPlugin, defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import vuetify from 'vite-plugin-vuetify'
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
+    build: {
+        rollupOptions: {
+            sourcemap: true,
+            output: {
+                entryFileNames: `assets/[name].js`,
+                chunkFileNames: `assets/[name].js`,
+                assetFileNames: `assets/[name].[ext]`,
+            },
+        },
+    },
     plugins: [
         vue(),
+        vuetify(),
         laravel({
             input: [
                 'resources/css/app.css',
@@ -13,5 +26,7 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        splitVendorChunkPlugin(),
+        visualizer(),
     ],
 });
