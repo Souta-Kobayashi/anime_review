@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -23,6 +24,13 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+        $this->renderable(function (Throwable $e, $request) {
+            // APIの認証エラーの例外処理
+            if ($request->is('api/*') && $e instanceof AuthenticationException) {
+                return response()->json(["error" => 401, "message" => "authenticate failed"]);
+            }
+        });
+
         $this->reportable(function (Throwable $e) {
             //
         });
