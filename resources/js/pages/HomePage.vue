@@ -2,7 +2,7 @@
   <BaseHeader />
   <main>
     <h1>Top</h1>
-    <router-link to="/anime">to anime</router-link>
+    <RouterLink to="/anime">to anime</RouterLink>
   </main>
   <BaseFooter />
   <Snackbar />

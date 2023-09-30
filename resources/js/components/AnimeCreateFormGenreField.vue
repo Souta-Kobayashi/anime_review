@@ -17,7 +17,7 @@ import { ref } from 'vue';
 import FormToggleSetLater from './FormToggleSetLater.vue';
 import GenreSelectButton from './GenreSelectButton.vue';
 
-const prop = defineProps({
+const props = defineProps({
   toggleGenre: {
     type: Boolean,
     default: false

@@ -17,7 +17,7 @@ import { ref } from 'vue';
 import FormToggleSetLater from './FormToggleSetLater.vue';
 import BroadcastTimeSelectField from './BroadcastTimeSelectField.vue';
 
-const prop = defineProps({
+const props = defineProps({
   toggleBroadcastTime: {
     type: Boolean,
     default: false

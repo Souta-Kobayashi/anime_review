@@ -17,7 +17,7 @@ import { ref } from 'vue';
 import FormToggleSetLater from './FormToggleSetLater.vue';
 import SynopsisTextArea from './SynopsisTextArea.vue';
 
-const prop = defineProps({
+const props = defineProps({
   toggleSynopsis: {
     type: Boolean,
     default: false

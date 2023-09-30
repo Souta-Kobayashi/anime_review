@@ -17,7 +17,7 @@ import { ref } from 'vue';
 import FormToggleSetLater from './FormToggleSetLater.vue';
 import KeyVisualUpload from './KeyVisualUpload.vue';
 
-const prop = defineProps({
+const props = defineProps({
   toggleKeyVisual: {
     type: Boolean,
     default: false
