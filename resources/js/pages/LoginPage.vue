@@ -52,9 +52,10 @@
 <script setup>
 import router from '../router';
 import { ref, reactive } from 'vue';
-import { useValidate } from '../lib/useValidation';
-import { useSnackbar } from '../lib/useSnackbar';
-import { useAxiosRequest } from '../lib/useAxiosRequest';
+import { useValidate } from '../composables/useValidation';
+import { useSnackbar } from '../composables/useSnackbar';
+import { useAxiosRequest } from '../composables/useAxiosRequest';
+import { useIsLoggedIn } from "../composables/useIsLoggedIn";
 import Snackbar from '../components/Snackbar.vue';
 
 // form
@@ -65,8 +66,9 @@ const form = reactive({
 
 // composables
 const { setSnackbar } = useSnackbar();
-const { axiosPost } = useAxiosRequest();
+const { axiosLoginPost } = useAxiosRequest();
 const { getErrMessage, blurExecVuelidate } = useValidate(form);
+const { setLoginStatus } = useIsLoggedIn();
 
 const showPassword = ref(false);
 const loading = ref(false);
@@ -78,10 +80,11 @@ const submitLogin = async () => {
   // snackbar
   let snackbarMessage, snackbarColor;
   try {
-    const result = await axiosPost('/api/login', form);
+    const result = await axiosLoginPost('/api/login', form);
     // メッセージ表示
     snackbarMessage = result.data.message;
     snackbarColor = 'rgba(2, 136, 209, 0.8)';
+    setLoginStatus(true);
     // topへリダイレクト
     router.push({ name: 'home' });
   } catch (error) {

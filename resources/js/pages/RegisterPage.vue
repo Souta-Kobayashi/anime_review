@@ -80,9 +80,9 @@
 <script setup>
 import router from '../router';
 import { ref, reactive } from 'vue';
-import { useSnackbar } from '../lib/useSnackbar';
-import { useValidate } from '../lib/useValidation';
-import { useAxiosRequest } from '../lib/useAxiosRequest';
+import { useSnackbar } from '../composables/useSnackbar';
+import { useValidate } from '../composables/useValidation';
+import { useAxiosRequest } from '../composables/useAxiosRequest';
 import Snackbar from '../components/Snackbar.vue';
 
 // form

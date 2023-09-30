@@ -1,6 +1,8 @@
 footer {
-  background: #f1f1f1;
-  .copy-right {
-    background: rgba(0, 0, 0, 0.2);
+  background: var(--bs-gray-900);
+
+  .sns-wrapper {
+    border-bottom: var(--bs-border-width) var(--bs-border-style) rgba(var(--bs-light-rgb), 0.5);
   }
+
 }

@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { useSnackbar } from "../lib/useSnackbar";
+import { useSnackbar } from "../composables/useSnackbar";
 
 const {
   snackbarMessage,

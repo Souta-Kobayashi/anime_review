@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { useSetSelectedId } from '../lib/setSelectedId';
+import { useSetSelectedId } from '../composables/setSelectedId';
 
 defineProps({
   toggleBroadcastTime: {

@@ -1,29 +1,12 @@
 <template>
   <footer class="mt-3 text-center text-white">
     <!-- SNS Icons -->
-    <div class="container pt-4">
-      <section class="mb-4">
-        <!-- Twitter -->
-        <a
-          class="btn btn-link btn-lg text-dark m-1"
-          href="https://twitter.com/soutaAppservice"
-          target="_blank" rel="noopener noreferrer"
-          role="button"
-          ><FontAwesomeIcon :icon="['fab', 'twitter']" />
-        </a>
-        <!-- Github -->
-        <a
-          class="btn btn-link btn-lg text-dark m-1"
-          href="https://github.com/Souta-Kobayashi"
-          target="_blank" rel="noopener noreferrer"
-          role="button"
-          ><FontAwesomeIcon :icon="['fab', 'github']" />
-        </a>
-      </section>
-    </div>
+    <MoleculeFooterFlexIcon />
     <!-- Copyright -->
-    <div class="text-center text-dark p-3 copy-right">
-      © 2023 Souta Kobayashi
-    </div>
+    <div class="text-center p-3">© 2023 Souta Kobayashi</div>
   </footer>
 </template>
+
+<script setup>
+import MoleculeFooterFlexIcon from "../molecules/MoleculeFooterFlexIcon.vue";
+</script>

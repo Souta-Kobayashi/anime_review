@@ -1,67 +1,63 @@
 <template>
-  <header class="mb-3">
-    <nav class="navbar navbar-expand-lg bg-dark">
-      <div class="container">
-        <div class="d-flex flex-wrap w-100 align-items-center justify-content-lg-start justify-content-between">
-          <router-link to="/" class="navbar-brand align-items-center text-white fs-4 text-decoration-none">Anime Review</router-link>
-
-          <!-- nav -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-center me-lg-auto" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <router-link to="/" class="nav-link" active-class="text-white">TOP</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/anime" class="nav-link" active-class="text-white">アニメ一覧</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/category" class="nav-link" active-class="text-white">カテゴリ</router-link>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" 
-                  id="create-menu-dropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  :class="{ 'text-white': isDropdownItemActive }">登録メニュー</a>
-                <ul class="dropdown-menu p-2" aria-labelledby="create-menu-dropdown">
-                  <li><router-link to="/anime/create" class="dropdown-item rounded-2">アニメ登録</router-link></li>
-                  <li><router-link to="/category/create" class="dropdown-item rounded-2">カテゴリ登録</router-link></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-          <!-- search -->
-          <!-- col-9は要調整 -->
-          <form class="col-9 col-lg-auto mb-lg-0 mb-2">
-            <input type="search" class="form-control form-control-dark" placeholder="アニメを探す" aria-label="Search">
-          </form>
-
-          <div class="text-end" v-if=false>
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
-          </div>
-        </div>
+  <header class="header">
+    <div class="container header-container">
+      <div class="logo">
+        <RouterLink to="/">AnimeReview</RouterLink>
       </div>
-    </nav>
+
+      <div class="menu-wrapper">
+        <ul class="menu-contents">
+          <MoleculePcNavMenu />
+          <MoleculePcNavRegisterMenu v-if="isLoginStatus" />
+        </ul>
+      </div>
+      <MoleculePcNavUserMenu v-if="!isLoginStatus" />
+      <MoleculeSpNavMenu
+        :is-login-status="isLoginStatus"
+        @toggle-hamburger-menu="toggleHamburgerMenu = !toggleHamburgerMenu"
+      />
+    </div>
+
+    <MoleculeHamburgerMenu
+      :is-login-status="isLoginStatus"
+      :toggle-hamburger-menu="toggleHamburgerMenu"
+      :initial-toggle-register-item="initialToggleRegisterItem"
+      @set-hamburger-contents="e => (hamburgerContents = e.value)"
+      @show-hamburger="e => (e.style.height = e.scrollHeight + 'px')"
+      @close-hamburger="e => (e.style.height = '0')"
+      @show-hamburger-inner="
+        e => changeHamburgerMenuHeight({ e, increaseHeight: true })
+      "
+      @close-hamburger-inner="
+        e => changeHamburgerMenuHeight({ e, increaseHeight: false })
+      "
+    />
   </header>
 </template>
 
 <script setup>
-import { computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import MoleculePcNavMenu from '../molecules/MoleculePcNavMenu.vue';
+import MoleculePcNavRegisterMenu from '../molecules/MoleculePcNavRegisterMenu.vue';
+import MoleculePcNavUserMenu from '../molecules/MoleculePcNavUserMenu.vue';
+import MoleculeSpNavMenu from '../molecules/MoleculeSpNavMenu.vue';
+import MoleculeHamburgerMenu from '../molecules/MoleculeHamburgerMenu.vue';
+import { useIsLoggedIn } from '../composables/useIsLoggedIn';
+
+const { isLoginStatus, fetchLoginStatus, setLoginStatus } = useIsLoggedIn();
 
 const route = useRoute();
 const path = computed(() => route.path);
+const initialToggleRegisterItem = ref(false);
+const toggleHamburgerMenu = ref(false);
+const hamburgerContents = ref(null);
 
-// ドロップダウン内のリンクを開いているか判定
-const isDropdownItemActive = computed(() => {
-  return path.value === '/anime/create' || path.value === '/category/create';
-});
+// ログイン判定
+(async () => {
+  const fls = await fetchLoginStatus();
+  setLoginStatus(fls?.data.status === '200');
+})();
 
 onMounted(() => {
   // ページ遷移時にドロップダウンが閉じない現象を修正
@@ -70,4 +66,18 @@ onMounted(() => {
     if (el) el.classList.remove('show');
   });
 });
+
+// ドロップダウン内のリンクを開いているか判定
+const isDropdownItemActive = computed(() => {
+  return path.value === '/anime/create' || path.value === '/category/create';
+});
+
+// ハンバーガーメニューのinnerのtoggleに併せてheightを変更
+const changeHamburgerMenuHeight = ({ e, increaseHeight }) => {
+  const currentHeight = parseInt(hamburgerContents.value.style.height);
+  const newHeight = increaseHeight
+    ? currentHeight + parseInt(e.scrollHeight)
+    : currentHeight - parseInt(e.scrollHeight);
+  hamburgerContents.value.style.height = newHeight + 'px';
+};
 </script>
