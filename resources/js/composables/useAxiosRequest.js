@@ -8,7 +8,7 @@ export function useAxiosRequest() {
     return axios.post(url, form);
   }
 
-  const axiosPost = (url, form) => {
+  const axiosPost = (url, form = '') => {
     return axios.post(url, form);
   }
 

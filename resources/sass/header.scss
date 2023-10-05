@@ -115,6 +115,22 @@
   }
 }
 
+.logout-btn-wrapper {
+  cursor: pointer;
+  padding: 0 10px;
+  transition: all 0.5s;
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .logout-text {
+    font-size: calc(0.7rem + 0.5vw);
+  }
+}
+
+.sp-logout-btn-wrapper {
+  cursor: pointer;
+}
+
 .rotate-r90 {
   transform: rotate(-90deg);
 }
@@ -164,7 +180,8 @@
       justify-content: space-between;
 
       .register-btn-wrapper,
-      .sp-login-btn-wrapper {
+      .sp-login-btn-wrapper,
+      .sp-logout-btn-wrapper {
         padding: 0 0.7rem 0 0;
       }
 
@@ -174,7 +191,8 @@
     }
 
     .menu-wrapper,
-    .user-menu-wrapper {
+    .user-menu-wrapper,
+    .logout-btn-wrapper {
       display: none;
     }
   }
@@ -184,7 +202,8 @@
 @include tab {
   .header {
     .menu-wrapper,
-    .user-menu-wrapper {
+    .user-menu-wrapper,
+    .logout-btn-wrapper {
       display: none;
     }
 
@@ -193,7 +212,8 @@
       justify-content: space-between;
 
       .register-btn-wrapper,
-      .sp-login-btn-wrapper {
+      .sp-login-btn-wrapper,
+      .sp-logout-btn-wrapper {
         padding: 0 0.7rem 0 0;
       }
 
