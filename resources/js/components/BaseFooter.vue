@@ -3,10 +3,10 @@
     <!-- SNS Icons -->
     <MoleculeFooterFlexIcon />
     <!-- Copyright -->
-    <div class="text-center p-3">© 2023 Souta Kobayashi</div>
+    <p class="text-center p-3 m-0">© 2023 Souta Kobayashi</p>
   </footer>
 </template>
 
 <script setup>
-import MoleculeFooterFlexIcon from "../molecules/MoleculeFooterFlexIcon.vue";
+import MoleculeFooterFlexIcon from '../molecules/MoleculeFooterFlexIcon.vue';
 </script>
