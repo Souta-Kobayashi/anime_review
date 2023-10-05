@@ -21,3 +21,5 @@ yarn-error.log
 /doc
 *.plantuml
 /log
+stats.html
+.prettierrc
