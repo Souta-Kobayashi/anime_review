@@ -2,10 +2,13 @@
   <div class="sp-header-contents">
     <AtomUserRegisterButtonText v-if="!isLoginStatus" />
     <AtomUserLoginLinkIcon v-if="!isLoginStatus" />
-    <AtomUserLogoutLinkIcon
+    <div
       v-if="isLoginStatus"
-      @user-logout="$emit('userLogout')"
-    />
+      class="sp-logout-btn-wrapper mr-4"
+      @click="$emit('userLogout')"
+    >
+      <AtomUserLogoutLinkIcon />
+    </div>
     <AtomHamburgerIcon @toggle-hamburger-menu="$emit('toggleHamburgerMenu')" />
   </div>
 </template>
