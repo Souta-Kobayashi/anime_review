@@ -4,10 +4,15 @@ import { useAxiosRequest } from './useAxiosRequest';
 const { axiosGet } = useAxiosRequest();
 
 const isLoginStatus = ref(false);
+const isDataReady = ref(false);
 
 export function useIsLoggedIn() {
   const setLoginStatus = (isLoggedIn) => {
     isLoginStatus.value = isLoggedIn;
+  }
+
+  const setDataReady = (isReady) => {
+    isDataReady.value = isReady;
   }
 
   const fetchLoginStatus = async () => {
@@ -21,7 +26,9 @@ export function useIsLoggedIn() {
 
   return {
     isLoginStatus,
+    isDataReady,
     setLoginStatus,
+    setDataReady,
     fetchLoginStatus,
   }
 }

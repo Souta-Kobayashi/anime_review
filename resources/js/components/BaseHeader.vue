@@ -5,17 +5,19 @@
         <RouterLink to="/">AnimeReview</RouterLink>
       </div>
 
-      <div class="menu-wrapper">
+      <div class="menu-wrapper" v-if="isDataReady">
         <ul class="menu-contents">
           <MoleculePcNavMenu />
           <MoleculePcNavRegisterMenu v-if="isLoginStatus" />
         </ul>
       </div>
       <MoleculePcNavUserMenu
+        v-if="isDataReady"
         :is-login-status="isLoginStatus"
         @user-logout="userLogout"
       />
       <MoleculeSpNavMenu
+        v-if="isDataReady"
         :is-login-status="isLoginStatus"
         @toggle-hamburger-menu="toggleHamburgerMenu = !toggleHamburgerMenu"
         @user-logout="userLogout"
@@ -51,7 +53,15 @@ import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 import { useSnackbar } from '../composables/useSnackbar';
 import { useAxiosRequest } from '../composables/useAxiosRequest';
 
-const { isLoginStatus, fetchLoginStatus, setLoginStatus } = useIsLoggedIn();
+// prettier-ignore
+const {
+  isLoginStatus,
+  isDataReady,
+  setLoginStatus,
+  setDataReady,
+  fetchLoginStatus,
+} = useIsLoggedIn();
+
 const { setSnackbar } = useSnackbar();
 const { axiosPost } = useAxiosRequest();
 
@@ -64,6 +74,7 @@ const hamburgerContents = ref(null);
 (async () => {
   const fls = await fetchLoginStatus();
   setLoginStatus(fls?.data.status === '200');
+  setDataReady(true);
 })();
 
 onMounted(() => {
