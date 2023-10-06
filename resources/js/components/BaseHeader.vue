@@ -25,7 +25,6 @@
     <MoleculeHamburgerMenu
       :is-login-status="isLoginStatus"
       :toggle-hamburger-menu="toggleHamburgerMenu"
-      :initial-toggle-register-item="initialToggleRegisterItem"
       @set-hamburger-contents="e => (hamburgerContents = e.value)"
       @show-hamburger="e => (e.style.height = e.scrollHeight + 'px')"
       @close-hamburger="e => (e.style.height = '0')"
@@ -58,7 +57,6 @@ const { axiosPost } = useAxiosRequest();
 
 const route = useRoute();
 const path = computed(() => route.path);
-const initialToggleRegisterItem = ref(false);
 const toggleHamburgerMenu = ref(false);
 const hamburgerContents = ref(null);
 

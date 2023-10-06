@@ -22,7 +22,6 @@
           </AtomMenuLink>
           <MoleculeSpNavRegisterMenu
             v-if="isLoginStatus"
-            :initial-toggle-register-item="initialToggleRegisterItem"
             @show-hamburger-inner="e => $emit('showHamburgerInner', e)"
             @close-hamburger-inner="e => $emit('closeHamburgerInner', e)"
           />
@@ -45,10 +44,6 @@ const props = defineProps({
   toggleHamburgerMenu: {
     type: Boolean,
     default: false,
-  },
-  initialToggleRegisterItem: {
-    type: Boolean,
-    default: true,
   },
 });
 

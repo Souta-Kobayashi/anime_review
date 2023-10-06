@@ -31,16 +31,9 @@
 import { ref } from 'vue';
 import AtomMenuLink from '../atoms/AtomMenuLink.vue';
 
-const props = defineProps({
-  initialToggleRegisterItem: {
-    type: Boolean,
-    default: true,
-  },
-});
-
 const emit = defineEmits(['showHamburgerInner', 'closeHamburgerInner']);
 
-const toggleRegisterItem = ref(props.initialToggleRegisterItem);
+const toggleRegisterItem = ref(false);
 const registerItems = {
   register: {
     title: 'アニメ登録',
