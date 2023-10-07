@@ -11,60 +11,60 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('./pages/LoginPage.vue'),
+    component: () => import('./pages/Login.vue'),
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('./pages/RegisterPage.vue'),
+    component: () => import('./pages/Register.vue'),
   },
   {
     path: '/',
     name: 'home',
-    component: () => import('./pages/HomePage.vue'),
+    component: () => import('./pages/Home.vue'),
     // component: HomePage,
   },
   {
     // アニメ一覧
     path: '/anime',
     name: 'anime',
-    component: () => import('./pages/AnimePage.vue'),
+    component: () => import('./pages/Anime.vue'),
   },
   {
     // アニメ登録
     path: '/anime/create',
     name: 'anime-create',
-    component: () => import('./pages/AnimeCreatePage.vue'),
+    component: () => import('./pages/AnimeCreate.vue'),
   },
   {
     // アニメ詳細
     path: '/anime/:id',
     name: 'anime-show',
-    component: () => import('./pages/AnimeShowPage.vue'),
+    component: () => import('./pages/AnimeShow.vue'),
   },
   {
     // アニメ編集
     path: '/anime/:id/edit',
     name: 'anime-edit',
-    component: () => import('./pages/AnimeEditPage.vue'),
+    component: () => import('./pages/AnimeEdit.vue'),
   },
   {
     // カテゴリリスト
     path: '/category',
     name: 'category',
-    component: () => import('./pages/CategoryPage.vue'),
+    component: () => import('./pages/Category.vue'),
   },
   {
     // カテゴリ登録
     path: '/category/create',
     name: 'category-create',
-    component: () => import('./pages/CategoryCreatePage.vue'),
+    component: () => import('./pages/CategoryCreate.vue'),
   },
   {
     // カテゴリ編集
     path: '/category/:id/edit',
     name: 'category-edit',
-    component: () => import('./pages/CategoryEditPage.vue'),
+    component: () => import('./pages/CategoryEdit.vue'),
   },
   // {
   //   path: '/about',
