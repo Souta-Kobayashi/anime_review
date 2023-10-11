@@ -1,8 +1,12 @@
 <template>
-  <v-sheet class="pa-6 mx-auto" max-width="700px" width="100vw">
+  <v-sheet
+    class="pa-6 mx-auto"
+    max-width="700px"
+    width="100vw"
+  >
     <h4 class="text-center">ログイン</h4>
 
-    <v-form v-model="isPassed" @submit.prevent="submitLogin">
+    <v-form v-model="isPassed" @submit.prevent>
       <v-container>
         <v-text-field
           v-model="form.email"
@@ -20,7 +24,9 @@
           v-model="form.password"
           :type="showPassword ? 'text' : 'password'"
           :error-messages="getErrMessage('password')"
-          :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          :append-inner-icon="
+            showPassword ? 'mdi-eye' : 'mdi-eye-off'
+          "
           color="primary"
           label="パスワード"
           placeholder="Enter your password"
@@ -39,6 +45,7 @@
           size="large"
           type="submit"
           variant="elevated"
+          @submit.prevent="submitLogin"
         >
           ログインする
         </v-btn>
@@ -55,7 +62,7 @@ import { ref, reactive } from 'vue';
 import { useValidate } from '../composables/useValidation';
 import { useSnackbar } from '../composables/useSnackbar';
 import { useAxiosRequest } from '../composables/useAxiosRequest';
-import { useIsLoggedIn } from "../composables/useIsLoggedIn";
+import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 import Snackbar from '../components/Snackbar.vue';
 
 // form
@@ -67,7 +74,8 @@ const form = reactive({
 // composables
 const { setSnackbar } = useSnackbar();
 const { axiosLoginPost } = useAxiosRequest();
-const { getErrMessage, blurExecVuelidate } = useValidate(form);
+const { getErrMessage, blurExecVuelidate } =
+  useValidate(form);
 const { setLoginStatus } = useIsLoggedIn();
 
 const showPassword = ref(false);
@@ -91,7 +99,8 @@ const submitLogin = async () => {
     snackbarColor = 'rgba(255, 87, 34, 0.8)';
     if (error.response.status !== 422) {
       // 422以外のエラーの場合
-      snackbarMessage = '想定外のエラーが発生しました。再度お試しください';
+      snackbarMessage =
+        '想定外のエラーが発生しました。再度お試しください';
     } else {
       // 422エラーの場合
       snackbarMessage = 'ログインに失敗しました';

@@ -1,8 +1,12 @@
 <template>
-  <v-sheet class="pa-6 mx-auto" max-width="700px" width="100vw">
+  <v-sheet
+    class="pa-6 mx-auto"
+    max-width="700px"
+    width="100vw"
+  >
     <h4 class="text-center">ユーザー登録</h4>
 
-    <v-form v-model="isPassed" @submit.prevent="submitRegisterUser">
+    <v-form v-model="isPassed" @submit.prevent>
       <v-container>
         <v-text-field
           v-model="form.name"
@@ -30,7 +34,9 @@
           v-model="form.password"
           :type="showPassword ? 'text' : 'password'"
           :error-messages="getErrMessage('password')"
-          :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          :append-inner-icon="
+            showPassword ? 'mdi-eye' : 'mdi-eye-off'
+          "
           :counter="8"
           color="primary"
           label="パスワード"
@@ -45,20 +51,34 @@
 
         <v-text-field
           v-model="form.password_confirmation"
-          :type="showConfirmationPassword ? 'text' : 'password'"
-          :error-messages="getErrMessage('password_confirmation')"
-          :append-inner-icon="showConfirmationPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="
+            showConfirmationPassword ? 'text' : 'password'
+          "
+          :error-messages="
+            getErrMessage('password_confirmation')
+          "
+          :append-inner-icon="
+            showConfirmationPassword
+              ? 'mdi-eye'
+              : 'mdi-eye-off'
+          "
           color="primary"
           label="パスワード(確認用)"
           placeholder="Enter your password"
           prepend-inner-icon="mdi-lock-outline"
           variant="underlined"
           autocomplete="new-password"
-          @click:appendInner="showConfirmationPassword = !showConfirmationPassword"
+          @click:appendInner="
+            showConfirmationPassword =
+              !showConfirmationPassword
+          "
           @blur="blurExecVuelidate('password_confirmation')"
         ></v-text-field>
 
-        <v-checkbox color="secondary" label="サイト規約に同意します"></v-checkbox>
+        <v-checkbox
+          color="secondary"
+          label="サイト規約に同意します"
+        ></v-checkbox>
         <v-btn
           :disabled="!isPassed"
           :loading="loading"
@@ -67,6 +87,7 @@
           size="large"
           type="submit"
           variant="elevated"
+          @submit.prevent="submitRegisterUser"
         >
           登録を完了する
         </v-btn>
@@ -97,7 +118,11 @@ const form = reactive({
 // composables
 const { setSnackbar } = useSnackbar();
 const { axiosPost } = useAxiosRequest();
-const { getErrMessage, blurExecVuelidate, setServerValidationError } = useValidate(form);
+const {
+  getErrMessage,
+  blurExecVuelidate,
+  setServerValidationError,
+} = useValidate(form);
 
 const showPassword = ref(false);
 const showConfirmationPassword = ref(false);
@@ -121,11 +146,13 @@ const submitRegisterUser = async () => {
 
     if (error.response.status !== 422) {
       // 422以外のエラーの場合
-      snackbarMessage = '想定外のエラーが発生しました。再度お試しください';
+      snackbarMessage =
+        '想定外のエラーが発生しました。再度お試しください';
       return;
     } else {
       // 422エラーの場合
-      snackbarMessage = 'ユーザー登録に失敗しました。エラーメッセージを確認してください';
+      snackbarMessage =
+        'ユーザー登録に失敗しました。エラーメッセージを確認してください';
     }
 
     // 422エラーの場合のみエラーメッセージを表示
