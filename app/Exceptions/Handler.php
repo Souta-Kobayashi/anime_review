@@ -26,6 +26,13 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->renderable(function (Throwable $e, $request) {
+            // 非ログイン時の例外処理
+            if ($request->is('api/isLoggedIn') && $e instanceof AuthenticationException) {
+                return response()->json(
+                    ['status' => 401, 'message' => 'authenticate failed'],
+                );
+            }
+
             // APIの認証エラーの例外処理
             if ($request->is('api/*') && $e instanceof AuthenticationException) {
                 return response()->json(
