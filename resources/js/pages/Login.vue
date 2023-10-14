@@ -45,7 +45,7 @@
           size="large"
           type="submit"
           variant="elevated"
-          @submit.prevent="submitLogin"
+          @click="submitLogin"
         >
           ログインする
         </v-btn>
@@ -57,11 +57,9 @@
 </template>
 
 <script setup>
-import router from '../router';
 import { ref, reactive } from 'vue';
+import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
-import { useSnackbar } from '../composables/useSnackbar';
-import { useAxiosRequest } from '../composables/useAxiosRequest';
 import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 import Snackbar from '../components/Snackbar.vue';
 
@@ -72,42 +70,23 @@ const form = reactive({
 });
 
 // composables
-const { setSnackbar } = useSnackbar();
-const { axiosLoginPost } = useAxiosRequest();
+const { loading, setLoading, apiPostRequest } =
+  useApiRequest();
+const { setLoginStatus } = useIsLoggedIn();
 const { getErrMessage, blurExecVuelidate } =
   useValidate(form);
-const { setLoginStatus } = useIsLoggedIn();
 
 const showPassword = ref(false);
-const loading = ref(false);
 const isPassed = ref(false);
 
 // submit
 const submitLogin = async () => {
-  loading.value = true;
-  // snackbar
-  let snackbarMessage, snackbarColor;
-  try {
-    const result = await axiosLoginPost('/api/login', form);
-    // メッセージ表示
-    snackbarMessage = result.data.message;
-    snackbarColor = 'rgba(2, 136, 209, 0.8)';
-    setLoginStatus(true);
-    // topへリダイレクト
-    router.push({ name: 'home' });
-  } catch (error) {
-    snackbarColor = 'rgba(255, 87, 34, 0.8)';
-    if (error.response.status !== 422) {
-      // 422以外のエラーの場合
-      snackbarMessage =
-        '想定外のエラーが発生しました。再度お試しください';
-    } else {
-      // 422エラーの場合
-      snackbarMessage = 'ログインに失敗しました';
-    }
-  } finally {
-    setSnackbar(snackbarMessage, snackbarColor);
-    loading.value = false;
-  }
+  setLoading(true);
+  const result = await apiPostRequest('/api/login', form);
+
+  // NOTE: 認証エラーはサーバーからのエラーメッセージは表示させないことにした
+  // "ログインに失敗"文言以上のヒントは不要と判断
+  if (result.status === 200) setLoginStatus(true);
+  setLoading(false);
 };
 </script>

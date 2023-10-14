@@ -1,12 +1,9 @@
-main{
+main {
   #animeName {
     width: 50%;
     @include sp {
       width: 100%;
     }
-    // &::placeholder {
-    //   // color: var(--bs-gray-500);
-    // }
   }
 
   #broadcastYear {
@@ -21,7 +18,7 @@ main{
       width: 30%;
     }
   }
-  
+
   #broadcastSeason {
     @include tab {
       width: 100vw;
@@ -51,12 +48,40 @@ main{
     button.active {
       background: #dee2e6;
       color: black;
-      font-weight: 600;    
+      font-weight: 600;
     }
-
   }
   .hidden {
     display: none;
   }
-}
 
+  .broadcast-wrapper {
+    display: flex;
+  }
+  .broadcast-year {
+    max-width: 30%;
+  }
+  .broadcast-season {
+    max-width: 70%;
+  }
+
+  @include tab {
+    .broadcast-wrapper {
+      display: flex;
+    }
+  }
+
+  @include sp {
+    .broadcast-wrapper {
+      display: block;
+    }
+    .broadcast-year {
+      max-width: 100%;
+      padding-bottom: 0;
+    }
+    .broadcast-season {
+      max-width: 100%;
+      padding-top: 0;
+    }
+  }
+}

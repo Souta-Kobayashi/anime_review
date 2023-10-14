@@ -5,10 +5,7 @@
       input-id="synopsisLateToggle"
       v-model="toggleSynopsisLocal"
     />
-    <SynopsisTextArea
-      :toggle-synopsis="toggleSynopsisLocal"
-      has-label
-    />
+    <SynopsisTextArea :toggle-synopsis="toggleSynopsisLocal" has-label />
   </div>
 </template>
 
@@ -20,9 +17,9 @@ import SynopsisTextArea from './SynopsisTextArea.vue';
 const props = defineProps({
   toggleSynopsis: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
-const toggleSynopsisLocal = ref(prop.toggleSynopsis);
+const toggleSynopsisLocal = ref(props.toggleSynopsis);
 </script>

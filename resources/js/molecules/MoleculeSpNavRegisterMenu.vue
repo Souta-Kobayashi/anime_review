@@ -1,14 +1,23 @@
 <template>
-  <li class="sp-menu-item" @click="toggleRegisterItem = !toggleRegisterItem">
-    <a href="#"
-      >登録メニュー<v-icon icon="mdi-triangle-small-down" size="small"
+  <li
+    class="sp-menu-item"
+    @click="toggleRegisterItem = !toggleRegisterItem"
+  >
+    <a
+      >登録メニュー<v-icon
+        icon="mdi-triangle-small-down"
+        size="small"
     /></a>
     <Transition
       name="show-hamburger-inner"
       @enter="e => $emit('showHamburgerInner', e)"
       @leave="e => $emit('closeHamburgerInner', e)"
     >
-      <ul v-show="toggleRegisterItem" class="register-item-wrapper" @click.stop>
+      <ul
+        v-show="toggleRegisterItem"
+        class="register-item-wrapper"
+        @click.stop
+      >
         <AtomMenuLink
           v-for="(item, key) in registerItems"
           :key="key"
@@ -31,7 +40,10 @@
 import { ref } from 'vue';
 import AtomMenuLink from '../atoms/AtomMenuLink.vue';
 
-const emit = defineEmits(['showHamburgerInner', 'closeHamburgerInner']);
+const emit = defineEmits([
+  'showHamburgerInner',
+  'closeHamburgerInner',
+]);
 
 const toggleRegisterItem = ref(false);
 const registerItems = {
@@ -46,7 +58,10 @@ const registerItems = {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+a {
+  cursor: pointer;
+}
 .show-hamburger-inner-enter-from {
   opacity: 0;
 }

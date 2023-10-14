@@ -53,11 +53,24 @@ class CustomValidationRules {
     }));
   }
 
+  animeCreateRules() {
+    return computed(() => ({
+      name: {
+        required: this.requiredCustomMessage(),
+      },
+    }));
+  }
+
   getRules() {
-    if (this.currentUrl === '/register') {
-      return this.registerRules();
-    } else if (this.currentUrl === '/login') {
-      return this.loginRules();
+    switch (this.currentUrl) {
+      case '/register':
+        return this.registerRules();
+      case '/login':
+        return this.loginRules();
+      case '/anime/create':
+        return this.animeCreateRules();
+      default:
+        console.log('Unknown Rules.');
     }
   }
 }

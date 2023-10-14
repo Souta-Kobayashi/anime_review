@@ -20,9 +20,9 @@ import KeyVisualSourceText from './KeyVisualSourceText.vue';
 const props = defineProps({
   toggleKeyVisualSource: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
-const toggleKeyVisualSourceLocal = ref(prop.toggleKeyVisualSource);
+const toggleKeyVisualSourceLocal = ref(props.toggleKeyVisualSource);
 </script>

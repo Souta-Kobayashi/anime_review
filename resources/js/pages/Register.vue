@@ -87,7 +87,7 @@
           size="large"
           type="submit"
           variant="elevated"
-          @submit.prevent="submitRegisterUser"
+          @click="submitRegisterUser"
         >
           登録を完了する
         </v-btn>
@@ -99,11 +99,9 @@
 </template>
 
 <script setup>
-import router from '../router';
 import { ref, reactive } from 'vue';
-import { useSnackbar } from '../composables/useSnackbar';
+import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
-import { useAxiosRequest } from '../composables/useAxiosRequest';
 import Snackbar from '../components/Snackbar.vue';
 
 // form
@@ -116,8 +114,8 @@ const form = reactive({
 });
 
 // composables
-const { setSnackbar } = useSnackbar();
-const { axiosPost } = useAxiosRequest();
+const { loading, setLoading, apiPostRequest } =
+  useApiRequest();
 const {
   getErrMessage,
   blurExecVuelidate,
@@ -126,41 +124,19 @@ const {
 
 const showPassword = ref(false);
 const showConfirmationPassword = ref(false);
-const loading = ref(false);
 const isPassed = ref(false);
 
 // submit
 const submitRegisterUser = async () => {
-  loading.value = true;
-  // snackbar
-  let snackbarMessage, snackbarColor;
-  try {
-    const result = await axiosPost('/api/register', form);
-    // メッセージ表示
-    snackbarMessage = result.data.message;
-    snackbarColor = 'rgba(2, 136, 209, 0.8)';
-    // topへリダイレクト
-    router.push({ name: 'home' });
-  } catch (error) {
-    snackbarColor = 'rgba(255, 87, 34, 0.8)';
-
-    if (error.response.status !== 422) {
-      // 422以外のエラーの場合
-      snackbarMessage =
-        '想定外のエラーが発生しました。再度お試しください';
-      return;
-    } else {
-      // 422エラーの場合
-      snackbarMessage =
-        'ユーザー登録に失敗しました。エラーメッセージを確認してください';
-    }
-
-    // 422エラーの場合のみエラーメッセージを表示
-    const errObject = error.response.data.errors;
+  setLoading(true);
+  const result = await apiPostRequest(
+    '/api/register',
+    form
+  );
+  if (result.status === 422) {
+    const errObject = result.data.errors;
     setServerValidationError(errObject);
-  } finally {
-    setSnackbar(snackbarMessage, snackbarColor);
-    loading.value = false;
   }
+  setLoading(false);
 };
 </script>

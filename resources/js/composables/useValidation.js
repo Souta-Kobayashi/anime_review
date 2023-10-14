@@ -11,7 +11,7 @@ export function useValidate(form) {
   const v$ = useVuelidate(rules, form);
 
   // フォーカスが外れた時実行される
-  const blurExecVuelidate = (field) => {
+  const blurExecVuelidate = field => {
     serverValidationErrMessage[field] = ''; // サーバーエラーメッセージ削除
     // 初回フロントバリデーション用の処理
     // NOTE: $touch()によって、バリデーションの実行に加えて初回バリデーションを行ったフラグが立てられる
@@ -20,27 +20,30 @@ export function useValidate(form) {
   };
 
   // バリデーションの結果を表示
-  const getErrMessage = (fieldName) => {
+  const getErrMessage = fieldName => {
     // vuelidateのエラーメッセージ
     const fieldErrors = v$.value[fieldName]?.$errors;
     if (fieldErrors && fieldErrors.length !== 0)
-      return fieldErrors.map((error) => error.$message).join(', ');
+      return fieldErrors
+        .map(error => error.$message)
+        .join(', ');
 
     // サーバーからのエラーメッセージ
-    const serverErrors = serverValidationErrMessage[fieldName];
+    const serverErrors =
+      serverValidationErrMessage[fieldName];
     if (serverErrors) return serverErrors;
   };
 
-  const setServerValidationError = (errObject) => {
+  const setServerValidationError = errObject => {
     for (const key in errObject) {
       serverValidationErrMessage[key] = errObject[key][0];
       getErrMessage(key);
     }
-  }
+  };
 
   return {
     blurExecVuelidate,
     getErrMessage,
     setServerValidationError,
-  }
+  };
 }

@@ -5,10 +5,7 @@
       input-id="keyVisualLateToggle"
       v-model="toggleKeyVisualLocal"
     />
-    <KeyVisualUpload
-      :toggle-key-visual="toggleKeyVisualLocal"
-      has-label
-    />
+    <KeyVisualUpload :toggle-key-visual="toggleKeyVisualLocal" has-label />
   </div>
 </template>
 
@@ -20,9 +17,9 @@ import KeyVisualUpload from './KeyVisualUpload.vue';
 const props = defineProps({
   toggleKeyVisual: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
-const toggleKeyVisualLocal = ref(prop.toggleKeyVisual);
+const toggleKeyVisualLocal = ref(props.toggleKeyVisual);
 </script>

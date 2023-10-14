@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref } from 'vue';
 import { useAxiosRequest } from './useAxiosRequest';
 
 const { axiosGet } = useAxiosRequest();
@@ -7,19 +7,18 @@ const isLoginStatus = ref(false);
 const isDataReady = ref(false);
 
 export function useIsLoggedIn() {
-  const setLoginStatus = (isLoggedIn) => {
-    isLoginStatus.value = isLoggedIn;
-  }
+  const setLoginStatus = v => {
+    isLoginStatus.value = v;
+  };
 
-  const setDataReady = (isReady) => {
-    isDataReady.value = isReady;
-  }
+  const setDataReady = v => {
+    isDataReady.value = v;
+  };
 
   const fetchLoginStatus = async () => {
     try {
       return await axiosGet('/api/isLoggedIn');
     } catch (error) {
-      console.log(error);
       return null;
     }
   };
@@ -30,5 +29,5 @@ export function useIsLoggedIn() {
     setLoginStatus,
     setDataReady,
     fetchLoginStatus,
-  }
+  };
 }

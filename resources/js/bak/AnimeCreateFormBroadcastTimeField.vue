@@ -20,9 +20,9 @@ import BroadcastTimeSelectField from './BroadcastTimeSelectField.vue';
 const props = defineProps({
   toggleBroadcastTime: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
-const toggleBroadcastTimeLocal = ref(prop.toggleBroadcastTime);
+const toggleBroadcastTimeLocal = ref(props.toggleBroadcastTime);
 </script>
