@@ -39,4 +39,11 @@ Route::middleware('auth:sanctum')->group(function () {
         // レスポンス
         return response()->json(['status' => 200, 'message' => 'アニメの登録が完了しました']);
     });
+
+    Route::post('/category/create', function (Request $request) {
+        // $categoryName = $request->input('categoryName');
+        // データベースへの保存などの処理
+        // レスポンス
+        return response()->json(['status' => 200, 'message' => 'カテゴリの登録が完了しました']);
+    });
 });

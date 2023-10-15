@@ -1,5 +1,11 @@
 import { computed } from 'vue';
-import { minLength, required, email, sameAs, helpers } from '@vuelidate/validators';
+import {
+  minLength,
+  required,
+  email,
+  sameAs,
+  helpers,
+} from '@vuelidate/validators';
 
 class CustomValidationRules {
   constructor(currentUrl, form) {
@@ -12,13 +18,22 @@ class CustomValidationRules {
     return helpers.withMessage('必須入力です', required);
   }
   emailCustomMessage() {
-    return helpers.withMessage('無効なメールアドレスです', email);
+    return helpers.withMessage(
+      '無効なメールアドレスです',
+      email
+    );
   }
   minLengthCustomMessage(length) {
-    return helpers.withMessage(`${length}文字以上の入力が必要です`, minLength(length));
+    return helpers.withMessage(
+      `${length}文字以上の入力が必要です`,
+      minLength(length)
+    );
   }
   sameAsPasswordCustomMessage(password) {
-    return helpers.withMessage('パスワードと一致しません', sameAs(password));
+    return helpers.withMessage(
+      'パスワードと一致しません',
+      sameAs(password)
+    );
   }
 
   registerRules() {
@@ -36,7 +51,9 @@ class CustomValidationRules {
       },
       password_confirmation: {
         required: this.requiredCustomMessage(),
-        sameAsPassword: this.sameAsPasswordCustomMessage(this.form.password),
+        sameAsPassword: this.sameAsPasswordCustomMessage(
+          this.form.password
+        ),
       },
     }));
   }
@@ -61,6 +78,14 @@ class CustomValidationRules {
     }));
   }
 
+  categoryCreateRules() {
+    return computed(() => ({
+      name: {
+        required: this.requiredCustomMessage(),
+      },
+    }));
+  }
+
   getRules() {
     switch (this.currentUrl) {
       case '/register':
@@ -69,6 +94,8 @@ class CustomValidationRules {
         return this.loginRules();
       case '/anime/create':
         return this.animeCreateRules();
+      case '/category/create':
+        return this.categoryCreateRules();
       default:
         console.log('Unknown Rules.');
     }
@@ -76,6 +103,9 @@ class CustomValidationRules {
 }
 
 export function getValidationRules(currentUrl, form) {
-  const customValidation = new CustomValidationRules(currentUrl, form);
+  const customValidation = new CustomValidationRules(
+    currentUrl,
+    form
+  );
   return customValidation.getRules();
 }

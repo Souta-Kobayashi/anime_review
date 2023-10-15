@@ -19,11 +19,17 @@ export function useGetErrorMessage() {
         message
           = status === 422 ? ERROR_MESSAGES.userRegisterFailed
           : ERROR_MESSAGES.serverError;
-      break;
+        break;
       case '/api/anime/create':
         message
           = status === 401 ? ERROR_MESSAGES.authenticationFailed
           : status === 422 ? ERROR_MESSAGES.animeRegisterFailed
+          : ERROR_MESSAGES.serverError;
+        break
+      case '/api/category/create':
+        message
+          = status === 401 ? ERROR_MESSAGES.authenticationFailed
+          : status === 422 ? ERROR_MESSAGES.categoryRegisterFailed
           : ERROR_MESSAGES.serverError;
         break
       default:

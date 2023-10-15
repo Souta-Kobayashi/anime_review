@@ -5,7 +5,6 @@
       <h4 class="text-center">アニメ登録</h4>
       <v-form v-model="isPassed" @submit.prevent>
         <v-container>
-          <!-- ここにerrorsを渡して -->
           <AtomAnimeNameInput
             v-model:anime-name="form.animeName"
             :server-error-message="serverErrorMessage"
