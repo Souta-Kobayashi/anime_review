@@ -1,7 +1,9 @@
 <template>
   <li class="menu-item has-child">
-    <a href="#" class="d-block menu-link"
-      >登録メニュー<v-icon icon="mdi-triangle-small-down" size="small"
+    <a class="d-block menu-link"
+      >登録メニュー<v-icon
+        icon="mdi-triangle-small-down"
+        size="small"
     /></a>
     <ul class="child-menu-wrapper">
       <AtomMenuLink
@@ -29,3 +31,9 @@ const registerItems = {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+a {
+  cursor: pointer;
+}
+</style>
