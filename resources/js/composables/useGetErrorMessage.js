@@ -1,4 +1,7 @@
-import ERROR_MESSAGES from '../const/Messages';
+import {
+  ERROR_MESSAGES,
+  CONSOLE_MESSAGES,
+} from '../const/Messages';
 
 export function useGetErrorMessage() {
   const getErrorMessage = (url, status) => {
@@ -32,6 +35,9 @@ export function useGetErrorMessage() {
           : status === 422 ? ERROR_MESSAGES.categoryRegisterFailed
           : ERROR_MESSAGES.serverError;
         break
+      case '/api/anime':
+        message = CONSOLE_MESSAGES.animeGetFailed;
+        break;
       default:
         message = ERROR_MESSAGES.serverError;
         break;

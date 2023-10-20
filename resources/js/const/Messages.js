@@ -6,9 +6,13 @@ const ERROR_MESSAGES = {
   loginFailed:            'ログインに失敗しました',
   authenticationFailed:   '再度ログインしてください',
   userRegisterFailed:     'ユーザー登録に失敗しました。エラーメッセージを確認してください',
+  animeGetFailed:         'アニメの取得に失敗した',
 };
 
+const CONSOLE_MESSAGES = {
+  animeGetFailed: 'Failed to retrieve list of animations.',
+};
 // const SUCCESS_MESSAGES = {
 // }
 
-export default ERROR_MESSAGES;
+export { ERROR_MESSAGES, CONSOLE_MESSAGES };

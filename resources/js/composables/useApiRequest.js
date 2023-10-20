@@ -16,6 +16,22 @@ export function useApiRequest() {
     loading.value = v;
   };
 
+  const apiGetRequest = async url => {
+    let response;
+    try {
+      response = await axiosGet(url);
+    } catch (error) {
+      const consoleErrorMessage = getErrorMessage(
+        url,
+        error.response.status
+      );
+      console.error(consoleErrorMessage);
+      response = error.response;
+    } finally {
+      return response;
+    }
+  };
+
   const apiPostRequest = async (
     url,
     data = '',
@@ -44,6 +60,7 @@ export function useApiRequest() {
   return {
     loading,
     setLoading,
+    apiGetRequest,
     apiPostRequest,
   };
 }

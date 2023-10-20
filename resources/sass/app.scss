@@ -13,12 +13,17 @@
 @import 'mixin';
 @import 'header';
 @import 'footer';
+@import 'anime_list.scss';
 @import 'form';
 @import 'custom_vuetify';
 
 h2,
 ul {
   margin: 0;
+}
+
+p {
+  margin-bottom: 0;
 }
 
 li {

@@ -47,3 +47,8 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['status' => 200, 'message' => 'カテゴリの登録が完了しました']);
     });
 });
+
+// アニメ一覧を返却
+Route::get('/anime', function () {
+    return response()->json(['status' => 200, 'message' => 'test']);
+});
