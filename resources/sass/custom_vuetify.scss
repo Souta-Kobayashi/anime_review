@@ -2,6 +2,10 @@
   margin-inline-start: 0 !important;
 }
 
+.v-container {
+  padding: 0 16px 16px !important;
+}
+
 @media (min-width: 1280px) {
   .v-container {
     max-width: 1400px !important;

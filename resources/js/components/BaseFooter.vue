@@ -1,9 +1,11 @@
 <template>
-  <footer class="mt-3 text-center text-white">
+  <footer class="text-center text-white">
     <!-- SNS Icons -->
     <MoleculeFooterFlexIcon />
     <!-- Copyright -->
-    <p class="text-center p-3 m-0">© 2023 Souta Kobayashi</p>
+    <p class="text-center p-3 m-0">
+      © 2023 Souta Kobayashi
+    </p>
   </footer>
 </template>
 

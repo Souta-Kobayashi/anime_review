@@ -5,7 +5,7 @@ const { apiGetRequest } = useApiRequest();
 export function useFetchAnimeList() {
   const fetchAnimeList = async () => {
     const result = await apiGetRequest('/api/anime');
-    if (result === 200) {
+    if (result.status === 200) {
       return result.data;
     }
     return null;
