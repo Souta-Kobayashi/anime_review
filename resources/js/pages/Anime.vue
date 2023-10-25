@@ -3,19 +3,7 @@
   <main>
     <h2 class="p-4 text-center">アニメ一覧</h2>
     <v-container class="position-relative">
-      <v-row align="start">
-        <AnimeCard
-          v-for="anime in displayAnimeList"
-          :key="anime.id"
-          :id="anime.id"
-          :anime-name="anime.animeName"
-          :category="anime.category"
-          :rating="anime.rating"
-          :synopsis="anime.synopsis"
-          :key-visual="anime.keyVisual"
-          :key-visual-reference="anime.keyVisualReference"
-        />
-      </v-row>
+      <AnimeCard :display-anime-list="displayAnimeList" />
       <AtomPagination
         :pagination-length="paginationLength"
         @page-change="pageChange"
@@ -23,13 +11,13 @@
     </v-container>
   </main>
   <BaseFooter />
-  <Snackbar />
+  <AtomSnackbar />
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import Snackbar from '../components/Snackbar.vue';
-import AnimeCard from '../components/AnimeCard.vue';
+import AtomSnackbar from '../atoms/AtomSnackbar.vue';
+import AnimeCard from '../organisms/AnimeCard.vue';
 import AtomPagination from '../atoms/pagination/AtomPagination.vue';
 import { useFetchAnimeList } from '../composables/useFetchAnimeList';
 import { useHelpers } from '../composables/useHelpers';
@@ -57,7 +45,7 @@ let animeList = [];
   );
 })();
 
-// アニメ表示リストを更新
+// ページネーションクリック時アニメ表示を更新
 const pageChange = pageNumber => {
   displayAnimeList.value = animeList.slice(
     pageSize * (pageNumber - 1),
@@ -65,5 +53,3 @@ const pageChange = pageNumber => {
   );
 };
 </script>
-
-<style lang="scss" scoped></style>

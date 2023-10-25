@@ -3,30 +3,21 @@
   <main>
     <h2 class="p-4 text-center">新着アニメ</h2>
     <v-container class="position-relative">
-      <v-row align="start" id="more-contents">
-        <AnimeCard
-          v-for="anime in displayAnimeList"
-          :key="anime.id"
-          :id="anime.id"
-          :anime-name="anime.animeName"
-          :category="anime.category"
-          :rating="anime.rating"
-          :synopsis="anime.synopsis"
-          :key-visual="anime.keyVisual"
-          :key-visual-reference="anime.keyVisualReference"
-        />
-      </v-row>
+      <AnimeCard
+        id="more-contents"
+        :display-anime-list="displayAnimeList"
+      />
       <AtomToAnimeListButton v-if="showMoreButton" />
     </v-container>
   </main>
   <BaseFooter />
-  <Snackbar />
+  <AtomSnackbar />
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import Snackbar from '../components/Snackbar.vue';
-import AnimeCard from '../components/AnimeCard.vue';
+import AtomSnackbar from '../atoms/AtomSnackbar.vue';
+import AnimeCard from '../organisms/AnimeCard.vue';
 import AtomToAnimeListButton from '../atoms/button/AtomToAnimeListButton.vue';
 import { useFetchAnimeList } from '../composables/useFetchAnimeList';
 import { useHelpers } from '../composables/useHelpers';
@@ -53,10 +44,10 @@ const fetchAndDisplayAnimeList = async () => {
 };
 
 const addMoreButtonClass = () => {
-  // もっと見るボタン、グラデーションクラスを削除
+  // もっと見るボタン、グラデーションクラスを追加
   showMoreButton.value = true;
   document
-    .getElementsById('more-contents')[0]
+    .getElementById('more-contents')
     .classList.add('more-contents');
 };
 
@@ -64,5 +55,3 @@ onMounted(() => {
   fetchAndDisplayAnimeList();
 });
 </script>
-
-<style lang="scss" scoped></style>

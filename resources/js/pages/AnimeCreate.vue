@@ -35,13 +35,13 @@
     </v-sheet>
   </main>
   <BaseFooter />
-  <Snackbar />
+  <AtomSnackbar />
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue';
 import { useApiRequest } from '../composables/useApiRequest';
-import Snackbar from '../components/Snackbar.vue';
+import AtomSnackbar from '../atoms/AtomSnackbar.vue';
 import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
 import AtomAnimeGenreRadioButton from '../atoms/radio/AtomAnimeGenreRadioButton.vue';
 import AtomAnimeSynopsisTextarea from '../atoms/textarea/AtomAnimeSynopsisTextarea.vue';

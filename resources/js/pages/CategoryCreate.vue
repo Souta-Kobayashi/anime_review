@@ -21,13 +21,13 @@
     </v-sheet>
   </main>
   <BaseFooter />
-  <Snackbar />
+  <AtomSnackbar />
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue';
 import { useApiRequest } from '../composables/useApiRequest';
-import Snackbar from '../components/Snackbar.vue';
+import AtomSnackbar from '../atoms/AtomSnackbar.vue';
 import AtomCategoryNameInput from '../atoms/input/AtomCategoryNameInput.vue';
 import AtomCategoryCreateSubmitButton from '../atoms/button/AtomCategoryCreateSubmitButton.vue';
 
