@@ -100,6 +100,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
 import AtomSnackbar from '../atoms/AtomSnackbar.vue';
@@ -136,6 +137,8 @@ const submitRegisterUser = async () => {
   if (result.status === 422) {
     const errObject = result.data.errors;
     setServerValidationError(errObject);
+  } else if (result.status === 200) {
+    router.push({ name: 'home' });
   }
   setLoading(false);
 };

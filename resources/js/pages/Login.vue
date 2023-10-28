@@ -58,6 +58,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
 import { useIsLoggedIn } from '../composables/useIsLoggedIn';
@@ -86,7 +87,10 @@ const submitLogin = async () => {
 
   // NOTE: 認証エラーはサーバーからのエラーメッセージは表示させないことにした
   // "ログインに失敗"文言以上のヒントは不要と判断
-  if (result.status === 200) setLoginStatus(true);
+  if (result.status === 200) {
+    router.push({ name: 'home' });
+    setLoginStatus(true);
+  }
   setLoading(false);
 };
 </script>

@@ -6,6 +6,7 @@ import { getValidationRules } from './useValidationRules';
 export function useValidate(form) {
   const currentUrl = router.options.history.location;
   const rules = getValidationRules(currentUrl, form);
+  let hasSentRequest = false;
   const serverValidationErrMessage = reactive({ ...form });
   // vuelidateのインスタンス生成
   const v$ = useVuelidate(rules, form);
@@ -29,12 +30,15 @@ export function useValidate(form) {
         .join(', ');
 
     // サーバーからのエラーメッセージ
-    const serverErrors =
-      serverValidationErrMessage[fieldName];
-    if (serverErrors) return serverErrors;
+    if (hasSentRequest) {
+      const serverErrors =
+        serverValidationErrMessage[fieldName];
+      if (serverErrors) return serverErrors;
+    }
   };
 
   const setServerValidationError = errObject => {
+    hasSentRequest = true;
     for (const key in errObject) {
       serverValidationErrMessage[key] = errObject[key][0];
       getErrMessage(key);

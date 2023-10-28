@@ -1,11 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
-const BASE_URL = '/'
-
-// import Home from './components/Home.vue'
-// import About from './components/About.vue'
-// import Item from './components/Item.vue'
-// import NotFound from './components/404.vue'
-// import HomePage from './pages/HomePage.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+const BASE_URL = '/';
 
 const routes = [
   {
@@ -22,7 +16,6 @@ const routes = [
     path: '/',
     name: 'home',
     component: () => import('./pages/Home.vue'),
-    // component: HomePage,
   },
   {
     // アニメ一覧
@@ -85,11 +78,11 @@ const routes = [
   //   path: '/:pathMatch(.*)',
   //   redirect: '/404',
   // },
-]
+];
 
 const router = createRouter({
-  history: createWebHistory(BASE_URL),  // set BASE_URL
-  routes
-})
+  history: createWebHistory(BASE_URL), // set BASE_URL
+  routes,
+});
 
-export default router
+export default router;

@@ -40,6 +40,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
 import AtomSnackbar from '../atoms/AtomSnackbar.vue';
 import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
@@ -90,6 +91,7 @@ const submitAnimeRegister = async () => {
       },
     }
   );
+  router.push({ name: 'home' });
 
   // このフォーマットで通る
   // result.response.data.errors = {

@@ -26,6 +26,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
 import AtomSnackbar from '../atoms/AtomSnackbar.vue';
 import AtomCategoryNameInput from '../atoms/input/AtomCategoryNameInput.vue';
@@ -46,6 +47,7 @@ const submitCategoryRegister = async () => {
     '/api/category/create',
     form
   );
+  router.push({ name: 'home' });
 
   // このフォーマットで通る
   // result.response.data.errors = {

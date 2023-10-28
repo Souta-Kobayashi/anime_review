@@ -15,6 +15,14 @@ export function useAxiosRequest() {
     return axios.post(url, form, header);
   };
 
+  const axiosPut = (url, form = '', header = '') => {
+    return axios.put(url, form, header);
+  };
+
+  const axiosDelete = url => {
+    return axios.delete(url);
+  };
+
   const axiosGet = url => {
     return axios.get(url);
   };
@@ -22,6 +30,8 @@ export function useAxiosRequest() {
   return {
     axiosLoginPost,
     axiosPost,
+    axiosPut,
+    axiosDelete,
     axiosGet,
   };
 }

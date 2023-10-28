@@ -5,6 +5,7 @@ import {
   email,
   sameAs,
   helpers,
+  not,
 } from '@vuelidate/validators';
 
 class CustomValidationRules {
@@ -33,6 +34,12 @@ class CustomValidationRules {
     return helpers.withMessage(
       'パスワードと一致しません',
       sameAs(password)
+    );
+  }
+  sameAsCategoryNameCustomMessage(categoryName) {
+    return helpers.withMessage(
+      '異なるカテゴリー名を入力してください',
+      not(sameAs(categoryName))
     );
   }
 
@@ -86,6 +93,18 @@ class CustomValidationRules {
     }));
   }
 
+  categoryUpdateRules() {
+    return computed(() => ({
+      name: {
+        required: this.requiredCustomMessage(),
+        sameAsRawValue:
+          this.sameAsCategoryNameCustomMessage(
+            this.form.name
+          ),
+      },
+    }));
+  }
+
   getRules() {
     switch (this.currentUrl) {
       case '/register':
@@ -96,6 +115,8 @@ class CustomValidationRules {
         return this.animeCreateRules();
       case '/category/create':
         return this.categoryCreateRules();
+      case '/category': // category edit dialog
+        return this.categoryUpdateRules();
       default:
         console.log('Unknown Rules.');
     }
