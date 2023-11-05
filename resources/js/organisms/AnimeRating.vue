@@ -139,7 +139,8 @@ const hideDialog = () => {
   showRatingUpdateDialog.value = false;
 
   // NOTE: ダイアログが消える前にpropsの更新処理が走りratingの値が
-  // リセットされてからダイアログが閉じる状態になりUXを損ねる。
+  // 更新前の状態にリセットされてからダイアログが閉じる状態になりUXを損ねる。
+  // vuetifyのv-dialogはtransitionが効いており閉じるまでに時間を要するため。
   // nextTickやasync/awaitでは改善しなかったため、暫定対応としてsetTimeout()でpropsの更新処理を遅らせて対応。
   // AnimeRatingUpdateDialogコンポーネント内の、showRatingUpdateDialogをwatchしてpropsの値を変えればいけそう
   setTimeout(() => {
