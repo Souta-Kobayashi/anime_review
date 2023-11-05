@@ -14,8 +14,13 @@
 @import 'header';
 @import 'footer';
 @import 'anime_list.scss';
+@import 'anime_show.scss';
 @import 'form';
 @import 'custom_vuetify';
+
+body {
+  overflow-x: hidden;
+}
 
 h2,
 ul {

@@ -11,13 +11,37 @@ export function useGetErrorMessage() {
       return message;
     }
 
+    if (status === 401) {
+      message = ERROR_MESSAGES.authenticationFailed;
+      return message;
+    }
+
     // 動的URL時のパターンマッチ
+    // アニメ更新・削除処理
+    const animeRequestError = /api\/anime\/\d+/;
+    if (animeRequestError.test(url)) {
+      switch (method) {
+        case 'put':
+          if (animeRequestError.test('rating')) {
+            message =
+              ERROR_MESSAGES.animeRatingUpdateFailed;
+          } else {
+            message = ERROR_MESSAGES.animeInfoUpdateFailed;
+          }
+          break;
+        case 'delete':
+          message = ERROR_MESSAGES.animeDeleteFailed;
+          break;
+        default:
+          break;
+      }
+      return message;
+    }
+
+    // カテゴリ更新・削除処理
     const categoryUpdateOrDelete = /api\/category\/\d+/;
     if (categoryUpdateOrDelete.test(url)) {
       switch (status) {
-        case 401:
-          message = ERROR_MESSAGES.authenticationFailed;
-          break;
         case 422:
           if (method === 'put') {
             message = ERROR_MESSAGES.categoryUpdateFailed;
@@ -45,14 +69,12 @@ export function useGetErrorMessage() {
         break;
       case '/api/anime/create':
         message
-          = status === 401 ? ERROR_MESSAGES.authenticationFailed
-          : status === 422 ? ERROR_MESSAGES.animeRegisterFailed
+          = status === 422 ? ERROR_MESSAGES.animeRegisterFailed
           : ERROR_MESSAGES.serverError;
         break
       case '/api/category/create':
         message
-          = status === 401 ? ERROR_MESSAGES.authenticationFailed
-          : status === 422 ? ERROR_MESSAGES.categoryRegisterFailed
+          = status === 422 ? ERROR_MESSAGES.categoryRegisterFailed
           : ERROR_MESSAGES.serverError;
         break
       case '/api/anime':

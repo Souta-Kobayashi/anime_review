@@ -1,0 +1,53 @@
+.pc-anime-title {
+  @include sp {
+    display: none !important;
+  }
+}
+.sp-head {
+  @include sp {
+    margin-top: 0 !important;
+  }
+}
+.sp-anime-title {
+  display: none;
+  @include sp {
+    display: block !important;
+  }
+}
+.anime-rating {
+  @include sp {
+    flex: auto !important;
+    max-width: none !important;
+  }
+
+  .rating-comprehensive {
+    line-height: 45px;
+  }
+
+  .rating-item {
+    align-items: center;
+    border-bottom: solid 1px #bcbcbc;
+    display: flex;
+    line-height: 39px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .rating-comprehensive-title {
+    font-weight: bold;
+    font-size: clamp(1rem, 0.847rem + 0.76vw, 1.563rem);
+  }
+
+  .rating-title {
+    font-weight: bold;
+    font-size: clamp(0.75rem, 0.614rem + 0.68vw, 1.25rem);
+  }
+
+  .rating-avg {
+    font-size: 30px;
+  }
+
+  .highly-rated {
+    color: #ff5900;
+  }
+}

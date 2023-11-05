@@ -1,15 +1,16 @@
 <template>
   <v-rating
     :size="size"
-    :model-value="rating"
+    v-model="ratingLocal"
+    :readonly="readonly"
     color="amber"
     density="compact"
     half-increments
-    readonly
   ></v-rating>
 </template>
 
 <script setup>
+import { computed } from 'vue';
 const props = defineProps({
   rating: {
     type: String,
@@ -21,7 +22,17 @@ const props = defineProps({
   },
   readonly: {
     type: Boolean,
-    default: false,
+    default: true,
+  },
+});
+const emit = defineEmits(['update:rating']);
+
+const ratingLocal = computed({
+  get() {
+    return props.rating;
+  },
+  set(v) {
+    emit('update:rating', v);
   },
 });
 </script>
