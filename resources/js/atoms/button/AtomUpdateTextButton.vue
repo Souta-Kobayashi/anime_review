@@ -3,8 +3,8 @@
     :disabled="!isPassed"
     color="blue-darken-1"
     variant="text"
-    >変更</v-btn
-  >
+    >保存
+  </v-btn>
 </template>
 
 <script setup>

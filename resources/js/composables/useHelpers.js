@@ -6,6 +6,11 @@ export function useHelpers() {
       }
       return array;
     },
+    toCamelCase: str => {
+      return str.replace(/[-_]\w/g, match =>
+        match.charAt(1).toUpperCase()
+      );
+    },
   };
 
   return helpers;

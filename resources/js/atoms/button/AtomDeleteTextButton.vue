@@ -1,3 +1,5 @@
 <template>
-  <v-btn color="blue-darken-1" variant="text">削除</v-btn>
+  <v-btn color="deep-orange-darken-4" variant="text"
+    >削除
+  </v-btn>
 </template>

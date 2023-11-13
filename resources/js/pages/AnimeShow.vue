@@ -33,31 +33,34 @@
           "
           :review-music="animeDetail.review_music"
           :review-characters="animeDetail.review_characters"
-          :close-dialog="closeDialog"
+          :close-dialog="closeRatingDialog"
           @save-rating="updateRating"
         />
       </v-row>
 
-      <!-- アニメ名、サムネイルもフィールド内に加える -->
-      <v-row>
-        <v-col
-          style="
-            background: green;
-            color: white;
-            height: 500px;
-          "
-        >
-          <div>anime information</div>
-          <AnimeInfoEditor
-            @update-anime-info="updateAnimeInfo"
-          />
-        </v-col>
+      <v-row class="w-100 m-auto flex-column">
+        <AnimeInfoEditor
+          v-if="isDataReady"
+          :categories="animeDetail.categories"
+          :categoryItems="categoryItems"
+          :watched-status="animeDetail.watched_status"
+          :broadcast-date="animeDetail.broadcast_date"
+          :genre="animeDetail.genre"
+          :synopsis="animeDetail.synopsis"
+          :comment="animeDetail.comment"
+          :is-login-status="isLoginStatus"
+          @update-anime-info="updateAnimeInfo"
+          ref="animeInfoEditorRef"
+        />
       </v-row>
 
       <v-row>
-        <v-col>
-          <div>delete text</div>
-          <AnimeDelete @delete-anime="deleteAnime" />
+        <v-col class="text-end">
+          <AnimeDelete
+            v-if="isLoginStatus"
+            :anime-name="animeDetail.anime_name"
+            @destroy-anime="destroyAnime"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -68,12 +71,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import router from '../router';
 import { useRoute } from 'vue-router';
 import { SNACKBAR_COLOR } from '../const/SnackbarColor';
 import { ERROR_MESSAGES } from '../const/Messages';
 import { useSnackbar } from '../composables/useSnackbar';
 import { useApiRequest } from '../composables/useApiRequest';
+import { useIsLoggedIn } from '../composables/useIsLoggedIn';
+import { useFetchCategories } from '../composables/useFetchCategories';
+import { useHelpers } from '../composables/useHelpers';
 import AnimeRating from '../organisms/AnimeRating.vue';
 import AnimeInfoEditor from '../organisms/AnimeInfoEditor.vue';
 import AnimeDelete from '../organisms/AnimeDelete.vue';
@@ -82,11 +89,25 @@ import AtomSnackbar from '../atoms/AtomSnackbar.vue';
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();
 const { setSnackbar } = useSnackbar();
+const { fetchCategories } = useFetchCategories();
+const { isLoginStatus, isDataReady } = useIsLoggedIn();
+const helpers = useHelpers();
 
 const route = useRoute();
 const animeDetail = ref({});
+const categoryItems = ref([]);
 const baseUrl = `/api${route.path}`;
-const closeDialog = ref(false);
+const closeRatingDialog = ref(false);
+const animeInfoEditorRef = ref(null);
+const hasMounted = ref(false);
+
+// カテゴリの取得
+const fetchCategoryItems = async () => {
+  categoryItems.value = await fetchCategories();
+  if (categoryItems.value === null) {
+    return;
+  }
+};
 
 // アニメ詳細取得APIリクエスト
 const fetchAnimeDetail = async () => {
@@ -105,15 +126,15 @@ const fetchAnimeDetail = async () => {
   }
 };
 
-// 初期データセット アニメ詳細
+// 初期データセット
 (async () => {
-  await fetchAnimeDetail();
+  fetchAnimeDetail();
+  fetchCategoryItems();
 })();
 
 // レーティング更新のAPIリクエスト
 const updateRating = async ratingItems => {
-  closeDialog.value = false;
-  console.log(ratingItems);
+  closeRatingDialog.value = false;
   const form = ratingItems.reduce((result, item) => {
     result[item.ratingName] = item.ratingValue;
     return result;
@@ -131,8 +152,56 @@ const updateRating = async ratingItems => {
     await fetchAnimeDetail();
   }
 };
-const updateAnimeInfo = () => {};
-const deleteAnime = () => {};
+
+// アニメ情報の更新
+const updateAnimeInfo = async (type, data) => {
+  // 放送時期はデータ加工
+  if (type === 'broadcast_date') {
+    data.year = data.year ?? '';
+    // 前後のスペースをトル
+    data = `${data.year}　${data.season}`.trim();
+  }
+
+  // 更新前と同値もしくはunMounted状態はreturn
+  if (animeDetail.value[type] === data || !hasMounted) {
+    // エディター閉じる
+    animeInfoEditorRef.value?.editorVisibleToggle(
+      helpers.toCamelCase(type),
+      false
+    );
+    return;
+  }
+
+  // APIリクエスト
+  const form = { [type]: data };
+  const result = await apiPutRequest(
+    `${baseUrl}/info`,
+    form
+  );
+
+  if (result.status === 200) {
+    // フロント側値の更新
+    animeDetail.value[type] = data;
+    // エディター閉じる
+    animeInfoEditorRef.value?.editorVisibleToggle(
+      helpers.toCamelCase(type),
+      false
+    );
+  }
+};
+
+// アニメの削除
+const destroyAnime = async () => {
+  const result = await apiDeleteRequest(baseUrl);
+  if (result.status === 200) {
+    // 削除後homeにリダイレクト
+    router.push({ name: 'home' });
+  }
+};
+
+onMounted(() => {
+  hasMounted.value = true;
+});
 </script>
 
 <style lang="scss" scoped>
