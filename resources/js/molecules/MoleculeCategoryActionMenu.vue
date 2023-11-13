@@ -1,6 +1,6 @@
 <template>
   <td class="text-end">
-    <div>
+    <div v-if="isLoginStatus">
       <span class="me-4">
         <AtomPencilIcon
           @click="$emit('showDialog', 'edit')"
