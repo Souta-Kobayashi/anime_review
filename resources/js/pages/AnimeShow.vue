@@ -85,7 +85,7 @@ import { useHelpers } from '../composables/useHelpers';
 import AnimeRating from '../organisms/AnimeRating.vue';
 import AnimeInfoEditor from '../organisms/AnimeInfoEditor.vue';
 import AnimeDelete from '../organisms/AnimeDelete.vue';
-import AtomSnackbar from '../atoms/AtomSnackbar.vue';
+import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();

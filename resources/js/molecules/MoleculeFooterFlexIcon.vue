@@ -18,5 +18,5 @@
 </template>
 
 <script setup>
-import AtomIconLink from '../atoms/AtomIconLink.vue';
+import AtomIconLink from '../atoms/icon/AtomIconLink.vue';
 </script>

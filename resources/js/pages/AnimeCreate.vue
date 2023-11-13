@@ -42,7 +42,7 @@
 import { ref, reactive } from 'vue';
 import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
-import AtomSnackbar from '../atoms/AtomSnackbar.vue';
+import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
 import AtomAnimeGenreRadioButton from '../atoms/radio/AtomAnimeGenreRadioButton.vue';
 import AtomAnimeSynopsisTextarea from '../atoms/textarea/AtomAnimeSynopsisTextarea.vue';

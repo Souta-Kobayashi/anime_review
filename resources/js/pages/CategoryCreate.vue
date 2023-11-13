@@ -28,7 +28,7 @@
 import { ref, reactive } from 'vue';
 import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
-import AtomSnackbar from '../atoms/AtomSnackbar.vue';
+import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AtomCategoryNameInput from '../atoms/input/AtomCategoryNameInput.vue';
 import AtomCategoryCreateSubmitButton from '../atoms/button/AtomCategoryCreateSubmitButton.vue';
 

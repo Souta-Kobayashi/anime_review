@@ -103,7 +103,7 @@ import { ref, reactive } from 'vue';
 import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
-import AtomSnackbar from '../atoms/AtomSnackbar.vue';
+import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 
 // form
 const form = reactive({

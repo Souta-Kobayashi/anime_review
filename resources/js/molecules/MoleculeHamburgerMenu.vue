@@ -22,8 +22,12 @@
           </AtomMenuLink>
           <MoleculeSpNavRegisterMenu
             v-if="isLoginStatus"
-            @show-hamburger-inner="e => $emit('showHamburgerInner', e)"
-            @close-hamburger-inner="e => $emit('closeHamburgerInner', e)"
+            @show-hamburger-inner="
+              e => $emit('showHamburgerInner', e)
+            "
+            @close-hamburger-inner="
+              e => $emit('closeHamburgerInner', e)
+            "
           />
         </ul>
       </div>
@@ -33,7 +37,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AtomMenuLink from '../atoms/AtomMenuLink.vue';
+import AtomMenuLink from '../atoms/menu/AtomMenuLink.vue';
 import MoleculeSpNavRegisterMenu from '../molecules/MoleculeSpNavRegisterMenu.vue';
 
 const props = defineProps({

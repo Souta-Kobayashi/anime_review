@@ -16,7 +16,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import AtomSnackbar from '../atoms/AtomSnackbar.vue';
+import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AnimeCard from '../organisms/AnimeCard.vue';
 import AtomPagination from '../atoms/pagination/AtomPagination.vue';
 import { useFetchAnimeList } from '../composables/useFetchAnimeList';

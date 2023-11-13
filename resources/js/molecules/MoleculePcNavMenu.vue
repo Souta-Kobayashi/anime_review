@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import AtomMenuLink from '../atoms/AtomMenuLink.vue';
+import AtomMenuLink from '../atoms/menu/AtomMenuLink.vue';
 
 const navigationItems = {
   top: {

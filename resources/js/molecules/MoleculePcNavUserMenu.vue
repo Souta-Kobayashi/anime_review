@@ -7,16 +7,19 @@
       <AtomUserLoginButtonWithIcon />
     </div>
   </div>
-  <AtomUserLogoutButtonWithIcon
-    v-if="isLoginStatus"
-    @user-logout="$emit('userLogout')"
-  />
+  <div
+    v-else
+    class="logout-btn-wrapper"
+    @click="$emit('userLogout')"
+  >
+    <AtomUserLogoutButtonWithIcon />
+  </div>
 </template>
 
 <script setup>
-import AtomUserRegisterButtonWithIcon from '../atoms/AtomUserRegisterButtonWithIcon.vue';
-import AtomUserLoginButtonWithIcon from '../atoms/AtomUserLoginButtonWithIcon.vue';
-import AtomUserLogoutButtonWithIcon from '../atoms/AtomUserLogoutButtonWithIcon.vue';
+import AtomUserRegisterButtonWithIcon from '../atoms/button/AtomUserRegisterButtonWithIcon.vue';
+import AtomUserLoginButtonWithIcon from '../atoms/button/AtomUserLoginButtonWithIcon.vue';
+import AtomUserLogoutButtonWithIcon from '../atoms/button/AtomUserLogoutButtonWithIcon.vue';
 
 const props = defineProps({
   isLoginStatus: {
