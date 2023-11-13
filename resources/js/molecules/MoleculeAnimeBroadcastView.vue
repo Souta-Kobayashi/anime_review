@@ -33,6 +33,7 @@
         />
       </div>
       <MoleculeUpdateAndCancelButton
+        :loading="isLoading"
         @update-anime-info="
           $emit('updateAnimeInfo', 'broadcast_date', {
             year,
@@ -68,6 +69,10 @@ const props = defineProps({
     default: false,
   },
   isEditorVisible: {
+    type: Boolean,
+    default: false,
+  },
+  isLoading: {
     type: Boolean,
     default: false,
   },

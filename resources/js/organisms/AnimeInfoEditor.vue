@@ -6,6 +6,7 @@
       :category-items="categoryItems"
       :is-login-status="isLoginStatus"
       :is-editor-visible="isEditorVisible.categories"
+      :is-loading="isLoading.categories"
       @editor-visible-toggle="editorVisibleToggle"
       @update-anime-info="
         (type, data) => $emit('updateAnimeInfo', type, data)
@@ -16,6 +17,7 @@
       :watched-status="watchedStatus"
       :is-login-status="isLoginStatus"
       :is-editor-visible="isEditorVisible.watchedStatus"
+      :is-loading="isLoading.watched_status"
       @editor-visible-toggle="editorVisibleToggle"
       @update-anime-info="
         (type, data) => $emit('updateAnimeInfo', type, data)
@@ -26,6 +28,7 @@
       :broadcast-date="broadcastDate"
       :is-login-status="isLoginStatus"
       :is-editor-visible="isEditorVisible.broadcastDate"
+      :is-loading="isLoading.broadcast_date"
       @editor-visible-toggle="editorVisibleToggle"
       @update-anime-info="
         (type, data) => $emit('updateAnimeInfo', type, data)
@@ -36,6 +39,7 @@
       :genre="genre"
       :is-login-status="isLoginStatus"
       :is-editor-visible="isEditorVisible.genre"
+      :is-loading="isLoading.genre"
       @editor-visible-toggle="editorVisibleToggle"
       @update-anime-info="
         (type, data) => $emit('updateAnimeInfo', type, data)
@@ -46,6 +50,7 @@
       :synopsis="synopsis"
       :is-login-status="isLoginStatus"
       :is-editor-visible="isEditorVisible.synopsis"
+      :is-loading="isLoading.synopsis"
       @editor-visible-toggle="editorVisibleToggle"
       @update-anime-info="
         (type, data) => $emit('updateAnimeInfo', type, data)
@@ -56,6 +61,7 @@
       :comment="comment"
       :is-login-status="isLoginStatus"
       :is-editor-visible="isEditorVisible.comment"
+      :is-loading="isLoading.comment"
       @editor-visible-toggle="editorVisibleToggle"
       @update-anime-info="
         (type, data) => $emit('updateAnimeInfo', type, data)
@@ -105,6 +111,10 @@ const props = defineProps({
   isLoginStatus: {
     type: Boolean,
     default: false,
+  },
+  isLoading: {
+    type: Object,
+    default: {},
   },
 });
 const emit = defineEmits(['updateAnimeInfo']);

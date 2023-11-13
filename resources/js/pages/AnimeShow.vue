@@ -49,6 +49,7 @@
           :synopsis="animeDetail.synopsis"
           :comment="animeDetail.comment"
           :is-login-status="isLoginStatus"
+          :is-loading="isLoading"
           @update-anime-info="updateAnimeInfo"
           ref="animeInfoEditorRef"
         />
@@ -100,6 +101,15 @@ const baseUrl = `/api${route.path}`;
 const closeRatingDialog = ref(false);
 const animeInfoEditorRef = ref(null);
 const hasMounted = ref(false);
+
+const isLoading = ref({
+  categories: false,
+  watched_status: false,
+  broadcast_date: false,
+  genre: false,
+  synopsis: false,
+  comment: false,
+});
 
 // カテゴリの取得
 const fetchCategoryItems = async () => {
@@ -155,6 +165,7 @@ const updateRating = async ratingItems => {
 
 // アニメ情報の更新
 const updateAnimeInfo = async (type, data) => {
+  isLoading.value[type] = true;
   // 放送時期はデータ加工
   if (type === 'broadcast_date') {
     data.year = data.year ?? '';
@@ -169,6 +180,7 @@ const updateAnimeInfo = async (type, data) => {
       helpers.toCamelCase(type),
       false
     );
+    isLoading.value[type] = false;
     return;
   }
 
@@ -188,6 +200,7 @@ const updateAnimeInfo = async (type, data) => {
       false
     );
   }
+  isLoading.value[type] = false;
 };
 
 // アニメの削除

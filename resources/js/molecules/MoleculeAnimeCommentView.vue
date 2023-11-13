@@ -25,6 +25,7 @@
         auto-grow
       ></v-textarea>
       <MoleculeUpdateAndCancelButton
+        :loading="isLoading"
         @update-anime-info="
           $emit('updateAnimeInfo', 'comment', commentLocal)
         "
@@ -51,6 +52,10 @@ const props = defineProps({
     default: false,
   },
   isEditorVisible: {
+    type: Boolean,
+    default: false,
+  },
+  isLoading: {
     type: Boolean,
     default: false,
   },

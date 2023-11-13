@@ -34,6 +34,7 @@
         multiple
       ></v-select>
       <MoleculeUpdateAndCancelButton
+        :loading="isLoading"
         @update-anime-info="
           $emit(
             'updateAnimeInfo',
@@ -68,6 +69,10 @@ const props = defineProps({
     default: false,
   },
   isEditorVisible: {
+    type: Boolean,
+    default: false,
+  },
+  isLoading: {
     type: Boolean,
     default: false,
   },

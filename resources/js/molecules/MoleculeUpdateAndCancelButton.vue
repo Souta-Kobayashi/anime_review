@@ -5,6 +5,7 @@
       color="indigo-darken-1"
       variant="flat"
       isPassed
+      :loading="loading"
       @click="$emit('updateAnimeInfo')"
     />
     <AtomCancelTextButton
@@ -18,6 +19,12 @@
 import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
 import AtomUpdateTextButton from '../atoms/button/AtomUpdateTextButton.vue';
 
+const props = defineProps({
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+});
 const emit = defineEmits([
   'updateAnimeInfo',
   'closeEditor',

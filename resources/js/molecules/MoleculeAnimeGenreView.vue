@@ -22,6 +22,7 @@
         inline
       />
       <MoleculeUpdateAndCancelButton
+        :loading="isLoading"
         @update-anime-info="
           $emit('updateAnimeInfo', 'genre', genreLocal)
         "
@@ -49,6 +50,10 @@ const props = defineProps({
     default: false,
   },
   isEditorVisible: {
+    type: Boolean,
+    default: false,
+  },
+  isLoading: {
     type: Boolean,
     default: false,
   },
