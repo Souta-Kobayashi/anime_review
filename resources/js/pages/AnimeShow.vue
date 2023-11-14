@@ -157,7 +157,7 @@ const updateRating = async ratingItems => {
 
   if (result.status === 200) {
     // ダイアログを閉じる
-    closeDialog.value = true;
+    closeRatingDialog.value = true;
     // カテゴリー表示をリフレッシュ
     await fetchAnimeDetail();
   }
