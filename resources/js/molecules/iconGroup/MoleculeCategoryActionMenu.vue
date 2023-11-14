@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import AtomDeleteIcon from '../atoms/icon/AtomDeleteIcon.vue';
-import AtomPencilIcon from '../atoms/icon/AtomPencilIcon.vue';
+import AtomDeleteIcon from '../../atoms/icon/AtomDeleteIcon.vue';
+import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
 
 const props = defineProps({
   isLoginStatus: {

@@ -37,7 +37,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import AnimeRatingUpdateDialog from '../organisms/AnimeRatingUpdateDialog.vue';
-import MoleculeAnimeRating from '../molecules/MoleculeAnimeRating.vue';
+import MoleculeAnimeRating from '../molecules/rating/MoleculeAnimeRating.vue';
 import AtomAnimeRatingComprehensive from '../atoms/text/AtomAnimeRatingComprehensive.vue';
 import AtomRateAnimeTextButton from '../atoms/button/AtomRateAnimeTextButton.vue';
 

@@ -43,7 +43,7 @@
 import { ref, watch } from 'vue';
 import CategoryEditDialog from '../organisms/CategoryEditDialog.vue';
 import CategoryDestroyDialog from '../organisms/CategoryDestroyDialog.vue';
-import MoleculeCategoryTableRow from '../molecules/MoleculeCategoryTableRow.vue';
+import MoleculeCategoryTableRow from '../molecules/table/MoleculeCategoryTableRow.vue';
 
 const props = defineProps({
   categories: {

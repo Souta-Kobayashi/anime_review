@@ -37,8 +37,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AtomMenuLink from '../atoms/menu/AtomMenuLink.vue';
-import MoleculeSpNavRegisterMenu from '../molecules/MoleculeSpNavRegisterMenu.vue';
+import AtomMenuLink from '../../atoms/menu/AtomMenuLink.vue';
+import MoleculeSpNavRegisterMenu from './MoleculeSpNavRegisterMenu.vue';
 
 const props = defineProps({
   isLoginStatus: {

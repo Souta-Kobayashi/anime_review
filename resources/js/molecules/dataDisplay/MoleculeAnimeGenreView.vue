@@ -36,9 +36,9 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-import AtomPencilIcon from '../atoms/icon/AtomPencilIcon.vue';
-import MoleculeAnimeGenreRadioGroup from '../molecules/RadioGroup/MoleculeAnimeGenreRadioGroup.vue';
-import MoleculeUpdateAndCancelButton from '../molecules/MoleculeUpdateAndCancelButton.vue';
+import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
+import MoleculeAnimeGenreRadioGroup from '../radioGroup/MoleculeAnimeGenreRadioGroup.vue';
+import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
 
 const props = defineProps({
   genre: {

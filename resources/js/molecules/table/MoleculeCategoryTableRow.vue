@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-import { useIsLoggedIn } from '../composables/useIsLoggedIn';
-import MoleculeCategoryActionMenu from '../molecules/MoleculeCategoryActionMenu.vue';
+import { useIsLoggedIn } from '../../composables/useIsLoggedIn';
+import MoleculeCategoryActionMenu from '../iconGroup/MoleculeCategoryActionMenu.vue';
 
 const props = defineProps({
   categoryId: {

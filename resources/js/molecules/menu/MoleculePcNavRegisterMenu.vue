@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import AtomMenuLink from '../atoms/menu/AtomMenuLink.vue';
+import AtomMenuLink from '../../atoms/menu/AtomMenuLink.vue';
 const registerItems = {
   register: {
     title: 'アニメ登録',

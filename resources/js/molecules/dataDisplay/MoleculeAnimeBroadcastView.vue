@@ -54,10 +54,10 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import AtomPencilIcon from '../atoms/icon/AtomPencilIcon.vue';
-import AtomBroadcastYearInput from '../atoms/input/AtomBroadcastYearInput.vue';
-import AtomAnimeSeasonRadioButton from '../atoms/radio/AtomAnimeSeasonRadioButton.vue';
-import MoleculeUpdateAndCancelButton from '../molecules/MoleculeUpdateAndCancelButton.vue';
+import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
+import AtomBroadcastYearInput from '../../atoms/input/AtomBroadcastYearInput.vue';
+import AtomAnimeSeasonRadioButton from '../../atoms/radio/AtomAnimeSeasonRadioButton.vue';
+import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
 
 const props = defineProps({
   broadcastDate: {

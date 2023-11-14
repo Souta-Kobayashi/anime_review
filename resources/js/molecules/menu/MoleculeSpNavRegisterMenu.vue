@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import AtomMenuLink from '../atoms/menu/AtomMenuLink.vue';
+import AtomMenuLink from '../../atoms/menu/AtomMenuLink.vue';
 
 const emit = defineEmits([
   'showHamburgerInner',

@@ -24,10 +24,10 @@
 </template>
 
 <script setup>
-import AtomUserRegisterButtonText from '../atoms/button/AtomUserRegisterButtonText.vue';
-import AtomUserLoginLinkIcon from '../atoms/icon/AtomUserLoginLinkIcon.vue';
-import AtomUserLogoutLinkIcon from '../atoms/icon/AtomUserLogoutLinkIcon.vue';
-import AtomHamburgerIcon from '../atoms/icon/AtomHamburgerIcon.vue';
+import AtomUserRegisterButtonText from '../../atoms/button/AtomUserRegisterButtonText.vue';
+import AtomUserLoginLinkIcon from '../../atoms/icon/AtomUserLoginLinkIcon.vue';
+import AtomUserLogoutLinkIcon from '../../atoms/icon/AtomUserLogoutLinkIcon.vue';
+import AtomHamburgerIcon from '../../atoms/icon/AtomHamburgerIcon.vue';
 
 const props = defineProps({
   isLoginStatus: {

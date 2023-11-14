@@ -47,8 +47,8 @@ import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
 import AtomAnimeGenreRadioButton from '../atoms/radio/AtomAnimeGenreRadioButton.vue';
 import AtomAnimeSynopsisTextarea from '../atoms/textarea/AtomAnimeSynopsisTextarea.vue';
 import AtomAnimeCreateSubmitButton from '../atoms/button/AtomAnimeCreateSubmitButton.vue';
-import MoleculeAnimeBroadcastField from '../molecules/MoleculeAnimeBroadcastField.vue';
-import MoleculeAnimeKeyVisualField from '../molecules/MoleculeAnimeKeyVisualField.vue';
+import MoleculeAnimeBroadcastField from '../molecules/dataEntry/MoleculeAnimeBroadcastField.vue';
+import MoleculeAnimeKeyVisualField from '../molecules/dataEntry/MoleculeAnimeKeyVisualField.vue';
 
 const form = reactive({
   animeName: '',

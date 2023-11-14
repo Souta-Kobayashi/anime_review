@@ -58,11 +58,11 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useApiRequest } from '../composables/useApiRequest';
-import MoleculePcNavMenu from '../molecules/MoleculePcNavMenu.vue';
-import MoleculePcNavRegisterMenu from '../molecules/MoleculePcNavRegisterMenu.vue';
-import MoleculePcNavUserMenu from '../molecules/MoleculePcNavUserMenu.vue';
-import MoleculeSpNavMenu from '../molecules/MoleculeSpNavMenu.vue';
-import MoleculeHamburgerMenu from '../molecules/MoleculeHamburgerMenu.vue';
+import MoleculePcNavMenu from '../molecules/menu/MoleculePcNavMenu.vue';
+import MoleculePcNavRegisterMenu from '../molecules/menu/MoleculePcNavRegisterMenu.vue';
+import MoleculePcNavUserMenu from '../molecules/menu/MoleculePcNavUserMenu.vue';
+import MoleculeSpNavMenu from '../molecules/menu/MoleculeSpNavMenu.vue';
+import MoleculeHamburgerMenu from '../molecules/menu/MoleculeHamburgerMenu.vue';
 import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 
 // prettier-ignore

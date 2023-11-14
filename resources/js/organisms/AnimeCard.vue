@@ -50,7 +50,7 @@
 <script setup>
 import { ref } from 'vue';
 import AtomAnimeCardImage from '../atoms/image/AtomAnimeCardImage.vue';
-import MoleculeAnimeCardDescription from '../molecules/MoleculeAnimeCardDescription.vue';
+import MoleculeAnimeCardDescription from '../molecules/card/MoleculeAnimeCardDescription.vue';
 
 const props = defineProps({
   displayAnimeList: {

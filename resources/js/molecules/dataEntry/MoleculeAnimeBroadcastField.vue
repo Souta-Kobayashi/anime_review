@@ -18,8 +18,8 @@
 </template>
 
 <script setup>
-import AtomBroadcastYearInput from '../atoms/input/AtomBroadcastYearInput.vue';
-import AtomAnimeSeasonRadioButton from '../atoms/radio/AtomAnimeSeasonRadioButton.vue';
+import AtomBroadcastYearInput from '../../atoms/input/AtomBroadcastYearInput.vue';
+import AtomAnimeSeasonRadioButton from '../../atoms/radio/AtomAnimeSeasonRadioButton.vue';
 
 const props = defineProps({
   broadcastYear: {

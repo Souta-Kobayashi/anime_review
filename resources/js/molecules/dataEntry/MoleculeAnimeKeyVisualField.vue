@@ -12,8 +12,8 @@
 </template>
 
 <script setup>
-import AtomAnimeKeyVisualSourceInput from '../atoms/input/AtomAnimeKeyVisualSourceInput.vue';
-import AtomAnimeKeyVisualImageInput from '../atoms/input/AtomAnimeKeyVisualImageInput.vue';
+import AtomAnimeKeyVisualSourceInput from '../../atoms/input/AtomAnimeKeyVisualSourceInput.vue';
+import AtomAnimeKeyVisualImageInput from '../../atoms/input/AtomAnimeKeyVisualImageInput.vue';
 
 const props = defineProps({
   // NOTE: 親のv-modelで渡された変数を受け取る。

@@ -50,9 +50,9 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-import AtomPencilIcon from '../atoms/icon/AtomPencilIcon.vue';
-import MoleculeAnimeWatchedStatusRadioGroup from '../molecules/RadioGroup/MoleculeAnimeWatchedStatusRadioGroup.vue';
-import MoleculeUpdateAndCancelButton from '../molecules/MoleculeUpdateAndCancelButton.vue';
+import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
+import MoleculeAnimeWatchedStatusRadioGroup from '../radioGroup/MoleculeAnimeWatchedStatusRadioGroup.vue';
+import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
 
 const props = defineProps({
   watchedStatus: {

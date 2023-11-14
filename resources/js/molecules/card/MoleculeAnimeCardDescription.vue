@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import AtomRating from '../atoms/rating/AtomRating.vue';
+import AtomRating from '../../atoms/rating/AtomRating.vue';
 const props = defineProps({
   animeName: {
     type: String,

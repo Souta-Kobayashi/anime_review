@@ -10,5 +10,5 @@
 </template>
 
 <script setup>
-import MoleculeFooterFlexIcon from '../molecules/MoleculeFooterFlexIcon.vue';
+import MoleculeFooterFlexIcon from '../molecules/iconGroup/MoleculeFooterFlexIcon.vue';
 </script>

@@ -3,23 +3,23 @@
     <dt
       class="anime-info-list-term d-flex justify-content-between"
     >
-      <span>コメント</span>
+      <span>あらすじ</span>
       <span
         v-if="isLoginStatus && !isEditorVisible"
         class="cursor-pointer"
         @click="
-          $emit('editorVisibleToggle', 'comment', true)
+          $emit('editorVisibleToggle', 'synopsis', true)
         "
       >
         <AtomPencilIcon />
       </span>
     </dt>
     <dd v-if="!isEditorVisible" class="anime-info-text">
-      {{ comment }}
+      {{ synopsis }}
     </dd>
     <dd v-else="isEditorVisible">
       <v-textarea
-        v-model="commentLocal"
+        v-model="synopsisLocal"
         class="anime-info-text"
         variant="outlined"
         auto-grow
@@ -27,10 +27,14 @@
       <MoleculeUpdateAndCancelButton
         :loading="isLoading"
         @update-anime-info="
-          $emit('updateAnimeInfo', 'comment', commentLocal)
+          $emit(
+            'updateAnimeInfo',
+            'synopsis',
+            synopsisLocal
+          )
         "
         @close-editor="
-          $emit('editorVisibleToggle', 'comment', false)
+          $emit('editorVisibleToggle', 'synopsis', false)
         "
       />
     </dd>
@@ -39,11 +43,11 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import AtomPencilIcon from '../atoms/icon/AtomPencilIcon.vue';
-import MoleculeUpdateAndCancelButton from '../molecules/MoleculeUpdateAndCancelButton.vue';
+import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
+import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
 
 const props = defineProps({
-  comment: {
+  synopsis: {
     type: String,
     default: '',
   },
@@ -65,12 +69,12 @@ const emit = defineEmits([
   'editorVisibleToggle',
 ]);
 
-const commentLocal = ref(props.comment);
+const synopsisLocal = ref(props.synopsis);
 
 watch(
-  () => props.comment,
+  () => props.synopsis,
   v => {
-    commentLocal.value = v;
+    synopsisLocal.value = v;
   }
 );
 </script>

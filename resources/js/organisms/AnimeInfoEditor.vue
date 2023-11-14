@@ -72,12 +72,12 @@
 
 <script setup>
 import { ref } from 'vue';
-import MoleculeAnimeCategoryView from '../molecules/MoleculeAnimeCategoryView.vue';
-import MoleculeAnimeWatchedStatusView from '../molecules/MoleculeAnimeWatchedStatusView.vue';
-import MoleculeAnimeBroadcastView from '../molecules/MoleculeAnimeBroadcastView.vue';
-import MoleculeAnimeGenreView from '../molecules/MoleculeAnimeGenreView.vue';
-import MoleculeAnimeSynopsisView from '../molecules/MoleculeAnimeSynopsisView.vue';
-import MoleculeAnimeCommentView from '../molecules/MoleculeAnimeCommentView.vue';
+import MoleculeAnimeCategoryView from '../molecules/dataDisplay/MoleculeAnimeCategoryView.vue';
+import MoleculeAnimeWatchedStatusView from '../molecules/dataDisplay/MoleculeAnimeWatchedStatusView.vue';
+import MoleculeAnimeBroadcastView from '../molecules/dataDisplay/MoleculeAnimeBroadcastView.vue';
+import MoleculeAnimeGenreView from '../molecules/dataDisplay/MoleculeAnimeGenreView.vue';
+import MoleculeAnimeSynopsisView from '../molecules/dataDisplay/MoleculeAnimeSynopsisView.vue';
+import MoleculeAnimeCommentView from '../molecules/dataDisplay/MoleculeAnimeCommentView.vue';
 
 const props = defineProps({
   categories: {

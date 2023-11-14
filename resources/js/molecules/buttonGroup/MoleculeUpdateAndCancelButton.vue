@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
-import AtomUpdateTextButton from '../atoms/button/AtomUpdateTextButton.vue';
+import AtomCancelTextButton from '../../atoms/button/AtomCancelTextButton.vue';
+import AtomUpdateTextButton from '../../atoms/button/AtomUpdateTextButton.vue';
 
 const props = defineProps({
   loading: {
