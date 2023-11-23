@@ -68,7 +68,8 @@ const { loading, setLoading, apiPostRequest } =
 const submitAnimeRegister = async () => {
   setLoading(true);
   const formData = new FormData();
-  formData.append('animeName', form.animeName);
+  formData.append('name', form.animeName);
+
   const broadcastYear = form.broadcastYear ?? '';
   formData.append(
     'broadcast_date',
@@ -76,9 +77,16 @@ const submitAnimeRegister = async () => {
   );
   formData.append('genre', form.genre);
   formData.append('synopsis', form.synopsis);
-  formData.append('keyVisualImage', form.keyVisualImage[0]);
+
+  let keyVisualImage;
+  if (form.keyVisualImage[0]) {
+    keyVisualImage = form.keyVisualImage[0];
+  } else {
+    keyVisualImage = '';
+  }
+  formData.append('key_visual_image', keyVisualImage);
   formData.append(
-    'keyVisualReference',
+    'key_visual_reference',
     form.keyVisualReference
   );
 
@@ -91,7 +99,9 @@ const submitAnimeRegister = async () => {
       },
     }
   );
-  router.push({ name: 'home' });
+
+  console.log(result);
+  // router.push({ name: 'home' });
 
   // このフォーマットで通る
   // result.response.data.errors = {
