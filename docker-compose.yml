@@ -34,6 +34,25 @@ services:
       - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
+  db.test:
+    image: mysql:5.7
+    platform: linux/amd64
+    container_name: db.test
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/db.test/data:/var/lib/mysql
+      - ./docker/db.test/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/db.test/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3307:3307
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -43,6 +62,6 @@ services:
       - PMA_ARBITRARY=1
       - PMA_HOSTS='db'
     ports:
-      - "3000:80"
+      - '3000:80'
     volumes:
       - ./docker/phpmyadmin/sessions:/sessions
