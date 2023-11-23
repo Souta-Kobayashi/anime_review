@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -13,9 +13,10 @@ class CreateUserRequest extends FormRequest
     private $rule;
     private $user;
 
-    public function __construct(Rule $rule,
-                                User $user)
-    {
+    public function __construct(
+        Rule $rule,
+        User $user
+    ) {
         $this->rule = $rule;
         $this->user = $user;
     }

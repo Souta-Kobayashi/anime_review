@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Contracts\RegisterViewResponse;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\User\CreateUserRequest;
 
 class RegisteredUserController extends Controller
 {
@@ -45,20 +45,21 @@ class RegisteredUserController extends Controller
     /**
      * Create a new registered user.
      *
-     * @param  \App\Http\Requests\CreateUserRequest  $request
+     * @param  \App\Http\Requests\User\CreateUserRequest  $request
      * @param  \Laravel\Fortify\Contracts\CreatesNewUsers  $creator
      * @return \Laravel\Fortify\Contracts\RegisterResponse
      */
-    public function store(CreateUserRequest $request,
-                          CreatesNewUsers $creator)
-    {
+    public function store(
+        CreateUserRequest $request,
+        CreatesNewUsers $creator
+    ) {
         // ユーザー登録
         $validated = $request->validated();
         $user = $creator->create($validated);
 
         // メール送信イベント
         // event(new Registered($user));
-        
+
         $this->guard->login($user);
 
         return app(RegisterResponse::class);
