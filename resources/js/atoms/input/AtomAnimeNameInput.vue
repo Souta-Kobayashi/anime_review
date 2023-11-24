@@ -8,8 +8,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-
 const props = defineProps({
   animeName: {
     type: String,
