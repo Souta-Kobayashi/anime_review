@@ -7,7 +7,8 @@
         <v-container>
           <AtomAnimeNameInput
             v-model:anime-name="form.animeName"
-            :server-error-message="serverErrorMessage"
+            :error-messages="nameErrorMessage"
+            @blur="blurExecVuelidate('animeName')"
           />
           <MoleculeAnimeBroadcastField
             v-model:broadcastYear="form.broadcastYear"
@@ -18,11 +19,21 @@
           />
           <AtomAnimeSynopsisTextarea
             v-model:synopsis="form.synopsis"
+            :error-messages="synopsisErrorMessage"
+            @blur="blurExecVuelidate('synopsis')"
           />
           <MoleculeAnimeKeyVisualField
             v-model:key-visual-image="form.keyVisualImage"
             v-model:key-visual-reference="
               form.keyVisualReference
+            "
+            :image-err-message="imageErrorMessage"
+            :reference-err-message="referenceErrorMessage"
+            @blur-image="
+              blurExecVuelidate('keyVisualImage')
+            "
+            @blur-reference="
+              blurExecVuelidate('keyVisualReference')
             "
           />
           <AtomAnimeCreateSubmitButton
@@ -39,9 +50,11 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
+import { useValidate } from '../composables/useValidation';
+import { useHelpers } from '../composables/useHelpers';
 import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
 import AtomAnimeGenreRadioButton from '../atoms/radio/AtomAnimeGenreRadioButton.vue';
@@ -61,16 +74,38 @@ const form = reactive({
 });
 const isPassed = ref(false);
 const serverErrorMessage = reactive({});
+
 // composables
 const { loading, setLoading, apiPostRequest } =
   useApiRequest();
+const helpers = useHelpers();
+const {
+  getErrMessage,
+  blurExecVuelidate,
+  setServerValidationError,
+} = useValidate(form);
 
-const submitAnimeRegister = async () => {
-  setLoading(true);
+// エラーメッセージ
+const nameErrorMessage = computed(() =>
+  getErrMessage('animeName')
+);
+const synopsisErrorMessage = computed(() =>
+  getErrMessage('synopsis')
+);
+const imageErrorMessage = computed(() =>
+  getErrMessage('keyVisualImage')
+);
+const referenceErrorMessage = computed(() =>
+  getErrMessage('keyVisualReference')
+);
+
+// apiリクエストするフォーム作成
+const makeRequestFormData = () => {
   const formData = new FormData();
-  formData.append('name', form.animeName);
-
   const broadcastYear = form.broadcastYear ?? '';
+  let keyVisualImage;
+
+  formData.append('name', form.animeName);
   formData.append(
     'broadcast_date',
     `${broadcastYear},${form.broadcastSeason}`
@@ -78,7 +113,6 @@ const submitAnimeRegister = async () => {
   formData.append('genre', form.genre);
   formData.append('synopsis', form.synopsis);
 
-  let keyVisualImage;
   if (form.keyVisualImage[0]) {
     keyVisualImage = form.keyVisualImage[0];
   } else {
@@ -90,6 +124,14 @@ const submitAnimeRegister = async () => {
     form.keyVisualReference
   );
 
+  return formData;
+};
+
+// アニメ登録
+const submitAnimeRegister = async () => {
+  setLoading(true);
+
+  const formData = makeRequestFormData();
   const result = await apiPostRequest(
     '/api/anime/create',
     formData,
@@ -100,25 +142,24 @@ const submitAnimeRegister = async () => {
     }
   );
 
-  console.log(result);
-  // router.push({ name: 'home' });
-
-  // このフォーマットで通る
-  // result.response.data.errors = {
-  //   name: ['nameは必ず指定してください。'],
-  //   password: ['passwordは必ず指定してください。'],
-  // };
-
-  // TODO: バックエンド側実装後修正する
-  // サーバー側バリデーションチェックの戻り値からエラーメッセージセット
-  // if () {
-
-  // }
-
-  // for (const key in result.data.errors) {
-  //   serverErrorMessage[key] = result.data.errors[key];
-  // }
-
+  if (result.status === 201) {
+    router.push({ name: 'home' });
+  } else if (result.status === 422) {
+    // prettier-ignore
+    const convertServerData = function (key) {
+      if (key === 'name')                 return 'animeName';
+      if (key === 'key_visual_image')     return helpers.toCamelCase(key);
+      if (key === 'key_visual_reference') return helpers.toCamelCase(key);
+      return key;
+    };
+    // サーバーエラーメッセージを生成
+    for (const serverKey in result.data.errors) {
+      const key = convertServerData(serverKey);
+      serverErrorMessage[key] =
+        result.data.errors[serverKey];
+    }
+    setServerValidationError(serverErrorMessage);
+  }
   setLoading(false);
 };
 </script>

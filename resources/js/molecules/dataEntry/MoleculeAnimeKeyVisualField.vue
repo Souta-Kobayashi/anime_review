@@ -1,13 +1,17 @@
 <template>
   <AtomAnimeKeyVisualImageInput
+    :error-messages="imageErrMessage"
     @update:keyVisualImage="
       e => $emit('update:keyVisualImage', e)
     "
+    @mousedown:control="$emit('blurImage')"
   />
   <AtomAnimeKeyVisualSourceInput
+    :error-messages="referenceErrMessage"
     @update:keyVisualReference="
       e => $emit('update:keyVisualReference', e)
     "
+    @blur="$emit('blurReference')"
   />
 </template>
 
@@ -23,9 +27,19 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  imageErrMessage: {
+    type: String,
+    default: '',
+  },
+  referenceErrMessage: {
+    type: String,
+    default: '',
+  },
 });
 const emit = defineEmits([
   'update:keyVisualImage',
   'update:keyVisualReference',
+  'blurImage',
+  'blurReference',
 ]);
 </script>

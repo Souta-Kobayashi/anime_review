@@ -79,9 +79,12 @@ class CustomValidationRules {
 
   animeCreateRules() {
     return computed(() => ({
-      name: {
+      animeName: {
         required: this.requiredCustomMessage(),
       },
+      synopsis: {},
+      keyVisualImage: {},
+      keyVisualReference: {},
     }));
   }
 
