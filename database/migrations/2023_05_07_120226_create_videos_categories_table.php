@@ -16,19 +16,18 @@ return new class extends Migration
             $table->unsignedInteger('video_id'); // foreign key
             $table->unsignedInteger('category_id'); // foreign key
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('video_id')
-                    ->references('id')
-                    ->on('videos')
-                    ->cascadeOnDelete()
-                    ->cascadeOnUpdate();
+                ->references('id')
+                ->on('videos')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->foreign('category_id')
-                    ->references('id')
-                    ->on('categories')
-                    ->cascadeOnDelete()
-                    ->cascadeOnUpdate();
+                ->references('id')
+                ->on('categories')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 
