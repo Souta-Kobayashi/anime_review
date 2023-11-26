@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Video\StoreRequest;
 use App\Http\Resources\VideoResource;
 use App\UseCases\Video\StoreAction;
+use App\UseCases\Video\DestroyAction;
 
 class VideoController extends Controller
 {
@@ -46,8 +47,8 @@ class VideoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Video $video)
+    public function destroy(string $id, Video $video, DestroyAction $action)
     {
-        //
+        return new VideoResource($action($video, $id));
     }
 }

@@ -17,9 +17,18 @@ class VideoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
-            'status' => 200,
-            'message' => 'アニメの登録が完了しました',
-        ];
+        // $uri = $request->path();
+
+        if ($request->isMethod('post')) {
+            return [
+                'status' => 200,
+                'message' => 'アニメの登録が完了しました',
+            ];
+        } elseif ($request->isMethod('delete')) {
+            return [
+                'status' => 200,
+                'message' => 'アニメを削除しました',
+            ];
+        }
     }
 }

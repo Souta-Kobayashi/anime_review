@@ -45,9 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}/info', function (Request $request) {
             return response()->json(['status' => 200, 'message' => 'アニメ情報を更新しました']);
         });
-        Route::delete('/{id}', function (Request $request) {
-            return response()->json(['status' => 200, 'message' => 'アニメを削除しました']);
-        });
+        Route::delete('/{id}', [VideoController::class, 'destroy']);
     });
 });
 
