@@ -45,25 +45,17 @@ const submitCategoryRegister = async () => {
   setLoading(true);
   const result = await apiPostRequest(
     '/api/category/create',
-    form
+    { name: form.categoryName }
   );
-  router.push({ name: 'home' });
 
-  // このフォーマットで通る
-  // result.response.data.errors = {
-  //   name: ['nameは必ず指定してください。'],
-  //   password: ['passwordは必ず指定してください。'],
-  // };
-
-  // TODO: バックエンド側実装後修正する
-  // サーバー側バリデーションチェックの戻り値からエラーメッセージセット
-  // if () {
-
-  // }
-
-  // for (const key in result.data.errors) {
-  //   serverErrorMessage[key] = result.data.errors[key];
-  // }
+  if (result.status === 201) {
+    router.push({ name: 'home' });
+  } else if (result.status === 422) {
+    // サーバーエラーメッセージを生成
+    for (const key in result.data.errors) {
+      serverErrorMessage[key] = result.data.errors[key];
+    }
+  }
 
   setLoading(false);
 };
