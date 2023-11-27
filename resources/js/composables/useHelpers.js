@@ -11,6 +11,12 @@ export function useHelpers() {
         match.charAt(1).toUpperCase()
       );
     },
+    clearObjectValues: obj => {
+      Object.keys(obj).forEach(key => {
+        obj[key] = '';
+      });
+      return obj;
+    },
   };
 
   return helpers;

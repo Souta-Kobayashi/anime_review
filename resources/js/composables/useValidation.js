@@ -2,11 +2,23 @@ import router from '../router';
 import { reactive } from 'vue';
 import { useVuelidate } from '@vuelidate/core';
 import { getValidationRules } from './useValidationRules';
+import { useHelpers } from './useHelpers';
+
+const helpers = useHelpers();
 
 export function useValidate(form) {
   const currentUrl = router.options.history.location;
   const rules = getValidationRules(currentUrl, form);
-  const serverValidationErrMessage = reactive({ ...form });
+
+  const clearValueForm = helpers.clearObjectValues(
+    Object.assign({}, form)
+  );
+  // データ更新のバリデーション時に初期エラーメッセージ=オブジェクトの値 となるため
+  // formの値を空にしたオブジェクトをセット
+  const serverValidationErrMessage = reactive({
+    ...clearValueForm,
+  });
+
   // vuelidateのインスタンス生成
   const v$ = useVuelidate(rules, form);
 

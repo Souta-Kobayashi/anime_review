@@ -1,7 +1,7 @@
 <template>
   <v-text-field
     v-model="editCategoryNameLocal.name"
-    :error-messages="getErrMessage('name')"
+    :error-messages="categoryNameErrorMessage"
     label="カテゴリ名"
     @blur="blurExecVuelidate('name')"
     @update:modelValue="
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue';
+import { reactive, watch, computed } from 'vue';
 import { useValidate } from '../../composables/useValidation';
 
 const props = defineProps({
@@ -34,6 +34,10 @@ const {
   blurExecVuelidate,
   setServerValidationError,
 } = useValidate(editCategoryNameLocal);
+
+const categoryNameErrorMessage = computed(() =>
+  getErrMessage('name')
+);
 
 watch(
   () => props.categoryUpdateErrorData,
