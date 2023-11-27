@@ -39,8 +39,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id, Category $video, DestroyAction $action): CategoryResource
     {
-        //
+        return new CategoryResource($action($video, $id));
     }
 }

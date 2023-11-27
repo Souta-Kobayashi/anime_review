@@ -27,9 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{id}', function (Request $request) {
             return response()->json(['status' => 200, 'message' => 'カテゴリ名を修正しました']);
         });
-        Route::delete('/{id}', function (Request $request) {
-            return response()->json(['status' => 200, 'message' => 'カテゴリを削除しました']);
-        });
+        Route::delete('/{id}', [CategoryController::class, 'destroy']);
     });
 
     Route::prefix('/anime')->group(function () {
