@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::prefix('/category')->group(function () {
-        Route::post('/create', function (Request $request) {
-            // $categoryName = $request->input('categoryName');
-            // データベースへの保存などの処理
-            // レスポンス
-            return response()->json(['status' => 200, 'message' => 'カテゴリの登録が完了しました']);
-        });
+        Route::post('/create', [CategoryController::class, 'store']);
         Route::put('/{id}', function (Request $request) {
             return response()->json(['status' => 200, 'message' => 'カテゴリ名を修正しました']);
         });

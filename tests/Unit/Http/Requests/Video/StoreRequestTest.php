@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Http\Requests;
+namespace Tests\Unit\Http\Requests\Video;
 
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
@@ -22,8 +22,8 @@ class StoreRequestTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        // mock
 
+        // mock
         $this->rule = $this->mock(Rule::class, function (MockInterface $mock) {
             $mock->shouldReceive('unique')->andReturn(new Unique('videos'));
             $mock->shouldReceive('in')->andReturn(new In([10, 20]));
