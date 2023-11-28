@@ -3,7 +3,7 @@
 namespace Tests\Unit\Http\Requests\Category;
 
 use Tests\TestCase;
-use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Category\StoreOrUpdateRequest;
 use Mockery\MockInterface;
 use App\Models\Category;
 use Illuminate\Validation\Rule;
@@ -14,7 +14,7 @@ class StoreRequestTest extends TestCase
 {
     private Rule $rule;
     private Category $category;
-    private StoreRequest $request;
+    private StoreOrUpdateRequest $request;
     private array $rules;
 
     public function setUp(): void
@@ -29,7 +29,7 @@ class StoreRequestTest extends TestCase
             $mock->shouldReceive('getTable')->andReturn('categories');
         });
 
-        $this->request = new StoreRequest($this->rule, $this->category);
+        $this->request = new StoreOrUpdateRequest($this->rule, $this->category);
         // フォームリクエストで定義したルールを取得
         $this->rules = $this->request->rules();
     }

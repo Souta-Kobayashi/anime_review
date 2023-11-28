@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Category;
 use App\Exceptions\DatabaseDestroyException;
+use App\Exceptions\DatabaseUpdateException;
 
 class CategoryControllerTest extends TestCase
 {
@@ -103,5 +104,69 @@ class CategoryControllerTest extends TestCase
             'status' => 500,
             'message' => '想定外のエラーによりカテゴリの削除に失敗しました'
         ]);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Update
+    |--------------------------------------------------------------------------
+     */
+    public function test_正常系_カテゴリ更新_成功(): void
+    {
+        $store_category = Category::factory()->create();
+        $user = User::factory()->create();
+        $data = [
+            'name' => $store_category->name . 'update'
+        ];
+
+        $response = $this->actingAs($user)
+            ->putJson($this->path . $store_category->id, $data);
+
+        $response->assertSuccessful()
+            ->assertExactJson([
+                'status' => 200,
+                'message' => 'カテゴリを更新しました'
+            ]);
+    }
+
+    public function test_異常系_カテゴリ更新失敗_ユーザー未認証_ステータス401(): void
+    {
+        $store_category = Category::factory()->create();
+        $data = [
+            'name' => $store_category->name . 'update'
+        ];
+
+        $response = $this->putJson($this->path . $store_category->id, $data);
+
+        $response->assertExactJson([
+            'status' => 401,
+            'message' => 'authenticate failed'
+        ]);
+
+        $this->assertGuest();
+    }
+
+    public function test_異常系_カテゴリ更新失敗_想定外(): void
+    {
+        $this->expectException(DatabaseUpdateException::class);
+
+        $store_category = Category::factory()->create();
+        $user = User::factory()->create();
+        $data = [
+            'name' => $store_category->name . 'update'
+        ];
+
+        // 削除対象のID　このIDはテーブルに存在しない
+        $update_id = '9999';
+
+        $response = $this->actingAs($user)
+            ->withoutExceptionHandling()
+            ->putJson($this->path . $update_id, $data);
+
+        $response->assertSuccessful()
+            ->assertExactJson([
+                'status' => 500,
+                'message' => '想定外のエラーによりカテゴリの更新に失敗しました'
+            ]);
     }
 }

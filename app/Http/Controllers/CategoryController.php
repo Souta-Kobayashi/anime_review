@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Category\StoreOrUpdateRequest;
 use App\Http\Resources\CategoryResource;
 use App\UseCases\Category\StoreAction;
 use App\UseCases\Category\DestroyAction;
+use App\UseCases\Category\UpdateAction;
+use App\Exceptions\DatabaseUpdateException;
 
 class CategoryController extends Controller
 {
@@ -22,7 +23,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request, StoreAction $action): CategoryResource
+    public function store(StoreOrUpdateRequest $request, StoreAction $action): CategoryResource
     {
         $category = $request->make_category();
         return new CategoryResource($action($category));
@@ -31,9 +32,14 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreOrUpdateRequest $request, UpdateAction $action, Category $category, string $id): CategoryResource
     {
-        //
+        try {
+            $category_name = $request->name;
+            return new CategoryResource($action($category, $id, $category_name));
+        } catch (\Throwable $e) {
+            throw new DatabaseUpdateException('カテゴリ');
+        }
     }
 
     /**

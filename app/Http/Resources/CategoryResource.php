@@ -27,6 +27,11 @@ class CategoryResource extends JsonResource
                 'status' => 200,
                 'message' => 'カテゴリを削除しました',
             ];
+        } elseif ($request->isMethod('put')) {
+            return [
+                'status' => 200,
+                'message' => 'カテゴリを更新しました',
+            ];
         }
     }
 }

@@ -21,12 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json(['status' => 200, 'message' => 'this user is logged in.']);
     });
 
-
     Route::prefix('/category')->group(function () {
         Route::post('/create', [CategoryController::class, 'store']);
-        Route::put('/{id}', function (Request $request) {
-            return response()->json(['status' => 200, 'message' => 'カテゴリ名を修正しました']);
-        });
+        Route::put('/{id}', [CategoryController::class, 'update']);
         Route::delete('/{id}', [CategoryController::class, 'destroy']);
     });
 

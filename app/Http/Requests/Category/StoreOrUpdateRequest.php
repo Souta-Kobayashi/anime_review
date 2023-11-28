@@ -6,7 +6,7 @@ use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class StoreOrUpdateRequest extends FormRequest
 {
     private Rule $rule;
     private Category $category;
