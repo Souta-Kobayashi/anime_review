@@ -44,10 +44,9 @@ const fetchCategory = async () => {
 // カテゴリ名の更新
 const updateCategory = async (categoryName, id) => {
   isCategoryUpdated.value = false;
-  const form = { categoryName };
   const result = await apiPutRequest(
     `/api/category/${id}`,
-    form
+    { name: categoryName }
   );
 
   if (result.status === 200) {
@@ -55,12 +54,7 @@ const updateCategory = async (categoryName, id) => {
     // カテゴリー表示をリフレッシュ
     await fetchCategory();
   } else {
-    // ダミー値
-    let local = {
-      name: ['カテゴリ名は必ず指定してください。'],
-    };
-    // categoryUpdateErrorData.value = result.data.errors; これでたぶん通る
-    categoryUpdateErrorData.value = local;
+    categoryUpdateErrorData.value = result.data.errors;
   }
 };
 
