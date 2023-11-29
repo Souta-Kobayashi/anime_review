@@ -100,21 +100,5 @@ Route::prefix('anime')->group(function () {
 });
 
 Route::prefix('category')->group(function () {
-    // カテゴリ一覧を返却
-    Route::get('/', function () {
-        return response()->json([
-            [
-                'id' => 1,
-                'category_name' => '学園',
-            ],
-            [
-                'id' => 2,
-                'category_name' => 'SF',
-            ],
-            [
-                'id' => 3,
-                'category_name' => 'ホラー',
-            ],
-        ]);
-    });
+    Route::get('/', [CategoryController::class, 'index']);
 });

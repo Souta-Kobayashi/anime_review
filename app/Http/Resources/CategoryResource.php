@@ -7,17 +7,19 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
 {
-    // レスポンスのjson構造変更
-    static public $wrap = '';
-
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request)
     {
-        if ($request->isMethod('post')) {
+        if ($request->isMethod('get')) {
+            return [
+                'id' => $this->id,
+                'category_name' => $this->name,
+            ];
+        } elseif ($request->isMethod('post')) {
             return [
                 'status' => 200,
                 'message' => 'カテゴリの登録が完了しました',

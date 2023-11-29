@@ -7,9 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class VideoResource extends JsonResource
 {
-    // レスポンスのjson構造変更
-    static public $wrap = '';
-
     /**
      * Transform the resource into an array.
      *

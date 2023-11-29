@@ -5,19 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\Category\StoreOrUpdateRequest;
 use App\Http\Resources\CategoryResource;
+use App\UseCases\Category\IndexAction;
 use App\UseCases\Category\StoreAction;
 use App\UseCases\Category\DestroyAction;
 use App\UseCases\Category\UpdateAction;
 use App\Exceptions\DatabaseUpdateException;
+use \Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexAction $action, Category $category): AnonymousResourceCollection
     {
-        //
+        return CategoryResource::collection($action($category));
     }
 
     /**
