@@ -9,7 +9,7 @@
   </div>
   <div
     v-else
-    class="d-flex logout-btn-wrapper"
+    class="logout-btn-wrapper"
     @click="$emit('userLogout')"
   >
     <AtomUserLogoutButtonWithIcon />
