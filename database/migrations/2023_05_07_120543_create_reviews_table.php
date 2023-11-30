@@ -15,20 +15,20 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('video_id'); // foreign key
             $table->unsignedSmallInteger('watched_status');
-            $table->unsignedDecimal('review_story',       5, 2)->nullable();
-            $table->unsignedDecimal('review_drawing',     5, 2)->nullable();
-            $table->unsignedDecimal('review_voice_actor', 5, 2)->nullable();
-            $table->unsignedDecimal('review_music',       5, 2)->nullable();
-            $table->unsignedDecimal('review_characters',  5, 2)->nullable();
+            $table->unsignedDecimal('review_story',       5, 1)->nullable();
+            $table->unsignedDecimal('review_drawing',     5, 1)->nullable();
+            $table->unsignedDecimal('review_voice_actor', 5, 1)->nullable();
+            $table->unsignedDecimal('review_music',       5, 1)->nullable();
+            $table->unsignedDecimal('review_characters',  5, 1)->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('video_id')
-                    ->references('id')
-                    ->on('videos')
-                    ->cascadeOnDelete()
-                    ->cascadeOnUpdate();
+                ->references('id')
+                ->on('videos')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 
