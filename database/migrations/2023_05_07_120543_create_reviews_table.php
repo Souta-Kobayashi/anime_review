@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('video_id'); // foreign key
-            $table->unsignedSmallInteger('watched_status');
+            $table->unsignedSmallInteger('watched_status')->nullable();
             $table->unsignedDecimal('review_story',       5, 1)->nullable();
             $table->unsignedDecimal('review_drawing',     5, 1)->nullable();
             $table->unsignedDecimal('review_voice_actor', 5, 1)->nullable();

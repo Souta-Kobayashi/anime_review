@@ -14,7 +14,7 @@ class VideoResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // $uri = $request->path();
+        $uri = $request->path();
 
         if ($request->isMethod('post')) {
             return [
@@ -25,6 +25,11 @@ class VideoResource extends JsonResource
             return [
                 'status' => 200,
                 'message' => 'アニメを削除しました',
+            ];
+        } elseif (strpos($uri, 'rating') !== false) {
+            return [
+                'status' => 200,
+                'message' => 'アニメのレビューが完了しました',
             ];
         }
     }

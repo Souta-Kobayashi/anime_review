@@ -9,7 +9,6 @@ class UpdateAction
 {
     public function __invoke(Category $category, string $category_id, string $category_name): Category
     {
-
         $original_category = $category->findOrFail($category_id);
         $original_category->name = $category_name;
 

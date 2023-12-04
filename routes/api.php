@@ -30,9 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/anime')->group(function () {
         Route::post('/create', [VideoController::class, 'store']);
 
-        Route::put('/{id}/rating', function (Request $request) {
-            return response()->json(['status' => 200, 'message' => 'アニメのレビューが完了しました']);
-        });
+        Route::put('/{id}/rating', [VideoController::class, 'update_rating']);
         Route::put('/{id}/info', function (Request $request) {
             return response()->json(['status' => 200, 'message' => 'アニメ情報を更新しました']);
         });
