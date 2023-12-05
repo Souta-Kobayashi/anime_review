@@ -8,14 +8,17 @@ use Exception;
 
 class UpdateRatingAction
 {
-    public function __invoke(Review $review_rating, Video $video, string $video_id): Review
+    public function __invoke(Video $video, array $review_items, string $video_id): Review
     {
-        $video->findOrFail($video_id);
-        $review_rating->video_id = $video_id;
+        $target_video = $video->findOrFail($video_id);
+        $review = $target_video->review ?? new Review;
+        $review->fill($review_items);
 
-        if (!$review_rating->save()) {
+        $result = $target_video->review()->save($review);
+        if (! $result) {
             throw new Exception;
         }
-        return $review_rating;
+
+        return $result;
     }
 }

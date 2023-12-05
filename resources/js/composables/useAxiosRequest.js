@@ -1,3 +1,11 @@
+import {
+  snakeCase,
+  isArray,
+  isObject,
+  mapValues,
+  mapKeys,
+} from 'lodash';
+
 export function useAxiosRequest() {
   const axiosGetCsrfCookie = () => {
     axios.get('/sanctum/csrf-cookie');
@@ -16,6 +24,34 @@ export function useAxiosRequest() {
   };
 
   const axiosPut = (url, form = '', header = '') => {
+    const mapKeysDeep = (data, callback) => {
+      if (isArray(data)) {
+        return data.map(innerData =>
+          mapKeysDeep(innerData, callback)
+        );
+      } else if (isObject(data)) {
+        return mapValues(mapKeys(data, callback), val =>
+          mapKeysDeep(val, callback)
+        );
+      } else {
+        return data;
+      }
+    };
+
+    const mapKeysSnakeCase = data =>
+      mapKeysDeep(data, (_value, key) => snakeCase(key));
+
+    axios.interceptors.request.use(
+      ({ data, ...request }) => {
+        const convertedData = mapKeysSnakeCase(data);
+        return { ...request, data: convertedData };
+      },
+      error => {
+        console.error('Request interceptor error:', error);
+        return Promise.reject(error);
+      }
+    );
+
     return axios.put(url, form, header);
   };
 

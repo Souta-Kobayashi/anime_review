@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\VideoController;
-use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,7 +92,7 @@ Route::prefix('anime')->group(function () {
             'review_voice_actor' => '3.0',
             'review_music' => '3.5',
             'review_characters' => '2.5',
-            'watched_status' => 40
+            'watched_status' => 40,
         ]);
     });
 });

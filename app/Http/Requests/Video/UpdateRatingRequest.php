@@ -4,7 +4,6 @@ namespace App\Http\Requests\Video;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\Review;
 
 class UpdateRatingRequest extends FormRequest
 {
@@ -50,10 +49,5 @@ class UpdateRatingRequest extends FormRequest
             'review_music' => '音楽',
             'review_characters' => 'キャラクター',
         ];
-    }
-
-    public function make_rating(): Review
-    {
-        return new Review($this->validated());
     }
 }

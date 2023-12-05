@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Video;
-use App\Models\Review;
-use Illuminate\Http\Request;
+use App\Exceptions\DatabaseUpdateException;
 use App\Http\Requests\Video\StoreRequest;
 use App\Http\Requests\Video\UpdateRatingRequest;
 use App\Http\Resources\VideoResource;
-use App\UseCases\Video\StoreAction;
+use App\Models\Video;
 use App\UseCases\Video\DestroyAction;
+use App\UseCases\Video\StoreAction;
 use App\UseCases\Video\UpdateRatingAction;
-use App\Exceptions\DatabaseUpdateException;
 use Throwable;
 
 class VideoController extends Controller
@@ -37,6 +35,7 @@ class VideoController extends Controller
     public function store(StoreRequest $request, StoreAction $action): VideoResource
     {
         $video = $request->make_video($request->validated());
+
         return new VideoResource($action($video));
     }
 
@@ -48,11 +47,12 @@ class VideoController extends Controller
         //
     }
 
-    public function update_rating(UpdateRatingRequest $request, UpdateRatingAction $action,  string $id): VideoResource
+    public function update_rating(UpdateRatingRequest $request, UpdateRatingAction $action, string $id): VideoResource
     {
         try {
-            $review_rating = $request->make_rating();
-            return new VideoResource($action($review_rating, $this->video, $id));
+            $review_items = $request->validated();
+
+            return new VideoResource($action($this->video, $review_items, $id));
         } catch (Throwable $e) {
             throw new DatabaseUpdateException('レビュー');
         }
