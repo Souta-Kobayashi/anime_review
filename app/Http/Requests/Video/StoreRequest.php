@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests\Video;
 
+use App\Models\Video;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\Video;
 
 class StoreRequest extends FormRequest
 {
     private Rule $rule;
+
     private Video $video;
 
     public function __construct(
@@ -38,7 +39,7 @@ class StoreRequest extends FormRequest
             'name' => [
                 'required',
                 'max:400',
-                $this->rule->unique($this->video->getTable())
+                $this->rule->unique($this->video->getTable()),
             ],
             'broadcast_date' => 'max:100',
             'genre' => [
@@ -68,19 +69,13 @@ class StoreRequest extends FormRequest
 
     public function make_video(array $data): Video
     {
-        // broadcast_dataの修正
-        if (array_key_exists('broadcast_date', $data)) {
-            $broadcast_data_array = array_filter(
-                explode(',', $data['broadcast_date'])
-            );
-            $broadcast_data = implode(' ', $broadcast_data_array);
-            $data['broadcast_date'] = $broadcast_data;
-        }
+        // broadcast_dataのフォーマット修正
+        $data = format_broadcast_date_for_database($data);
 
         // 画像をディスクに保存しkey_visual_urlに変換する
-        if (!empty($data['key_visual_image'])) {
+        if (! empty($data['key_visual_image'])) {
             $image = $data['key_visual_image'];
-            $key_visual_url = time() . '.' . $image->getClientOriginalExtension();
+            $key_visual_url = time().'.'.$image->getClientOriginalExtension();
             // 画像をディスクに保存
             $image->storeAs('uploads', $key_visual_url, 'public');
             $data['key_visual_url'] = $key_visual_url;
