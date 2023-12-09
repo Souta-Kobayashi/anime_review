@@ -10,6 +10,8 @@ if (! function_exists('format_broadcast_date_for_database')) {
     function format_broadcast_date_for_database(array $data): array
     {
         if (array_key_exists('broadcast_date', $data)) {
+            // 空配列はここで削除される
+            // eg) 2023, | ,春アニメ
             $broadcast_data_array = array_filter(
                 explode(',', $data['broadcast_date'])
             );

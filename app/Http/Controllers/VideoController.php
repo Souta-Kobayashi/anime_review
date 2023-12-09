@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\DatabaseUpdateException;
 use App\Http\Requests\Video\StoreRequest;
+use App\Http\Requests\Video\UpdateInfoRequest;
 use App\Http\Requests\Video\UpdateRatingRequest;
 use App\Http\Resources\VideoResource;
 use App\Models\Video;
 use App\UseCases\Video\DestroyAction;
 use App\UseCases\Video\StoreAction;
+use App\UseCases\Video\UpdateInfoAction;
 use App\UseCases\Video\UpdateRatingAction;
 use Throwable;
 
@@ -58,12 +60,15 @@ class VideoController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(StoreRequest $request, Video $video)
+    public function update_info(UpdateInfoRequest $request, UpdateInfoAction $action, string $id): VideoResource
     {
-        //
+        try {
+            $anime_info_item = $request->make_anime_info($request->validated());
+
+            return new VideoResource($action($this->video, $anime_info_item, $id));
+        } catch (Throwable $e) {
+            throw new DatabaseUpdateException('アニメ情報');
+        }
     }
 
     /**

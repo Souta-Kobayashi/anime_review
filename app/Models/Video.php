@@ -28,7 +28,7 @@ class Video extends Model
 
     public function categories(): BelongsToMany
     {
-        return $this->BelongsToMany(Category::class, 'videos_categories');
+        return $this->BelongsToMany(Category::class, 'videos_categories')->withTimestamps();
     }
 
     public function review(): HasOne

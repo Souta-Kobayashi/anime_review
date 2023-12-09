@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\VideoController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,9 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/create', [VideoController::class, 'store']);
 
         Route::put('/{id}/rating', [VideoController::class, 'update_rating']);
-        Route::put('/{id}/info', function (Request $request) {
-            return response()->json(['status' => 200, 'message' => 'アニメ情報を更新しました']);
-        });
+        Route::put('/{id}/info', [VideoController::class, 'update_info']);
         Route::delete('/{id}', [VideoController::class, 'destroy']);
     });
 });
@@ -78,8 +75,14 @@ Route::prefix('anime')->group(function () {
             'anime_name' => '秋桜丘高校舞台裏クラブ 〜星の輝き、未知の舞台へ〜これは、世界を舞台に繰り広げられる、知られざる高校生たちの物語。学園の舞台裏で奏でられる感動と謎の数々。本物の友情、夢、そして探求心。全てがここに綴られていく。',
             'broadcast_date' => '2023年　秋アニメ', // "year年. \S. seasonアニメ" をフォーマットする
             'categories' => [
-                '学園',
-                'SF',
+                [
+                    'id' => 11,
+                    'category_name' => 'hic',
+                ],
+                [
+                    'id' => 12,
+                    'category_name' => 'dolorem',
+                ],
             ],
             'comment' => '「秋桜丘高校舞台裏クラブ 〜星の輝き、未知の舞台へ〜」は、普段目にすることのない高校生たちの世界を描いた感動的な物語です。学園の裏側で展開される彼らの冒険と謎解きは魅力的で、友情、夢、探求心がテーマとして浮かび上がります。キャラクターたちの成長と絆は心温まり、視聴者に共感を呼び起こします。アニメの背後に隠れた輝きを追い求める彼らの物語は、心に残り、視聴者に感動と希望をもたらします。',
             'genre' => 20,

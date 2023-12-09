@@ -20,14 +20,14 @@
         :key="index"
         variant="tonal"
         class="me-2 mb-2"
-        >{{ category }}
+        >{{ category.category_name }}
       </v-chip>
     </dd>
     <dd v-else="isEditorVisible">
       <v-select
         class="anime-info-text"
-        v-model="categoriesLocal"
-        :items="categoryItems"
+        v-model="currentCategoriesLocal"
+        :items="categoryItemsLocal"
         chips
         variant="underlined"
         label="カテゴリを選択"
@@ -35,13 +35,7 @@
       ></v-select>
       <MoleculeUpdateAndCancelButton
         :loading="isLoading"
-        @update-anime-info="
-          $emit(
-            'updateAnimeInfo',
-            'categories',
-            categoriesLocal
-          )
-        "
+        @update-anime-info="updateAnimeInfo"
         @close-editor="
           $emit('editorVisibleToggle', 'categories', false)
         "
@@ -82,12 +76,54 @@ const emit = defineEmits([
   'editorVisibleToggle',
 ]);
 
-const categoriesLocal = ref(props.categories);
+const currentCategoriesLocal = ref([]);
+const categoryItemsLocal = ref([]);
+
+const categorySet = (categories, type) => {
+  if (type === 'current') {
+    currentCategoriesLocal.value = categories.map(
+      item => item.category_name
+    );
+  } else if (type === 'list') {
+    categoryItemsLocal.value = categories.map(
+      item => item.category_name
+    );
+  }
+};
+
+// 初期データセット
+(async () => {
+  categorySet(props.categories, 'current');
+  categorySet(props.categoryItems, 'list');
+})();
 
 watch(
   () => props.categories,
   v => {
-    categoriesLocal.value = v;
+    categorySet(v, 'current');
   }
 );
+
+watch(
+  () => props.categoryItems,
+  v => {
+    categorySet(v, 'list');
+  }
+);
+
+const updateAnimeInfo = () => {
+  // カテゴリidと一緒にリクエストするための処理
+  const filteredCategoryItems = props.categoryItems.filter(
+    item =>
+      currentCategoriesLocal.value.includes(
+        item.category_name
+      )
+  );
+
+  emit(
+    'updateAnimeInfo',
+    'categories',
+    filteredCategoryItems
+  );
+};
 </script>

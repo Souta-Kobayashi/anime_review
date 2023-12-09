@@ -163,26 +163,47 @@ const updateRating = async ratingItems => {
   }
 };
 
-// アニメ情報の更新
-const updateAnimeInfo = async (type, data) => {
-  isLoading.value[type] = true;
-  // 放送時期はデータ加工
+// prettier-ignore
+// 更新前の値と同値もしくはunMounted状態はfalseを返す
+const shouldSkipUpdate = (type, data) => {
+  // broadcast_dataは,を置換
   if (type === 'broadcast_date') {
-    data.year = data.year ?? '';
-    // 前後のスペースをトル
-    data = `${data.year}　${data.season}`.trim();
+    data = data.replace(/,/g, '　');
   }
 
-  // 更新前と同値もしくはunMounted状態はreturn
-  if (animeDetail.value[type] === data || !hasMounted) {
+  // NOTE: categoryがプロキシされたオブジェクトの値のためJSON.stringifyで文字列変換し比較
+  if (
+    JSON.stringify(animeDetail.value[type]) === JSON.stringify(data)
+    || !hasMounted
+  ) {
     // エディター閉じる
     animeInfoEditorRef.value?.editorVisibleToggle(
       helpers.toCamelCase(type),
       false
     );
     isLoading.value[type] = false;
-    return;
+    return false;
   }
+  return true;
+};
+
+// 放送時期のデータを加工する
+const formatBroadcastForBackend = (type, data) => {
+  if (type === 'broadcast_date') {
+    // 放送西暦のプルダウンは値がないとnullとなるため空文字に置換
+    data.year = data.year ?? '';
+    return `${data.year},${data.season}`;
+  }
+  return data;
+};
+
+// アニメ情報の更新
+const updateAnimeInfo = async (type, data) => {
+  isLoading.value[type] = true;
+  // 放送時期はデータ加工
+  data = formatBroadcastForBackend(type, data);
+  // APIリクエストの送信判定
+  if (!shouldSkipUpdate(type, data)) return;
 
   // APIリクエスト
   const form = { [type]: data };
