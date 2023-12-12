@@ -43,28 +43,28 @@ import AtomRateAnimeTextButton from '../atoms/button/AtomRateAnimeTextButton.vue
 
 const props = defineProps({
   reviewAverage: {
-    type: String,
-    default: 'ー',
+    type: Number,
+    default: null,
   },
   reviewStory: {
-    type: String,
-    default: '0',
+    type: Number,
+    default: 0,
   },
   reviewDrawing: {
-    type: String,
-    default: '0',
+    type: Number,
+    default: 0,
   },
   reviewVoiceActor: {
-    type: String,
-    default: '0',
+    type: Number,
+    default: 0,
   },
   reviewMusic: {
-    type: String,
-    default: '0',
+    type: Number,
+    default: 0,
   },
   reviewCharacters: {
-    type: String,
-    default: '0',
+    type: Number,
+    default: 0,
   },
   closeDialog: {
     type: Boolean,
@@ -108,13 +108,13 @@ const ratingItemsMaster = [
 const ratingItems = ref(
   ratingItemsMaster.map(item => ({
     ...item,
-    ratingValue: String(item.ratingValue),
+    ratingValue: Number(item.ratingValue),
   }))
 );
 const dialogRatingItems = ref(
   ratingItemsMaster.map(item => ({
     ...item,
-    ratingValue: String(item.ratingValue),
+    ratingValue: Number(item.ratingValue),
   }))
 );
 
@@ -132,7 +132,7 @@ ratingItemsMaster.forEach((item, index) => {
 
 // ダイアログ内ratingの変更処理
 const dialogRatingItemsUpdate = (index, v) => {
-  dialogRatingItems.value[index].ratingValue = String(v);
+  dialogRatingItems.value[index].ratingValue = Number(v);
 };
 
 const hideDialog = () => {
@@ -147,7 +147,7 @@ const hideDialog = () => {
     dialogRatingItems.value = ratingItemsMaster.map(
       item => ({
         ...item,
-        ratingValue: String(item.ratingValue),
+        ratingValue: Number(item.ratingValue),
       })
     );
   }, 500);

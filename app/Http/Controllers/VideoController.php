@@ -9,6 +9,7 @@ use App\Http\Requests\Video\UpdateRatingRequest;
 use App\Http\Resources\VideoResource;
 use App\Models\Video;
 use App\UseCases\Video\DestroyAction;
+use App\UseCases\Video\IndexAction;
 use App\UseCases\Video\StoreAction;
 use App\UseCases\Video\UpdateInfoAction;
 use App\UseCases\Video\UpdateRatingAction;
@@ -26,9 +27,9 @@ class VideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexAction $action)
     {
-        //
+        return VideoResource::collection($action());
     }
 
     /**

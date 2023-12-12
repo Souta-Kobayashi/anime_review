@@ -13,8 +13,8 @@ const props = defineProps({
     default: '',
   },
   ratingValue: {
-    type: String,
-    default: '0',
+    type: Number,
+    default: 0,
   },
 });
 </script>

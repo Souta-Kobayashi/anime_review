@@ -35,4 +35,37 @@ class Video extends Model
     {
         return $this->hasOne(Review::class);
     }
+
+    /**
+     * レビューの平均値を取得
+     * ビジネスロジックだが汎用的な処理であるため一旦モデルに実装
+     */
+    public function get_average_rating(): float|int
+    {
+        $review = $this->review;
+
+        if (! $review) {
+            return 0;
+        }
+
+        $review_items = [
+            'story' => $review->review_story,
+            'drawing' => $review->review_drawing,
+            'voice_actor' => $review->review_voice_actor,
+            'music' => $review->review_music,
+            'characters' => $review->review_characters,
+        ];
+
+        // nullが一つでもあれば計算不能として0.0を返す
+        if (in_array(null, $review_items, true)) {
+            return 0;
+        }
+
+        // 数値に変換
+        $review_items = array_map(fn ($item) => (float) $item, $review_items);
+
+        $average = array_sum($review_items) / count($review_items);
+
+        return $average;
+    }
 }

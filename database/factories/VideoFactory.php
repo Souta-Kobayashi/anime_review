@@ -18,12 +18,12 @@ class VideoFactory extends Factory
     {
         return [
             'name' => fake()->sentence(),
-            'broadcast_date' => fake()->numberBetween(1980, 2023) . '年　' .
-                fake()->randomElement(['春', '夏', '秋', '冬']) . 'アニメ',
+            'broadcast_date' => fake()->numberBetween(1980, 2023).'年　'.
+                fake()->randomElement(['春', '夏', '秋', '冬']).'アニメ',
             'genre' => fake()->randomElement([10, 20]),
             'synopsis' => fake()->realText(1000),
-            'key_visual_url' => 'dummy.png',
-            'key_visual_reference' => fake()->sentence() . 'より引用',
+            'key_visual_url' => '/image/dummy.png',
+            'key_visual_reference' => fake()->sentence().'より引用',
         ];
     }
 }

@@ -13,8 +13,8 @@
 import { computed } from 'vue';
 const props = defineProps({
   reviewAverage: {
-    type: String,
-    default: 'ー',
+    type: Number,
+    default: null,
   },
 });
 

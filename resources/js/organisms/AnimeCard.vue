@@ -28,7 +28,7 @@
             />
             <MoleculeAnimeCardDescription
               :anime-name="anime.animeName"
-              :category="anime.category"
+              :categories="anime.categories"
               :rating="anime.rating"
               :synopsis="anime.synopsis"
             />
