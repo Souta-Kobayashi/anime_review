@@ -56,7 +56,7 @@ class Video extends Model
             'characters' => $review->review_characters,
         ];
 
-        // nullが一つでもあれば計算不能として0.0を返す
+        // nullが一つでもあれば計算不能として0を返す
         if (in_array(null, $review_items, true)) {
             return 0;
         }

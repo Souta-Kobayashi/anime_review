@@ -25,6 +25,11 @@ class VideoResource extends JsonResource
         if ($this->is_video_index_resource($request, $uri)) {
             return $this->make_video_index_resource($request, $uri);
         }
+
+        // アニメ詳細
+        if ($this->is_video_show_resource($request, $uri)) {
+            return $this->make_video_show_resource($request, $uri);
+        }
     }
 
     public function is_message_return_resource($request, $uri): bool
@@ -38,7 +43,13 @@ class VideoResource extends JsonResource
     public function is_video_index_resource($request, $uri): bool
     {
         return $request->isMethod('get')
-            || preg_match('/anime\/?$/', $uri) !== false;
+            && preg_match('/anime\/?$/', $uri);
+    }
+
+    public function is_video_show_resource($request, $uri): bool
+    {
+        return $request->isMethod('get')
+            && preg_match('/anime\/\d+\/?$/', $uri);
     }
 
     /**
@@ -69,7 +80,7 @@ class VideoResource extends JsonResource
     }
 
     /**
-     * /api/anime/のリソースを返却
+     * アニメ一覧　/api/anime/のリソースを返却
      */
     public function make_video_index_resource(): array
     {
@@ -79,8 +90,33 @@ class VideoResource extends JsonResource
             'categories' => $this->resource['category'] ?? [], // array
             'rating' => $this->resource['rating'] ?? '',
             'synopsis' => $this->resource['synopsis'] ?? '',
-            'keyVisual' => $this->resource['key_visual'] ?? '',
+            'keyVisual' => $this->resource['key_visual'] ?? 'storage/uploads/dummy.png',
             'keyVisualReference' => $this->resource['key_visual_reference'] ?? '',
+        ];
+    }
+
+    /**
+     * アニメ詳細　/api/anime/\d のリソースを返却
+     */
+    public function make_video_show_resource(): array
+    {
+        return [
+            'id' => $this->resource['id'] ?? '',
+            'anime_name' => $this->resource['anime_name'] ?? '',
+            'broadcast_date' => $this->resource['broadcast_date'] ?? '',
+            'categories' => $this->resource['categories'] ?? [], // array
+            'comment' => $this->resource['comment'] ?? '',
+            'genre' => $this->resource['genre'] ?? '',
+            'synopsis' => $this->resource['synopsis'] ?? '',
+            'key_visual' => $this->resource['key_visual'] ?? 'storage/uploads/dummy.png',
+            'key_visual_reference' => $this->resource['key_visual_reference'] ?? '',
+            'review_average' => $this->resource['review_average'] ?? 0,
+            'review_story' => $this->resource['review_story'] ?? 0,
+            'review_drawing' => $this->resource['review_drawing'] ?? 0,
+            'review_voice_actor' => $this->resource['review_voice_actor'] ?? 0,
+            'review_music' => $this->resource['review_music'] ?? 0,
+            'review_characters' => $this->resource['review_characters'] ?? 0,
+            'watched_status' => $this->resource['watched_status'] ?? 999, // nullの場合は選択肢外の数値を入れる
         ];
     }
 }

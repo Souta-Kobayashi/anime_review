@@ -7,9 +7,11 @@ use App\Http\Requests\Video\StoreRequest;
 use App\Http\Requests\Video\UpdateInfoRequest;
 use App\Http\Requests\Video\UpdateRatingRequest;
 use App\Http\Resources\VideoResource;
+use App\Models\Review;
 use App\Models\Video;
 use App\UseCases\Video\DestroyAction;
 use App\UseCases\Video\IndexAction;
+use App\UseCases\Video\ShowAction;
 use App\UseCases\Video\StoreAction;
 use App\UseCases\Video\UpdateInfoAction;
 use App\UseCases\Video\UpdateRatingAction;
@@ -19,9 +21,12 @@ class VideoController extends Controller
 {
     private Video $video;
 
-    public function __construct(Video $video)
+    private Review $review;
+
+    public function __construct(Video $video, Review $review)
     {
         $this->video = $video;
+        $this->review = $review;
     }
 
     /**
@@ -39,15 +44,15 @@ class VideoController extends Controller
     {
         $video = $request->make_video($request->validated());
 
-        return new VideoResource($action($video));
+        return new VideoResource($action($video, $this->review));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Video $video)
+    public function show(ShowAction $action, string $id)
     {
-        //
+        return new VideoResource($action($this->video, $id));
     }
 
     public function update_rating(UpdateRatingRequest $request, UpdateRatingAction $action, string $id): VideoResource

@@ -78,7 +78,7 @@ class StoreRequest extends FormRequest
             $key_visual_url = time().'.'.$image->getClientOriginalExtension();
             // 画像をディスクに保存
             $image->storeAs('uploads', $key_visual_url, 'public');
-            $data['key_visual_url'] = $key_visual_url;
+            $data['key_visual_url'] = '/storage/uploads/'.$key_visual_url;
         }
         // DBにはパスだけ保存するため$dataから削除
         unset($data['key_visual_image']);
