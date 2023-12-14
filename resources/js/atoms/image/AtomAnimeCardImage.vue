@@ -10,7 +10,7 @@
 const props = defineProps({
   src: {
     type: String,
-    default: 'storage/uploads/dummy.png',
+    default: '/image/no_image.png',
   },
   keyVisualReference: {
     type: String,

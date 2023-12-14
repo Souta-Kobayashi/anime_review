@@ -90,7 +90,7 @@ class VideoResource extends JsonResource
             'categories' => $this->resource['category'] ?? [], // array
             'rating' => $this->resource['rating'] ?? '',
             'synopsis' => $this->resource['synopsis'] ?? '',
-            'keyVisual' => $this->resource['key_visual'] ?? 'storage/uploads/dummy.png',
+            'keyVisual' => $this->resource['key_visual'] ?? '/image/no_image.png',
             'keyVisualReference' => $this->resource['key_visual_reference'] ?? '',
         ];
     }
@@ -108,7 +108,7 @@ class VideoResource extends JsonResource
             'comment' => $this->resource['comment'] ?? '',
             'genre' => $this->resource['genre'] ?? '',
             'synopsis' => $this->resource['synopsis'] ?? '',
-            'key_visual' => $this->resource['key_visual'] ?? 'storage/uploads/dummy.png',
+            'key_visual' => $this->resource['key_visual'] ?? '/image/no_image.png',
             'key_visual_reference' => $this->resource['key_visual_reference'] ?? '',
             'review_average' => $this->resource['review_average'] ?? 0,
             'review_story' => $this->resource['review_story'] ?? 0,

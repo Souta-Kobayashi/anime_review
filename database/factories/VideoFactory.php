@@ -22,7 +22,7 @@ class VideoFactory extends Factory
                 fake()->randomElement(['春', '夏', '秋', '冬']).'アニメ',
             'genre' => fake()->randomElement([10, 20]),
             'synopsis' => fake()->realText(1000),
-            'key_visual_url' => '/storage/uploads/dummy.png',
+            'key_visual_url' => '/image/no_image.png',
             'key_visual_reference' => fake()->sentence().'より引用',
         ];
     }
