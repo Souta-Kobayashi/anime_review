@@ -187,12 +187,31 @@ const shouldSkipUpdate = (type, data) => {
   return true;
 };
 
-// 放送時期のデータを加工する
+// 放送時期のデータをAPIリクエスト用に加工
 const formatBroadcastForBackend = (type, data) => {
   if (type === 'broadcast_date') {
     // 放送西暦のプルダウンは値がないとnullとなるため空文字に置換
     data.year = data.year ?? '';
     return `${data.year},${data.season}`;
+  }
+  return data;
+};
+
+// 放送時期のデータをフロント表示用に加工
+const formatBroadcastForDisplay = (type, data) => {
+  if (!type === 'broadcast_date') {
+    return data;
+  }
+
+  const pattern = /^\d{4}.*アニメ/;
+  if (pattern.test(data)) {
+    // 西暦、季節ともに入力されている場合はスペースに置換
+    // e.g.) 2023年,春アニメ
+    data = data.replace(/,/g, ' ');
+  } else {
+    // 西暦、季節どちらか入力されている場合は空文字に置換
+    // e.g.) ,春アニメ | 2023年,
+    data = data.replace(/,/g, '');
   }
   return data;
 };
@@ -213,6 +232,8 @@ const updateAnimeInfo = async (type, data) => {
   );
 
   if (result.status === 200) {
+    // 放送時期のデータの場合はフロント表示用に修正
+    data = formatBroadcastForDisplay(type, data);
     // フロント側値の更新
     animeDetail.value[type] = data;
     // エディター閉じる
