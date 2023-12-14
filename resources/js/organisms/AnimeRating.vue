@@ -1,5 +1,11 @@
 <template>
-  <v-col cols="7" sm="7" md="8" lg="9" class="anime-rating">
+  <v-col
+    cols="12"
+    sm="7"
+    md="8"
+    lg="9"
+    class="anime-rating"
+  >
     <div
       class="d-flex align-items-center justify-content-center mb-4 rating-comprehensive"
     >

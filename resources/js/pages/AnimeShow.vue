@@ -9,7 +9,7 @@
       </v-row>
 
       <v-row class="sp-head">
-        <v-col cols="5" sm="5" md="4" lg="3">
+        <v-col cols="6" sm="5" md="4" lg="3">
           <v-img
             :src="animeDetail.key_visual"
             height="350"
@@ -158,7 +158,7 @@ const updateRating = async ratingItems => {
   if (result.status === 200) {
     // ダイアログを閉じる
     closeRatingDialog.value = true;
-    // カテゴリー表示をリフレッシュ
+    // アニメ表示をリフレッシュ
     await fetchAnimeDetail();
   }
 };

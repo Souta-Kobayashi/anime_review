@@ -1,5 +1,5 @@
 .pc-anime-title {
-  @include sp {
+  @media (max-width: 600px) {
     display: none !important;
   }
 }
@@ -10,7 +10,7 @@
 }
 .sp-anime-title {
   display: none;
-  @include sp {
+  @media (max-width: 600px) {
     display: block !important;
   }
 }
