@@ -6,9 +6,10 @@ use App\Models\Video;
 
 class IndexAction
 {
-    public function __invoke()
+    public function __invoke(): array
     {
-        $videos = Video::with(['categories', 'review'])->get();
+        // 登録日を降順でソートし一覧取得
+        $videos = Video::with(['categories', 'review'])->get()->sortByDesc('created_at');
 
         return $videos->map(function ($video) {
             return [
