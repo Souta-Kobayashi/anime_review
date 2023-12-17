@@ -52,12 +52,14 @@
       "
     />
   </header>
+  <AtomSiteMessage />
 </template>
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useApiRequest } from '../composables/useApiRequest';
+import AtomSiteMessage from '../atoms/notify/AtomSiteMessage.vue';
 import MoleculePcNavMenu from '../molecules/menu/MoleculePcNavMenu.vue';
 import MoleculePcNavRegisterMenu from '../molecules/menu/MoleculePcNavRegisterMenu.vue';
 import MoleculePcNavUserMenu from '../molecules/menu/MoleculePcNavUserMenu.vue';
