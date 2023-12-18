@@ -4,10 +4,7 @@
       v-model="visibleSiteMessage"
       closable
       density="compact"
-      max-width="1400"
       type="info"
-      title=""
-      text=""
       variant="tonal"
       close-label="Close Alert"
       border="start"

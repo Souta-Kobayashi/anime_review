@@ -2,9 +2,11 @@
   <BaseHeader />
   <main>
     <v-container>
-      <v-row class="pc-anime-title">
+      <v-row class="pc-anime-title-wrapper">
         <v-col>
-          <h4>{{ animeDetail.anime_name }}</h4>
+          <h4 class="show-page-anime-title">
+            {{ animeDetail.anime_name }}
+          </h4>
         </v-col>
       </v-row>
 
@@ -20,8 +22,10 @@
             </p>
           </v-img>
         </v-col>
-        <v-col class="sp-anime-title">
-          <h4>{{ animeDetail.anime_name }}</h4>
+        <v-col class="sp-anime-title-wrapper">
+          <h4 class="show-page-anime-title">
+            {{ animeDetail.anime_name }}
+          </h4>
         </v-col>
 
         <AnimeRating

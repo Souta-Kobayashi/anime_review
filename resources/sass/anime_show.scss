@@ -1,14 +1,17 @@
-.pc-anime-title {
+.pc-anime-title-wrapper {
   @media (max-width: 600px) {
     display: none !important;
   }
+}
+.show-page-anime-title {
+  font-size: clamp(1.5rem, 1.398rem + 0.51vw, 1.875rem);
 }
 .sp-head {
   @include sp {
     margin-top: 0 !important;
   }
 }
-.sp-anime-title {
+.sp-anime-title-wrapper {
   display: none;
   @media (max-width: 600px) {
     display: block !important;
