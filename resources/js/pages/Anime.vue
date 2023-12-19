@@ -21,6 +21,7 @@ import AnimeCard from '../organisms/AnimeCard.vue';
 import AtomPagination from '../atoms/pagination/AtomPagination.vue';
 import { useFetchAnimeList } from '../composables/useFetchAnimeList';
 import { useHelpers } from '../composables/useHelpers';
+import { useVueScrollTo } from '../composables/useVueScrollTo';
 
 const { fetchAnimeList } = useFetchAnimeList();
 const helpers = useHelpers();
@@ -28,6 +29,7 @@ const pageSize = 20;
 const paginationLength = ref(0);
 const displayAnimeList = ref([]);
 let animeList = [];
+const { vueScrollTo, options } = useVueScrollTo(); // vue-scroll-to
 
 // アニメ一覧取得
 (async () => {
@@ -51,5 +53,7 @@ const pageChange = pageNumber => {
     pageSize * (pageNumber - 1),
     pageSize * pageNumber
   );
+  // トップまでスクロール
+  vueScrollTo.scrollTo('#app', options);
 };
 </script>
