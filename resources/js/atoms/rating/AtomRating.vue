@@ -3,7 +3,7 @@
     :size="size"
     v-model="ratingLocal"
     :readonly="readonly"
-    color="amber"
+    :color="color"
     density="compact"
     half-increments
   ></v-rating>
@@ -23,6 +23,10 @@ const props = defineProps({
   readonly: {
     type: Boolean,
     default: true,
+  },
+  color: {
+    type: String,
+    default: 'amber',
   },
 });
 const emit = defineEmits(['update:rating']);

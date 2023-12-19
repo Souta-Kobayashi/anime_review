@@ -5,7 +5,11 @@
       <p class="category">
         カテゴリ：{{ formattedCategories }}
       </p>
-      <AtomRating :rating="rating" readonly />
+      <AtomRating
+        :rating="rating"
+        :color="ratingColor"
+        readonly
+      />
     </div>
     <p class="synopsis">
       {{ synopsis }}
@@ -14,7 +18,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import AtomRating from '../../atoms/rating/AtomRating.vue';
 const props = defineProps({
   animeName: {
@@ -35,6 +39,10 @@ const props = defineProps({
   },
 });
 
+// レビュー3.5以上は色を変える
+const ratingColor = computed(() =>
+  props.rating >= 3.5 ? 'red-lighten-2' : 'amber'
+);
 const formattedCategories = ref(
   formatCategories(props.categories)
 );

@@ -20,6 +20,6 @@ const props = defineProps({
 
 // 評価が4.0以上は色付きで表示する
 const isHighlyRated = computed(() =>
-  props.reviewAverage >= 4.0 ? true : false
+  props.reviewAverage >= 3.5 ? true : false
 );
 </script>
