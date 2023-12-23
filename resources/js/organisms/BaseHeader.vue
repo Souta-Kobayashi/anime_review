@@ -14,7 +14,7 @@
       <MoleculePcNavUserMenu
         v-if="isDataReady"
         :is-login-status="isLoginStatus"
-        @user-logout="userLogout"
+        @user-logout="showLogoutDialog = true"
       />
       <MoleculeSpNavMenu
         v-if="isDataReady"
@@ -22,7 +22,7 @@
         @toggle-hamburger-menu="
           toggleHamburgerMenu = !toggleHamburgerMenu
         "
-        @user-logout="userLogout"
+        @user-logout="showLogoutDialog = true"
       />
     </div>
 
@@ -51,6 +51,11 @@
           })
       "
     />
+    <LogoutDialog
+      v-model="showLogoutDialog"
+      @close-dialog="showLogoutDialog = false"
+      @user-logout="userLogout"
+    />
   </header>
   <AtomSiteMessage />
 </template>
@@ -65,6 +70,7 @@ import MoleculePcNavRegisterMenu from '../molecules/menu/MoleculePcNavRegisterMe
 import MoleculePcNavUserMenu from '../molecules/menu/MoleculePcNavUserMenu.vue';
 import MoleculeSpNavMenu from '../molecules/menu/MoleculeSpNavMenu.vue';
 import MoleculeHamburgerMenu from '../molecules/menu/MoleculeHamburgerMenu.vue';
+import LogoutDialog from '../organisms/LogoutDialog.vue';
 import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 
 // prettier-ignore
@@ -82,6 +88,7 @@ const route = useRoute();
 const path = computed(() => route.path);
 const toggleHamburgerMenu = ref(false);
 const hamburgerContents = ref(null);
+const showLogoutDialog = ref(false);
 
 // ログイン判定
 (async () => {
@@ -110,6 +117,7 @@ const isDropdownItemActive = computed(() => {
 const userLogout = async () => {
   const result = await apiPostRequest('/api/logout');
   if (result.status) setLoginStatus(false);
+  showLogoutDialog.value = false;
 };
 
 // ハンバーガーメニューのinnerのtoggleに併せてheightを変更
