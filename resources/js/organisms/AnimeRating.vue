@@ -14,7 +14,10 @@
       />
     </div>
 
-    <div class="d-flex flex-wrap mb-10">
+    <div
+      class="d-flex flex-wrap"
+      :class="isLoginStatus ? 'mb-10' : 'mb-5'"
+    >
       <MoleculeAnimeRating
         v-for="rating in ratingItems"
         :key="rating.ratingTitle"
@@ -23,7 +26,10 @@
       />
     </div>
 
-    <AtomRateAnimeTextButton @click="showDialog" />
+    <AtomRateAnimeTextButton
+      v-if="isLoginStatus"
+      @click="showDialog"
+    />
 
     <!-- ダイアログ追加 -->
     <AnimeRatingUpdateDialog
@@ -41,6 +47,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
+import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 import AnimeRatingUpdateDialog from '../organisms/AnimeRatingUpdateDialog.vue';
 import MoleculeAnimeRating from '../molecules/rating/MoleculeAnimeRating.vue';
 import AtomAnimeRatingComprehensive from '../atoms/text/AtomAnimeRatingComprehensive.vue';
@@ -79,6 +86,7 @@ const props = defineProps({
 const emit = defineEmits(['saveRating']);
 
 const { setFormDirty } = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
+const { isLoginStatus } = useIsLoggedIn();
 const showRatingUpdateDialog = ref(false);
 const ratingItemsMaster = [
   {
