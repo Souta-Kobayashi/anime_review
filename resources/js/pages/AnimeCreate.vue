@@ -3,7 +3,11 @@
   <main>
     <v-sheet class="pa-6 mx-auto" max-width="1000px">
       <h4 class="text-center">アニメ登録</h4>
-      <v-form v-model="isPassed" @submit.prevent>
+      <v-form
+        v-model="isPassed"
+        @submit.prevent
+        @input="setFormDirty(true)"
+      >
         <v-container>
           <AtomAnimeNameInput
             v-model:anime-name="form.animeName"
@@ -55,6 +59,7 @@ import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
 import { useHelpers } from '../composables/useHelpers';
+import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
 import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
 import AtomAnimeGenreRadioButton from '../atoms/radio/AtomAnimeGenreRadioButton.vue';
@@ -84,6 +89,7 @@ const {
   blurExecVuelidate,
   setServerValidationError,
 } = useValidate(form);
+const { setFormDirty } = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
 
 // エラーメッセージ
 const nameErrorMessage = computed(() =>
@@ -143,6 +149,7 @@ const submitAnimeRegister = async () => {
   );
 
   if (result.status === 201) {
+    setFormDirty(false);
     router.push({ name: 'home' });
   } else if (result.status === 422) {
     // prettier-ignore

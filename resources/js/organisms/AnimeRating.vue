@@ -23,9 +23,7 @@
       />
     </div>
 
-    <AtomRateAnimeTextButton
-      @click="showRatingUpdateDialog = true"
-    />
+    <AtomRateAnimeTextButton @click="showDialog" />
 
     <!-- ダイアログ追加 -->
     <AnimeRatingUpdateDialog
@@ -42,6 +40,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
 import AnimeRatingUpdateDialog from '../organisms/AnimeRatingUpdateDialog.vue';
 import MoleculeAnimeRating from '../molecules/rating/MoleculeAnimeRating.vue';
 import AtomAnimeRatingComprehensive from '../atoms/text/AtomAnimeRatingComprehensive.vue';
@@ -79,6 +78,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['saveRating']);
 
+const { setFormDirty } = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
 const showRatingUpdateDialog = ref(false);
 const ratingItemsMaster = [
   {
@@ -141,7 +141,13 @@ const dialogRatingItemsUpdate = (index, v) => {
   dialogRatingItems.value[index].ratingValue = Number(v);
 };
 
+const showDialog = () => {
+  setFormDirty(true);
+  showRatingUpdateDialog.value = true;
+};
+
 const hideDialog = () => {
+  setFormDirty(false);
   showRatingUpdateDialog.value = false;
 
   // NOTE: ダイアログが消える前にpropsの更新処理が走りratingの値が
@@ -163,6 +169,7 @@ const hideDialog = () => {
 watch(
   () => props.closeDialog,
   closeDialog => {
+    setFormDirty(false);
     showRatingUpdateDialog.value = closeDialog
       ? false
       : true;
