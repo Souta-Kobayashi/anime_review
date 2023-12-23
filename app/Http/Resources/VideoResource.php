@@ -101,12 +101,12 @@ class VideoResource extends JsonResource
     public function make_video_show_resource(): array
     {
         return [
-            'id' => $this->resource['id'] ?? '',
+            'id' => $this->resource['id'] ?? 999999,
             'anime_name' => $this->resource['anime_name'] ?? '',
             'broadcast_date' => $this->resource['broadcast_date'] ?? '',
             'categories' => $this->resource['categories'] ?? [], // array
             'comment' => $this->resource['comment'] ?? '',
-            'genre' => $this->resource['genre'] ?? '',
+            'genre' => $this->resource['genre'] ?? 999, // nullの場合は選択肢外の数値を入れる
             'synopsis' => $this->resource['synopsis'] ?? '',
             'key_visual' => $this->resource['key_visual'] ?? '/image/no_image.png',
             'key_visual_reference' => $this->resource['key_visual_reference'] ?? '',
