@@ -203,7 +203,7 @@ const formatBroadcastForBackend = (type, data) => {
 
 // 放送時期のデータをフロント表示用に加工
 const formatBroadcastForDisplay = (type, data) => {
-  if (!type === 'broadcast_date') {
+  if (!(type === 'broadcast_date')) {
     return data;
   }
 

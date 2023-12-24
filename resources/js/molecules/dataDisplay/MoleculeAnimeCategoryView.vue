@@ -15,7 +15,9 @@
       </span>
     </dt>
     <dd v-if="!isEditorVisible" class="anime-info-category">
+      <span v-if="categories.length === 0">未選択</span>
       <v-chip
+        v-else
         v-for="(category, index) in categories"
         :key="index"
         variant="tonal"

@@ -19,7 +19,7 @@
       </span>
     </dt>
     <dd v-if="!isEditorVisible" class="anime-info-text">
-      {{ broadcastDate }}
+      {{ broadcastDate !== '' ? broadcastDate : '未選択' }}
     </dd>
     <dd v-else="isEditorVisible">
       <div>

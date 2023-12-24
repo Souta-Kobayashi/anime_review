@@ -15,7 +15,7 @@
       </span>
     </dt>
     <dd v-if="!isEditorVisible" class="anime-info-text">
-      {{ synopsis }}
+      {{ synopsis !== '' ? synopsis : '未入力' }}
     </dd>
     <dd v-else="isEditorVisible">
       <v-textarea
