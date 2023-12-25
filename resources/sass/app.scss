@@ -1,0 +1,65 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+// vuetify
+@import 'vuetify/dist/vuetify.min.css';
+
+@import 'mixin';
+@import 'header';
+@import 'footer';
+@import 'anime_list.scss';
+@import 'anime_show.scss';
+@import 'form';
+@import 'custom_vuetify';
+
+body {
+  overflow-x: hidden;
+}
+
+h2,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.display-flex-responsive {
+  display: flex;
+  @include sp {
+    display: block;
+  }
+}
+
+.display-block {
+  display: block;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.justify-items-center {
+  justify-items: center;
+}

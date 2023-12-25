@@ -17,3 +17,9 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/docker
+/doc
+*.plantuml
+/log
+stats.html
+.prettierrc
