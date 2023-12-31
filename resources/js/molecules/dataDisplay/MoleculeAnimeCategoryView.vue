@@ -33,6 +33,7 @@
         chips
         variant="underlined"
         label="カテゴリを選択"
+        theme="dark"
         multiple
       ></v-select>
       <MoleculeUpdateAndCancelButton
