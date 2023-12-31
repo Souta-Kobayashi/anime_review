@@ -13,7 +13,9 @@
       <v-row class="sp-head">
         <v-col cols="6" sm="5" md="4" lg="3">
           <v-img
-            :src="animeDetail.key_visual"
+            :src="
+              getKeyVisualSource(animeDetail.key_visual)
+            "
             height="350"
             cover
           >
@@ -114,6 +116,12 @@ const isLoading = ref({
   synopsis: false,
   comment: false,
 });
+
+// base64エンコード用
+const getKeyVisualSource = keyVisual =>
+  keyVisual === '/image/no_image.png'
+    ? keyVisual
+    : `data:image/png;base64,${keyVisual}`;
 
 // カテゴリの取得
 const fetchCategoryItems = async () => {

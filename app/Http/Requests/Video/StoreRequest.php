@@ -75,10 +75,8 @@ class StoreRequest extends FormRequest
         // 画像をディスクに保存しkey_visual_urlに変換する
         if (! empty($data['key_visual_image'])) {
             $image = $data['key_visual_image'];
-            $key_visual_url = time().'.'.$image->getClientOriginalExtension();
-            // 画像をディスクに保存
-            $image->storeAs('uploads', $key_visual_url, 'public');
-            $data['key_visual_url'] = '/storage/uploads/'.$key_visual_url;
+            // 画像データをbase64でエンコード
+            $data['key_visual_url'] = base64_encode(file_get_contents($image->getRealPath()));
         }
         // DBにはパスだけ保存するため$dataから削除
         unset($data['key_visual_image']);
