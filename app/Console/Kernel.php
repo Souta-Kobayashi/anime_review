@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('migrate:refresh')->weekly();
-        $schedule->command('db:seed')->weekly();
+        $schedule->command('migrate:refresh --force')->everyMinute();
+        $schedule->command('db:seed --force')->everyMinute();
     }
 
     /**
