@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Video;
 
 use App\Models\Video;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -39,7 +40,10 @@ class StoreRequest extends FormRequest
             'name' => [
                 'required',
                 'max:400',
-                $this->rule->unique($this->video->getTable()),
+                $this->rule
+                    ->unique($this->video->getTable())
+                    // ソフトデリートされていないレコードが対象
+                    ->where(fn (Builder $query) => $query->whereNull('deleted_at')),
             ],
             'broadcast_date' => 'max:100',
             'genre' => [
