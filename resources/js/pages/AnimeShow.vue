@@ -13,6 +13,7 @@
       <v-row class="sp-head">
         <v-col cols="6" sm="5" md="4" lg="3">
           <v-img
+            v-if="animeDetail"
             :src="
               getKeyVisualSource(animeDetail.key_visual)
             "
@@ -119,7 +120,7 @@ const isLoading = ref({
 
 // base64エンコード用
 const getKeyVisualSource = keyVisual =>
-  keyVisual === '/image/no_image.png'
+  !keyVisual || keyVisual === '/image/no_image.png'
     ? keyVisual
     : `data:image/png;base64,${keyVisual}`;
 
