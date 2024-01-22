@@ -24,7 +24,7 @@ import { useHelpers } from '../composables/useHelpers';
 
 const { fetchAnimeList } = useFetchAnimeList();
 const helpers = useHelpers();
-const maxAnimeItems = 20;
+const maxAnimeItems = 5;
 const showMoreButton = ref(false);
 const displayAnimeList = ref([]);
 
@@ -37,7 +37,7 @@ const fetchAndDisplayAnimeList = async () => {
       animeList,
       maxAnimeItems
     );
-    if (animeList.length > 20) {
+    if (animeList.length > 5) {
       addMoreButtonClass();
     }
   }

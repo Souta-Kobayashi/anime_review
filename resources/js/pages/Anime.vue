@@ -25,7 +25,7 @@ import { useVueScrollTo } from '../composables/useVueScrollTo';
 
 const { fetchAnimeList } = useFetchAnimeList();
 const helpers = useHelpers();
-const pageSize = 20;
+const pageSize = 5;
 const paginationLength = ref(0);
 const displayAnimeList = ref([]);
 let animeList = [];
