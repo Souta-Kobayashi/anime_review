@@ -1,6 +1,10 @@
 <template>
   <a :href="href" target="_blank">
-    <v-icon color="white" :icon="mdiIcon" size="large"></v-icon>
+    <v-icon
+      color="white"
+      :icon="mdiIcon"
+      size="large"
+    ></v-icon>
   </a>
 </template>
 

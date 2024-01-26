@@ -47,12 +47,10 @@ const vuetify = createVuetify({
 /* fontawesome */
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import {
-  faGithub,
-  faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
-library.add([faGithub, faTwitter]);
+import { fab } from '@fortawesome/free-brands-svg-icons';
+library.add(fab);
 
+// custom components
 import BaseHeader from './organisms/BaseHeader.vue';
 import BaseFooter from './organisms/BaseFooter.vue';
 
