@@ -4,7 +4,7 @@
     <MoleculeFooterFlexIcon />
     <!-- Copyright -->
     <p class="text-center p-3 m-0">
-      © 2023 Souta Kobayashi
+      © 2024 Souta Kobayashi
     </p>
   </footer>
 </template>
