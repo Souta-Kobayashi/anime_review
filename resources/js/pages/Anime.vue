@@ -5,7 +5,7 @@
     <v-container class="position-relative">
       <AnimeCard :display-anime-list="displayAnimeList" />
       <AtomPagination
-        v-model:current-page="currentPage"
+        v-model="currentPage"
         :pagination-length="paginationLength"
         @page-change="pageChange"
       />
