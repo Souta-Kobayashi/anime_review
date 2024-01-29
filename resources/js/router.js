@@ -53,12 +53,12 @@ const routes = [
     name: 'category-create',
     component: () => import('./pages/CategoryCreate.vue'),
   },
-  {
-    // カテゴリ編集
-    path: '/category/:id/edit',
-    name: 'category-edit',
-    component: () => import('./pages/CategoryEdit.vue'),
-  },
+  // {
+  //   // カテゴリ編集
+  //   path: '/category/:id/edit',
+  //   name: 'category-edit',
+  //   component: () => import('./pages/CategoryEdit.vue'),
+  // },
   // {
   //   path: '/about',
   //   name: 'About',
