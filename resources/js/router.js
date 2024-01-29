@@ -83,6 +83,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(BASE_URL), // set BASE_URL
   routes,
+
+  // ページ遷移時のスクロール動作
+  scrollBehavior(to, from, savedPosition) {
+    // ブラウザの進む/戻る操作時の挙動
+    if (savedPosition) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(savedPosition);
+        }, 1000);
+      });
+    } else {
+      return { top: 0, left: 0 };
+    }
+  },
 });
 
 export default router;
