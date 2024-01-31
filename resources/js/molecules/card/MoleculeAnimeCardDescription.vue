@@ -39,9 +39,9 @@ const props = defineProps({
   },
 });
 
-// レビュー3.5以上は色を変える
+// レビュー4.0以上は色を変える
 const ratingColor = computed(() =>
-  props.rating >= 3.5 ? 'red-lighten-2' : 'amber'
+  props.rating >= 4.0 ? 'red-lighten-2' : 'amber'
 );
 const formattedCategories = ref(
   formatCategories(props.categories)

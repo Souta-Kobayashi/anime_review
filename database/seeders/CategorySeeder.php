@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = $this->build_category($this->get_category_items());
-        Category::insert($categories);
+        Category::upsert($categories, ['id']);
     }
 
     private function build_category(array $category_names): array
@@ -38,6 +38,7 @@ class CategorySeeder extends Seeder
             'ほのぼの',
             'スポーツ',
             '競技',
+            '学園',
             '青春',
             'ホラー',
             'サスペンス',
@@ -47,6 +48,8 @@ class CategorySeeder extends Seeder
             '戦記',
             '戦争',
             'ミリタリー',
+            '家族',
+            '仕事',
         ];
     }
 }
