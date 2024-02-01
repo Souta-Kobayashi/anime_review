@@ -83,9 +83,11 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits(['saveRating']);
+const emit = defineEmits([
+  'saveRating',
+  'setNavigationBlocked',
+]);
 
-const { setFormDirty } = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
 const { isLoginStatus } = useIsLoggedIn();
 const showRatingUpdateDialog = ref(false);
 const ratingItemsMaster = [
@@ -150,12 +152,12 @@ const dialogRatingItemsUpdate = (index, v) => {
 };
 
 const showDialog = () => {
-  setFormDirty(true);
+  emit('setNavigationBlocked', true);
   showRatingUpdateDialog.value = true;
 };
 
 const hideDialog = () => {
-  setFormDirty(false);
+  emit('setNavigationBlocked', false);
   showRatingUpdateDialog.value = false;
 
   // NOTE: ダイアログが消える前にpropsの更新処理が走りratingの値が
@@ -177,7 +179,7 @@ const hideDialog = () => {
 watch(
   () => props.closeDialog,
   closeDialog => {
-    setFormDirty(false);
+    emit('setNavigationBlocked', false);
     showRatingUpdateDialog.value = closeDialog
       ? false
       : true;

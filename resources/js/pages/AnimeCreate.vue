@@ -6,7 +6,7 @@
       <v-form
         v-model="isPassed"
         @submit.prevent
-        @input="setFormDirty(true)"
+        @input="setNavigationBlocked(true)"
       >
         <v-container>
           <AtomAnimeNameInput
@@ -48,6 +48,13 @@
         </v-container>
       </v-form>
     </v-sheet>
+    <LeavingConfirmationDialog
+      @go-next-page="goNextPage"
+      @hide-navigation-confirm-dialog="
+        hideNavigationConfirmDialog
+      "
+      v-model="showConfirmationDialog"
+    />
   </main>
   <BaseFooter />
   <AtomSnackbar />
@@ -67,6 +74,7 @@ import AtomAnimeSynopsisTextarea from '../atoms/textarea/AtomAnimeSynopsisTextar
 import AtomAnimeCreateSubmitButton from '../atoms/button/AtomAnimeCreateSubmitButton.vue';
 import MoleculeAnimeBroadcastField from '../molecules/dataEntry/MoleculeAnimeBroadcastField.vue';
 import MoleculeAnimeKeyVisualField from '../molecules/dataEntry/MoleculeAnimeKeyVisualField.vue';
+import LeavingConfirmationDialog from '../organisms/LeavingConfirmationDialog.vue';
 
 const form = reactive({
   animeName: '',
@@ -89,7 +97,13 @@ const {
   blurExecVuelidate,
   setServerValidationError,
 } = useValidate(form);
-const { setFormDirty } = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
+
+const {
+  setNavigationBlocked,
+  goNextPage,
+  hideNavigationConfirmDialog,
+  showConfirmationDialog,
+} = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
 
 // エラーメッセージ
 const nameErrorMessage = computed(() =>
@@ -149,7 +163,7 @@ const submitAnimeRegister = async () => {
   );
 
   if (result.status === 201) {
-    setFormDirty(false);
+    setNavigationBlocked(false);
     router.push({ name: 'home' });
   } else if (result.status === 422) {
     // prettier-ignore

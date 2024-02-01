@@ -1,31 +1,44 @@
 import { ref } from 'vue';
-import { onBeforeRouteLeave } from 'vue-router';
+import { useRouter, onBeforeRouteLeave } from 'vue-router';
 
 export function useVueRouterBeforeRouteLeave() {
-  const isFormDirty = ref(false);
+  const isNavigationBlocked = ref(false);
+  const nextPageURL = ref(false);
+  const showConfirmationDialog = ref(false);
+  const router = useRouter();
 
   /**
-   * @param {boolean} v - フォームの変更状態を表すブール値
+   * @param {boolean} v - ページ遷移可能かを表すブール値
    */
-  const setFormDirty = v => {
-    isFormDirty.value = v;
+  const setNavigationBlocked = v => {
+    isNavigationBlocked.value = v;
+  };
+
+  const goNextPage = () => {
+    setNavigationBlocked(false);
+    router.push(nextPageURL.value);
+  };
+
+  const hideNavigationConfirmDialog = () => {
+    showConfirmationDialog.value = false;
   };
 
   /**
    * フォームが変更されている場合に確認ダイアログを表示
    */
-  const pageLeaveNavigation = onBeforeRouteLeave(
-    (to, from) => {
-      if (isFormDirty.value && to.path !== from.path) {
-        const answer = window.confirm(
-          'このページから移動しても良いですか？データは保持されません。'
-        );
-        if (!answer) return false;
-      }
+  onBeforeRouteLeave((to, from) => {
+    // フォーム編集中は画面遷移させずダイアログ表示
+    if (isNavigationBlocked.value) {
+      showConfirmationDialog.value = true;
+      nextPageURL.value = to.fullPath;
+      return false;
     }
-  );
+  });
 
   return {
-    setFormDirty,
+    setNavigationBlocked,
+    goNextPage,
+    hideNavigationConfirmDialog,
+    showConfirmationDialog,
   };
 }

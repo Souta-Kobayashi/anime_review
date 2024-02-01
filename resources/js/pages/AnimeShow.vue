@@ -42,6 +42,7 @@
           :review-characters="animeDetail.review_characters"
           :close-dialog="closeRatingDialog"
           @save-rating="updateRating"
+          @set-navigation-blocked="setNavigationBlocked"
         />
       </v-row>
 
@@ -58,6 +59,7 @@
           :is-login-status="isLoginStatus"
           :is-loading="isLoading"
           @update-anime-info="updateAnimeInfo"
+          @set-navigation-blocked="setNavigationBlocked"
           ref="animeInfoEditorRef"
         />
       </v-row>
@@ -72,6 +74,14 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <LeavingConfirmationDialog
+      @go-next-page="goNextPage"
+      @hide-navigation-confirm-dialog="
+        hideNavigationConfirmDialog
+      "
+      v-model="showConfirmationDialog"
+    />
   </main>
 
   <BaseFooter />
@@ -89,10 +99,12 @@ import { useApiRequest } from '../composables/useApiRequest';
 import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 import { useFetchCategories } from '../composables/useFetchCategories';
 import { useHelpers } from '../composables/useHelpers';
+import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
 import AnimeRating from '../organisms/AnimeRating.vue';
 import AnimeInfoEditor from '../organisms/AnimeInfoEditor.vue';
 import AnimeDelete from '../organisms/AnimeDelete.vue';
 import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
+import LeavingConfirmationDialog from '../organisms/LeavingConfirmationDialog.vue';
 
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();
@@ -117,6 +129,13 @@ const isLoading = ref({
   synopsis: false,
   comment: false,
 });
+
+const {
+  setNavigationBlocked,
+  goNextPage,
+  hideNavigationConfirmDialog,
+  showConfirmationDialog,
+} = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
 
 // base64エンコード用
 const getKeyVisualSource = keyVisual =>
