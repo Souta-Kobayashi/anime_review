@@ -72,7 +72,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
 import MoleculeAnimeCategoryView from '../molecules/dataDisplay/MoleculeAnimeCategoryView.vue';
 import MoleculeAnimeWatchedStatusView from '../molecules/dataDisplay/MoleculeAnimeWatchedStatusView.vue';
 import MoleculeAnimeBroadcastView from '../molecules/dataDisplay/MoleculeAnimeBroadcastView.vue';
@@ -118,7 +117,10 @@ const props = defineProps({
     default: {},
   },
 });
-const emit = defineEmits(['updateAnimeInfo']);
+const emit = defineEmits([
+  'updateAnimeInfo',
+  'setNavigationBlocked',
+]);
 
 const isEditorVisible = ref({
   categories: false,
@@ -128,11 +130,10 @@ const isEditorVisible = ref({
   synopsis: false,
   comment: false,
 });
-const { setFormDirty } = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
 
 // 選択されたフィールドのエディターの表示非表示を制御
 const editorVisibleToggle = (type, isVisible) => {
-  setFormDirty(isVisible);
+  emit('setNavigationBlocked', isVisible);
   isEditorVisible.value[type] = isVisible;
 };
 
