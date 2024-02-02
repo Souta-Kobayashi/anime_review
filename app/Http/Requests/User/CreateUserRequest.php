@@ -2,15 +2,17 @@
 
 namespace App\Http\Requests\User;
 
+use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\User;
-use App\Actions\Fortify\PasswordValidationRules;
 
 class CreateUserRequest extends FormRequest
 {
     use PasswordValidationRules;
+
     private $rule;
+
     private $user;
 
     public function __construct(
@@ -51,6 +53,13 @@ class CreateUserRequest extends FormRequest
             'email',
             'max:255',
             $this->rule->unique($this->user->getTable()),
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'email' => 'Eメールアドレス',
         ];
     }
 }

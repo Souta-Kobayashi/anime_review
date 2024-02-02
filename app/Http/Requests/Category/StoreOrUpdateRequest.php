@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 class StoreOrUpdateRequest extends FormRequest
 {
     private Rule $rule;
+
     private Category $category;
 
     public function __construct(
@@ -38,7 +39,7 @@ class StoreOrUpdateRequest extends FormRequest
             'name' => [
                 'required',
                 'max:100',
-                $this->rule->unique($this->category->getTable())
+                $this->rule->unique($this->category->getTable()),
             ],
         ];
     }
@@ -46,7 +47,7 @@ class StoreOrUpdateRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'カテゴリ名',
+            'name' => 'カテゴリ',
         ];
     }
 
