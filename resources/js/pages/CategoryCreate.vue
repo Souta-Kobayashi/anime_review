@@ -49,7 +49,7 @@ const submitCategoryRegister = async () => {
   );
 
   if (result.status === 201) {
-    router.push({ name: 'home' });
+    router.push({ name: 'category' });
   } else if (result.status === 422) {
     // サーバーエラーメッセージを生成
     for (const key in result.data.errors) {
