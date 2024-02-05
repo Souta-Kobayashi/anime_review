@@ -1,91 +1,97 @@
 <template>
-  <BaseHeader />
-  <main>
-    <v-container>
-      <v-row class="pc-anime-title-wrapper">
-        <v-col>
-          <h4 class="show-page-anime-title">
-            {{ animeDetail.anime_name }}
-          </h4>
-        </v-col>
-      </v-row>
+  <template v-if="hasAnimeDetail">
+    <BaseHeader />
+    <main>
+      <v-container>
+        <v-row class="pc-anime-title-wrapper">
+          <v-col>
+            <h4 class="show-page-anime-title">
+              {{ animeDetail.anime_name }}
+            </h4>
+          </v-col>
+        </v-row>
 
-      <v-row class="sp-head">
-        <v-col cols="6" sm="5" md="4" lg="3">
-          <v-img
-            v-if="animeDetail"
-            :src="
-              getKeyVisualSource(animeDetail.key_visual)
+        <v-row class="sp-head">
+          <v-col cols="6" sm="5" md="4" lg="3">
+            <v-img
+              v-if="animeDetail"
+              :src="
+                getKeyVisualSource(animeDetail.key_visual)
+              "
+              height="350"
+              cover
+            >
+              <p class="key-visual-reference">
+                {{ animeDetail.key_visual_reference }}
+              </p>
+            </v-img>
+          </v-col>
+          <v-col class="sp-anime-title-wrapper">
+            <h4 class="show-page-anime-title">
+              {{ animeDetail.anime_name }}
+            </h4>
+          </v-col>
+
+          <AnimeRating
+            :review-average="animeDetail.review_average"
+            :review-story="animeDetail.review_story"
+            :review-drawing="animeDetail.review_drawing"
+            :review-voice-actor="
+              animeDetail.review_voice_actor
             "
-            height="350"
-            cover
-          >
-            <p class="key-visual-reference">
-              {{ animeDetail.key_visual_reference }}
-            </p>
-          </v-img>
-        </v-col>
-        <v-col class="sp-anime-title-wrapper">
-          <h4 class="show-page-anime-title">
-            {{ animeDetail.anime_name }}
-          </h4>
-        </v-col>
-
-        <AnimeRating
-          :review-average="animeDetail.review_average"
-          :review-story="animeDetail.review_story"
-          :review-drawing="animeDetail.review_drawing"
-          :review-voice-actor="
-            animeDetail.review_voice_actor
-          "
-          :review-music="animeDetail.review_music"
-          :review-characters="animeDetail.review_characters"
-          :close-dialog="closeRatingDialog"
-          @save-rating="updateRating"
-          @set-navigation-blocked="setNavigationBlocked"
-        />
-      </v-row>
-
-      <v-row class="w-100 m-auto flex-column">
-        <AnimeInfoEditor
-          v-if="isDataReady"
-          :categories="animeDetail.categories"
-          :categoryItems="categoryItems"
-          :watched-status="animeDetail.watched_status"
-          :broadcast-date="animeDetail.broadcast_date"
-          :genre="animeDetail.genre"
-          :synopsis="animeDetail.synopsis"
-          :comment="animeDetail.comment"
-          :is-login-status="isLoginStatus"
-          :is-loading="isLoading"
-          @update-anime-info="updateAnimeInfo"
-          @set-navigation-blocked="setNavigationBlocked"
-          ref="animeInfoEditorRef"
-        />
-      </v-row>
-
-      <v-row>
-        <v-col class="text-end">
-          <AnimeDelete
-            v-if="isLoginStatus"
-            :anime-name="animeDetail.anime_name"
-            @destroy-anime="destroyAnime"
+            :review-music="animeDetail.review_music"
+            :review-characters="
+              animeDetail.review_characters
+            "
+            :close-dialog="closeRatingDialog"
+            @save-rating="updateRating"
+            @set-navigation-blocked="setNavigationBlocked"
           />
-        </v-col>
-      </v-row>
-    </v-container>
+        </v-row>
 
-    <LeavingConfirmationDialog
-      @go-next-page="goNextPage"
-      @hide-navigation-confirm-dialog="
-        hideNavigationConfirmDialog
-      "
-      v-model="showConfirmationDialog"
-    />
-  </main>
+        <v-row class="w-100 m-auto flex-column">
+          <AnimeInfoEditor
+            v-if="isDataReady"
+            :categories="animeDetail.categories"
+            :categoryItems="categoryItems"
+            :watched-status="animeDetail.watched_status"
+            :broadcast-date="animeDetail.broadcast_date"
+            :genre="animeDetail.genre"
+            :synopsis="animeDetail.synopsis"
+            :comment="animeDetail.comment"
+            :is-login-status="isLoginStatus"
+            :is-loading="isLoading"
+            @update-anime-info="updateAnimeInfo"
+            @set-navigation-blocked="setNavigationBlocked"
+            ref="animeInfoEditorRef"
+          />
+        </v-row>
 
-  <BaseFooter />
-  <AtomSnackbar />
+        <v-row>
+          <v-col class="text-end">
+            <AnimeDelete
+              v-if="isLoginStatus"
+              :anime-name="animeDetail.anime_name"
+              @destroy-anime="destroyAnime"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
+
+      <LeavingConfirmationDialog
+        @go-next-page="goNextPage"
+        @hide-navigation-confirm-dialog="
+          hideNavigationConfirmDialog
+        "
+        v-model="showConfirmationDialog"
+      />
+    </main>
+    <BaseFooter />
+    <AtomSnackbar />
+  </template>
+  <template v-else>
+    <NotFoundView />
+  </template>
 </template>
 
 <script setup>
@@ -100,11 +106,12 @@ import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 import { useFetchCategories } from '../composables/useFetchCategories';
 import { useHelpers } from '../composables/useHelpers';
 import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
+import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AnimeRating from '../organisms/AnimeRating.vue';
 import AnimeInfoEditor from '../organisms/AnimeInfoEditor.vue';
 import AnimeDelete from '../organisms/AnimeDelete.vue';
-import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import LeavingConfirmationDialog from '../organisms/LeavingConfirmationDialog.vue';
+import NotFoundView from '../pages/NotFoundView.vue';
 
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();
@@ -119,7 +126,8 @@ const categoryItems = ref([]);
 const baseUrl = `/api${route.path}`;
 const closeRatingDialog = ref(false);
 const animeInfoEditorRef = ref(null);
-const hasMounted = ref(false);
+// const hasMounted = ref(false);
+const hasAnimeDetail = ref(true);
 
 const isLoading = ref({
   categories: false,
@@ -161,10 +169,12 @@ const fetchAnimeDetail = async () => {
       animeDetail.value.review_average = 'ー';
     }
   } else {
-    setSnackbar(
-      ERROR_MESSAGES.animeGetFailed,
-      SNACKBAR_COLOR.snackbarErrorColor
-    );
+    // NotFoundを表示
+    hasAnimeDetail.value = false;
+    // setSnackbar(
+    //   ERROR_MESSAGES.animeGetFailed,
+    //   SNACKBAR_COLOR.snackbarErrorColor
+    // );
   }
 };
 
@@ -206,7 +216,7 @@ const shouldSkipUpdate = (type, data) => {
   // NOTE: categoryがプロキシされたオブジェクトの値のためJSON.stringifyで文字列変換し比較
   if (
     JSON.stringify(animeDetail.value[type]) === JSON.stringify(data)
-    || !hasMounted
+    // || !hasMounted
   ) {
     // エディター閉じる
     animeInfoEditorRef.value?.editorVisibleToggle(
@@ -286,9 +296,11 @@ const destroyAnime = async () => {
   }
 };
 
-onMounted(() => {
-  hasMounted.value = true;
-});
+// TODO: リリース後数週間様子見て不要であれば削除
+// onMounted(() => {
+//   console.log('mounted');
+//   hasMounted.value = true;
+// });
 </script>
 
 <style lang="scss" scoped>
