@@ -8,11 +8,11 @@ import {
 
 export function useAxiosRequest() {
   const axiosGetCsrfCookie = () => {
-    axios.get('/sanctum/csrf-cookie');
+    return axios.get('/sanctum/csrf-cookie');
   };
 
-  const axiosLoginPost = (url, form) => {
-    axiosGetCsrfCookie();
+  const axiosLoginPost = async (url, form) => {
+    await axiosGetCsrfCookie();
     return axios.post(url, form);
   };
 
