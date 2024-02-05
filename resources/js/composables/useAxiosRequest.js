@@ -41,18 +41,25 @@ export function useAxiosRequest() {
     const mapKeysSnakeCase = data =>
       mapKeysDeep(data, (_value, key) => snakeCase(key));
 
-    axios.interceptors.request.use(
-      ({ data, ...request }) => {
-        const convertedData = mapKeysSnakeCase(data);
-        return { ...request, data: convertedData };
-      },
-      error => {
-        console.error('Request interceptor error:', error);
-        return Promise.reject(error);
-      }
-    );
+    const requestInterceptors =
+      axios.interceptors.request.use(
+        ({ data, ...request }) => {
+          const convertedData = mapKeysSnakeCase(data);
+          return { ...request, data: convertedData };
+        },
+        error => {
+          console.error(
+            'Request interceptor error:',
+            error
+          );
+          return Promise.reject(error);
+        }
+      );
 
-    return axios.put(url, form, header);
+    return axios.put(url, form, header).finally(() => {
+      // interceptorを解除
+      axios.interceptors.request.eject(requestInterceptors);
+    });
   };
 
   const axiosDelete = url => {

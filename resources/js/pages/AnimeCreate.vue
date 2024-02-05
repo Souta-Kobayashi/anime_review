@@ -120,7 +120,7 @@ const referenceErrorMessage = computed(() =>
 );
 
 // apiリクエストするフォーム作成
-const makeRequestFormData = () => {
+const makeRequestFormData = async () => {
   const formData = new FormData();
   const broadcastYear = form.broadcastYear ?? '';
   let keyVisualImage;
@@ -151,7 +151,7 @@ const makeRequestFormData = () => {
 const submitAnimeRegister = async () => {
   setLoading(true);
 
-  const formData = makeRequestFormData();
+  const formData = await makeRequestFormData();
   const result = await apiPostRequest(
     '/api/anime/create',
     formData,
