@@ -31,15 +31,9 @@ const routes = [
   },
   {
     // アニメ詳細
-    path: '/anime/:id',
+    path: '/anime/:id(\\d+)',
     name: 'anime-show',
     component: () => import('./pages/AnimeShow.vue'),
-  },
-  {
-    // アニメ編集
-    path: '/anime/:id/edit',
-    name: 'anime-edit',
-    component: () => import('./pages/AnimeEdit.vue'),
   },
   {
     // カテゴリリスト
@@ -54,30 +48,15 @@ const routes = [
     component: () => import('./pages/CategoryCreate.vue'),
   },
   // {
-  //   // カテゴリ編集
-  //   path: '/category/:id/edit',
-  //   name: 'category-edit',
-  //   component: () => import('./pages/CategoryEdit.vue'),
-  // },
-  // {
   //   path: '/about',
   //   name: 'About',
   //   component: About,
   // },
-  // {
-  //   path: '/item/:id(\\d+)',
-  //   name: 'Item',
-  //   component: Item,
-  // },
-  // {
-  //   path: '/404',
-  //   name: '404-NotFound',
-  //   component: NotFound,
-  // },
-  // {
-  //   path: '/:pathMatch(.*)',
-  //   redirect: '/404',
-  // },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('./pages/NotFoundView.vue'),
+  },
 ];
 
 const router = createRouter({
