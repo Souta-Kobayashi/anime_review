@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('broadcast_date', 100)->nullable();
             $table->unsignedSmallInteger('genre')->nullable();
             $table->text('synopsis')->nullable();
-            $table->text('key_visual_url')->nullable();
+            $table->mediumText('key_visual_url')->nullable();
             $table->string('key_visual_reference', 450)->nullable();
             $table->timestamps();
             $table->softDeletes();
