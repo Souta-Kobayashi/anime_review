@@ -57,7 +57,6 @@
     />
   </main>
   <BaseFooter />
-  <AtomSnackbar />
 </template>
 
 <script setup>
@@ -67,7 +66,6 @@ import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
 import { useHelpers } from '../composables/useHelpers';
 import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
-import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
 import AtomAnimeGenreRadioButton from '../atoms/radio/AtomAnimeGenreRadioButton.vue';
 import AtomAnimeSynopsisTextarea from '../atoms/textarea/AtomAnimeSynopsisTextarea.vue';

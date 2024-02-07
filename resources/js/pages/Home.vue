@@ -11,12 +11,10 @@
     </v-container>
   </main>
   <BaseFooter />
-  <AtomSnackbar />
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AnimeCard from '../organisms/AnimeCard.vue';
 import AtomToAnimeListButton from '../atoms/button/AtomToAnimeListButton.vue';
 import { useFetchAnimeList } from '../composables/useFetchAnimeList';

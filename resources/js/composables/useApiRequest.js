@@ -1,12 +1,10 @@
 import { ref } from 'vue';
 import { useAxiosRequest } from './useAxiosRequest';
-import { useSnackbar } from './useSnackbar';
 import { useGetErrorMessage } from './useGetErrorMessage';
-import { SNACKBAR_COLOR } from '../const/SnackbarColor';
+import { toast } from 'vuetify-sonner';
 
 const { axiosPost, axiosPut, axiosDelete, axiosGet } =
   useAxiosRequest();
-const { setSnackbar } = useSnackbar();
 const { getErrorMessage } = useGetErrorMessage();
 
 export function useApiRequest() {
@@ -32,21 +30,20 @@ export function useApiRequest() {
     data = '',
     contentType = ''
   ) => {
-    let snackbarMessage, snackbarColor;
+    let snackbarMessage;
     let response;
     try {
       response = await axiosPost(url, data, contentType);
       snackbarMessage = response.data.message;
-      snackbarColor = SNACKBAR_COLOR.snackbarSuccessColor;
+      toast.success(snackbarMessage);
     } catch (error) {
       snackbarMessage = getErrorMessage(
         url,
         error.response.status
       );
-      snackbarColor = SNACKBAR_COLOR.snackbarErrorColor;
       response = error.response;
+      toast.warning(snackbarMessage);
     } finally {
-      setSnackbar(snackbarMessage, snackbarColor);
       return response;
     }
   };
@@ -56,43 +53,41 @@ export function useApiRequest() {
     data = '',
     contentType = ''
   ) => {
-    let snackbarMessage, snackbarColor;
+    let snackbarMessage;
     let response;
     try {
       response = await axiosPut(url, data, contentType);
       snackbarMessage = response.data.message;
-      snackbarColor = SNACKBAR_COLOR.snackbarSuccessColor;
+      toast.success(snackbarMessage);
     } catch (error) {
       snackbarMessage = getErrorMessage(
         url,
         error.response.status,
         'put'
       );
-      snackbarColor = SNACKBAR_COLOR.snackbarErrorColor;
+      toast.warning(snackbarMessage);
       response = error.response;
     } finally {
-      setSnackbar(snackbarMessage, snackbarColor);
       return response;
     }
   };
 
   const apiDeleteRequest = async url => {
-    let snackbarMessage, snackbarColor;
+    let snackbarMessage;
     let response;
     try {
       response = await axiosDelete(url);
       snackbarMessage = response.data.message;
-      snackbarColor = SNACKBAR_COLOR.snackbarSuccessColor;
+      toast.success(snackbarMessage);
     } catch (error) {
       snackbarMessage = getErrorMessage(
         url,
         error.response.status,
         'delete'
       );
-      snackbarColor = SNACKBAR_COLOR.snackbarErrorColor;
+      toast.warning(snackbarMessage);
       response = error.response;
     } finally {
-      setSnackbar(snackbarMessage, snackbarColor);
       return response;
     }
   };
