@@ -87,7 +87,6 @@
       />
     </main>
     <BaseFooter />
-    <AtomSnackbar />
   </template>
   <template v-else>
     <NotFoundView />
@@ -98,15 +97,11 @@
 import { ref, onMounted } from 'vue';
 import router from '../router';
 import { useRoute } from 'vue-router';
-import { SNACKBAR_COLOR } from '../const/SnackbarColor';
-import { ERROR_MESSAGES } from '../const/Messages';
-import { useSnackbar } from '../composables/useSnackbar';
 import { useApiRequest } from '../composables/useApiRequest';
 import { useIsLoggedIn } from '../composables/useIsLoggedIn';
 import { useFetchCategories } from '../composables/useFetchCategories';
 import { useHelpers } from '../composables/useHelpers';
 import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
-import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AnimeRating from '../organisms/AnimeRating.vue';
 import AnimeInfoEditor from '../organisms/AnimeInfoEditor.vue';
 import AnimeDelete from '../organisms/AnimeDelete.vue';
@@ -115,7 +110,6 @@ import NotFoundView from '../pages/NotFoundView.vue';
 
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();
-const { setSnackbar } = useSnackbar();
 const { fetchCategories } = useFetchCategories();
 const { isLoginStatus, isDataReady } = useIsLoggedIn();
 const helpers = useHelpers();
@@ -171,10 +165,6 @@ const fetchAnimeDetail = async () => {
   } else {
     // NotFoundを表示
     hasAnimeDetail.value = false;
-    // setSnackbar(
-    //   ERROR_MESSAGES.animeGetFailed,
-    //   SNACKBAR_COLOR.snackbarErrorColor
-    // );
   }
 };
 

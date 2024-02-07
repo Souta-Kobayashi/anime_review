@@ -12,12 +12,10 @@
     />
   </main>
   <BaseFooter />
-  <AtomSnackbar />
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import CategoriesTable from '../organisms/CategoriesTable.vue';
 import { useApiRequest } from '../composables/useApiRequest';
 

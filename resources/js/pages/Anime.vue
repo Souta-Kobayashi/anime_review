@@ -12,13 +12,11 @@
     </v-container>
   </main>
   <BaseFooter />
-  <AtomSnackbar />
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 import AnimeCard from '../organisms/AnimeCard.vue';
 import AtomPagination from '../atoms/pagination/AtomPagination.vue';
 import { useFetchAnimeList } from '../composables/useFetchAnimeList';

@@ -53,7 +53,6 @@
     </v-form>
   </v-sheet>
   <BaseFooter />
-  <AtomSnackbar />
 </template>
 
 <script setup>
@@ -62,7 +61,6 @@ import router from '../router';
 import { useApiRequest } from '../composables/useApiRequest';
 import { useValidate } from '../composables/useValidation';
 import { useIsLoggedIn } from '../composables/useIsLoggedIn';
-import AtomSnackbar from '../atoms/notify/AtomSnackbar.vue';
 
 // form
 const form = reactive({
