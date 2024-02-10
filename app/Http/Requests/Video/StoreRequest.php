@@ -3,9 +3,11 @@
 namespace App\Http\Requests\Video;
 
 use App\Models\Video;
+use App\Rules\ImageExtensionRule;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Intervention\Image\Facades\Image;
 
 class StoreRequest extends FormRequest
 {
@@ -53,7 +55,7 @@ class StoreRequest extends FormRequest
             'synopsis' => 'max:10000',
             'key_visual_image' => [
                 'nullable',
-                'image',
+                new ImageExtensionRule,
             ],
             'key_visual_reference' => 'max:450',
         ];
@@ -79,8 +81,15 @@ class StoreRequest extends FormRequest
         // 画像をディスクに保存しkey_visual_urlに変換する
         if (! empty($data['key_visual_image'])) {
             $image = $data['key_visual_image'];
-            // 画像データをbase64でエンコード
-            $data['key_visual_url'] = base64_encode(file_get_contents($image->getRealPath()));
+
+            // 画像データをbase64でエンコード svgファイルはエンコードできなかったので直データをbase64エンコードしている
+            if ($image->extension() !== 'svg') {
+                // w1:h1.4
+                $resized_image = Image::make($image->getRealPath())->resize(600, 840);
+                $data['key_visual_url'] = 'data:image/webp;base64,'.base64_encode($resized_image->encode('webp'));
+            } else {
+                $data['key_visual_url'] = 'data:image/svg+xml;base64,'.base64_encode(file_get_contents($image->getRealPath()));
+            }
         }
         // DBにはパスだけ保存するため$dataから削除
         unset($data['key_visual_image']);

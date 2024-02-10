@@ -21,7 +21,7 @@
             class="d-flex flex-no-wrap justify-space-between"
           >
             <AtomAnimeCardImage
-              :src="getKeyVisualSource(anime.keyVisual)"
+              :src="anime.keyVisual"
               :key-visual-reference="
                 anime.keyVisualReference
               "
@@ -58,12 +58,6 @@ const props = defineProps({
     default: [],
   },
 });
-
-// base64エンコード用
-const getKeyVisualSource = keyVisual =>
-  keyVisual === '/image/no_image.png'
-    ? keyVisual
-    : `data:image/png;base64,${keyVisual}`;
 
 // NOTE: vuetifyのv-hoverではスマホでタップ時にもhoverの判定となってしまう
 // オーバーレイはPC時のみ表示したいため関数を用意
