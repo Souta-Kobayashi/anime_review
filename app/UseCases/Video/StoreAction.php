@@ -21,7 +21,7 @@ class StoreAction
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            throw new DatabaseStoreException('アニメ');
+            throw new DatabaseStoreException('アニメ', $e);
         }
 
         return $video;

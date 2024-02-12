@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\DatabaseStoreException;
 use App\Exceptions\DatabaseUpdateException;
 use App\Http\Requests\Video\StoreRequest;
 use App\Http\Requests\Video\UpdateInfoRequest;
@@ -42,7 +43,11 @@ class VideoController extends Controller
      */
     public function store(StoreRequest $request, StoreAction $action): VideoResource
     {
-        $video = $request->make_video($request->validated());
+        try {
+            $video = $request->make_video($request->validated());
+        } catch (\Exception $e) {
+            throw new DatabaseStoreException('アニメ', $e);
+        }
 
         return new VideoResource($action($video, $this->review));
     }
