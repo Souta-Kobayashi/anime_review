@@ -2,6 +2,10 @@
   <BaseHeader />
   <main>
     <h2 class="p-4 text-center">アニメ一覧</h2>
+    <AnimeCardSkeletonLoader
+      :is-fetching="isFetching"
+      :anime-card-count="pageSize"
+    />
     <v-container class="position-relative">
       <AnimeCard :display-anime-list="displayAnimeList" />
       <AtomPagination
@@ -17,20 +21,23 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import AnimeCard from '../organisms/AnimeCard.vue';
-import AtomPagination from '../atoms/pagination/AtomPagination.vue';
 import { useFetchAnimeList } from '../composables/useFetchAnimeList';
 import { useVueScrollTo } from '../composables/useVueScrollTo';
+import AtomPagination from '../atoms/pagination/AtomPagination.vue';
+import AnimeCard from '../organisms/AnimeCard.vue';
+import AnimeCardSkeletonLoader from '../organisms/AnimeCardSkeletonLoader.vue';
 
 const router = useRouter();
 const route = useRoute();
 const { fetchAnimeList } = useFetchAnimeList();
+const { vueScrollTo, options } = useVueScrollTo(); // vue-scroll-to
+
 const pageSize = 5;
 const paginationLength = ref(0);
 const currentPage = ref(1);
 const displayAnimeList = ref([]);
+const isFetching = ref(true);
 let animeList = [];
-const { vueScrollTo, options } = useVueScrollTo(); // vue-scroll-to
 
 // ページに応じたアニメをdisplayAnimeListにセット
 const setPageAnimeItems = currentPage => {
@@ -46,6 +53,7 @@ const setPageAnimeItems = currentPage => {
   if (animeList === null) {
     return;
   }
+  isFetching.value = false;
   // ページネーションのlength
   paginationLength.value = Math.ceil(
     animeList.length / pageSize
