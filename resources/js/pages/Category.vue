@@ -3,6 +3,7 @@
   <main>
     <h2 class="p-4 text-center">カテゴリ一覧</h2>
     <CategoriesTable
+      :is-fetching="isFetching"
       :categories="categories"
       :is-category-updated="isCategoryUpdated"
       :is-category-deleted="isCategoryDeleted"
@@ -16,19 +17,22 @@
 
 <script setup>
 import { ref } from 'vue';
-import CategoriesTable from '../organisms/CategoriesTable.vue';
 import { useApiRequest } from '../composables/useApiRequest';
+import CategoriesTable from '../organisms/CategoriesTable.vue';
 
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();
+
 const categories = ref([]);
 const isCategoryUpdated = ref(null);
 const isCategoryDeleted = ref(null);
 const categoryUpdateErrorData = ref(null);
+const isFetching = ref(true);
 
 // カテゴリの取得
 const fetchCategory = async () => {
   const result = await apiGetRequest('/api/category');
+  isFetching.value = false;
   if (result.status === 200) {
     categories.value = result.data;
   }

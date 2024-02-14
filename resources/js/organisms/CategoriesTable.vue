@@ -1,5 +1,13 @@
 <template>
   <v-container>
+    <table class="w-100">
+      <tbody>
+        <CategoriesTableSkeltonLoader
+          :is-fetching="isFetching"
+        />
+      </tbody>
+    </table>
+
     <v-table hover fixed-header>
       <thead>
         <tr>
@@ -41,11 +49,16 @@
 
 <script setup>
 import { ref, watch } from 'vue';
+import MoleculeCategoryTableRow from '../molecules/table/MoleculeCategoryTableRow.vue';
 import CategoryEditDialog from '../organisms/CategoryEditDialog.vue';
 import CategoryDestroyDialog from '../organisms/CategoryDestroyDialog.vue';
-import MoleculeCategoryTableRow from '../molecules/table/MoleculeCategoryTableRow.vue';
+import CategoriesTableSkeltonLoader from '../organisms/CategoriesTableSkeltonLoader.vue';
 
 const props = defineProps({
+  isFetching: {
+    type: Boolean,
+    default: true,
+  },
   categories: {
     type: Array,
     default: [],
