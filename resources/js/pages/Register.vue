@@ -76,9 +76,11 @@
         ></v-text-field>
 
         <v-checkbox
+          v-if="false"
           color="secondary"
           label="サイト規約に同意します"
         ></v-checkbox>
+
         <v-btn
           :disabled="!isPassed"
           :loading="loading"
