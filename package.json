@@ -9,7 +9,6 @@
         "heroku-postbuild": "npm run build"
     },
     "devDependencies": {
-        "@fullhuman/postcss-purgecss": "^5.0.0",
         "@mdi/font": "^7.4.47",
         "@popperjs/core": "^2.11.6",
         "@vitejs/plugin-vue": "^4.6.2",
