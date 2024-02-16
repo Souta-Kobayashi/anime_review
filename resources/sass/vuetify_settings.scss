@@ -1,3 +1,6 @@
 @use 'vuetify/settings' with (
-  $skeleton-loader-image-height: 350px
+  $skeleton-loader-image-height: 350px,
+  $skeleton-loader-subtitle-max-width: 45%,
+  $skeleton-loader-subtitle-text-height:
+    clamp(1rem, 0.847rem + 0.76vw, 1.563rem)
 );
