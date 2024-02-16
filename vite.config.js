@@ -3,6 +3,7 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import vuetify from 'vite-plugin-vuetify';
 import { visualizer } from 'rollup-plugin-visualizer';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   build: {
@@ -33,5 +34,6 @@ export default defineConfig({
     }),
     splitVendorChunkPlugin(),
     visualizer(),
+    viteCompression(),
   ],
 });
