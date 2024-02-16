@@ -25,6 +25,7 @@
               v-else
               :src="animeDetail.key_visual"
               height="350"
+              alt="アニメのキービジュアル画像"
               cover
             >
               <p class="key-visual-reference">

@@ -1,5 +1,9 @@
 <template>
-  <RouterLink to="/login" class="sp-login-btn">
+  <RouterLink
+    to="/login"
+    class="sp-login-btn"
+    aria-label="ログインページに遷移する"
+  >
     <span class="icon-wrapper">
       <v-icon
         class="account-icon"
