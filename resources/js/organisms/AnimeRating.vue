@@ -6,41 +6,54 @@
     lg="9"
     class="anime-rating"
   >
-    <div
-      class="d-flex align-items-center justify-content-center mb-4 rating-comprehensive"
-    >
-      <AtomAnimeRatingComprehensive
-        :review-average="reviewAverage"
+    <template v-if="isFetching">
+      <v-skeleton-loader
+        class="justify-content-around"
+        type="subtitle,list-item,list-item,list-item,list-item,list-item"
+      ></v-skeleton-loader>
+    </template>
+
+    <template v-else>
+      <div
+        class="d-flex align-items-center justify-content-center mb-4 rating-comprehensive"
+      >
+        <AtomAnimeRatingComprehensive
+          :review-average="reviewAverage"
+        />
+      </div>
+
+      <div
+        class="d-flex flex-wrap"
+        :class="isLoginStatus ? 'mb-10' : 'mb-5'"
+      >
+        <MoleculeAnimeRating
+          v-for="rating in ratingItems"
+          :key="rating.ratingTitle"
+          :rating-title="rating.ratingTitle"
+          :rating-value="rating.ratingValue"
+        />
+      </div>
+
+      <AtomRateAnimeTextButton
+        v-if="isLoginStatus"
+        @click="showDialog"
       />
-    </div>
 
-    <div
-      class="d-flex flex-wrap"
-      :class="isLoginStatus ? 'mb-10' : 'mb-5'"
-    >
-      <MoleculeAnimeRating
-        v-for="rating in ratingItems"
-        :key="rating.ratingTitle"
-        :rating-title="rating.ratingTitle"
-        :rating-value="rating.ratingValue"
+      <!-- ダイアログ追加 -->
+      <AnimeRatingUpdateDialog
+        v-model:show-rating-update-dialog="
+          showRatingUpdateDialog
+        "
+        :rating-items="dialogRatingItems"
+        @hide-dialog="hideDialog"
+        @save-rating="
+          $emit('saveRating', dialogRatingItems)
+        "
+        @dialog-rating-items-update="
+          dialogRatingItemsUpdate
+        "
       />
-    </div>
-
-    <AtomRateAnimeTextButton
-      v-if="isLoginStatus"
-      @click="showDialog"
-    />
-
-    <!-- ダイアログ追加 -->
-    <AnimeRatingUpdateDialog
-      v-model:show-rating-update-dialog="
-        showRatingUpdateDialog
-      "
-      :rating-items="dialogRatingItems"
-      @hide-dialog="hideDialog"
-      @save-rating="$emit('saveRating', dialogRatingItems)"
-      @dialog-rating-items-update="dialogRatingItemsUpdate"
-    />
+    </template>
   </v-col>
 </template>
 
@@ -54,9 +67,13 @@ import AtomAnimeRatingComprehensive from '../atoms/text/AtomAnimeRatingComprehen
 import AtomRateAnimeTextButton from '../atoms/button/AtomRateAnimeTextButton.vue';
 
 const props = defineProps({
+  isFetching: {
+    type: Boolean,
+    default: true,
+  },
   reviewAverage: {
     type: Number,
-    default: null,
+    default: 0,
   },
   reviewStory: {
     type: Number,
