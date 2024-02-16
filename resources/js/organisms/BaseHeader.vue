@@ -2,7 +2,9 @@
   <header class="header">
     <div class="container header-container">
       <div class="logo">
-        <RouterLink to="/">AnimeReview</RouterLink>
+        <RouterLink to="/" aria-label="TOPページに遷移する"
+          >AnimeReview</RouterLink
+        >
       </div>
 
       <div class="menu-wrapper" v-if="isDataReady">
