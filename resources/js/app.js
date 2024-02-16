@@ -45,8 +45,8 @@ const vuetify = createVuetify({
 /* fontawesome */
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { fab } from '@fortawesome/free-brands-svg-icons';
-library.add(fab);
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons/faXTwitter';
+library.add(faXTwitter);
 
 // custom components
 import BaseHeader from './organisms/BaseHeader.vue';

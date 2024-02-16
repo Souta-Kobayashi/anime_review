@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { VSonner, toast } from 'vuetify-sonner';
+import { VSonner } from 'vuetify-sonner';
 // Required for snackbar background and text color
 import 'vuetify-sonner/style.css';
 </script>

@@ -6,6 +6,10 @@
         <v-row class="pc-anime-title-wrapper">
           <v-col>
             <h4 class="show-page-anime-title">
+              <v-skeleton-loader
+                v-if="isFetching"
+                type="heading"
+              ></v-skeleton-loader>
               {{ animeDetail.anime_name }}
             </h4>
           </v-col>
@@ -13,8 +17,12 @@
 
         <v-row class="sp-head">
           <v-col cols="6" sm="5" md="4" lg="3">
+            <v-skeleton-loader
+              v-if="isFetching"
+              type="image"
+            ></v-skeleton-loader>
             <v-img
-              v-if="animeDetail"
+              v-else
               :src="animeDetail.key_visual"
               height="350"
               cover
@@ -26,11 +34,16 @@
           </v-col>
           <v-col class="sp-anime-title-wrapper">
             <h4 class="show-page-anime-title">
+              <v-skeleton-loader
+                v-if="isFetching"
+                type="heading"
+              ></v-skeleton-loader>
               {{ animeDetail.anime_name }}
             </h4>
           </v-col>
 
           <AnimeRating
+            :isFetching="isFetching"
             :review-average="animeDetail.review_average"
             :review-story="animeDetail.review_story"
             :review-drawing="animeDetail.review_drawing"
@@ -49,9 +62,9 @@
 
         <v-row class="w-100 m-auto flex-column">
           <AnimeInfoEditor
-            v-if="isDataReady"
+            :isFetching="isFetching"
             :categories="animeDetail.categories"
-            :categoryItems="categoryItems"
+            :categoryItems="allCategoryItems"
             :watched-status="animeDetail.watched_status"
             :broadcast-date="animeDetail.broadcast_date"
             :genre="animeDetail.genre"
@@ -114,12 +127,13 @@ const helpers = useHelpers();
 
 const route = useRoute();
 const animeDetail = ref({});
-const categoryItems = ref([]);
+const allCategoryItems = ref([]);
 const baseUrl = `/api${route.path}`;
 const closeRatingDialog = ref(false);
 const animeInfoEditorRef = ref(null);
 // const hasMounted = ref(false);
 const hasAnimeDetail = ref(true);
+const isFetching = ref(true);
 
 const isLoading = ref({
   categories: false,
@@ -137,10 +151,10 @@ const {
   showConfirmationDialog,
 } = useVueRouterBeforeRouteLeave(); // 入力途中でページ遷移時ダイアログを表示
 
-// カテゴリの取得
-const fetchCategoryItems = async () => {
-  categoryItems.value = await fetchCategories();
-  if (categoryItems.value === null) {
+// 全カテゴリの取得
+const fetchAllCategories = async () => {
+  allCategoryItems.value = await fetchCategories();
+  if (allCategoryItems.value === null) {
     return;
   }
 };
@@ -148,6 +162,7 @@ const fetchCategoryItems = async () => {
 // アニメ詳細取得APIリクエスト
 const fetchAnimeDetail = async () => {
   const result = await apiGetRequest(`${baseUrl}/`);
+  isFetching.value = false;
   if (result.status === 200) {
     animeDetail.value = result.data;
     // 各評価がオール0の場合は総合評価を棒線
@@ -163,7 +178,7 @@ const fetchAnimeDetail = async () => {
 // 初期データセット
 (async () => {
   fetchAnimeDetail();
-  fetchCategoryItems();
+  fetchAllCategories();
 })();
 
 // レーティング更新のAPIリクエスト
@@ -291,5 +306,8 @@ const destroyAnime = async () => {
   @media (min-width: 1280px) {
     max-width: 1200px !important;
   }
+}
+.v-skeleton-loader__list-item {
+  margin: 12px !important;
 }
 </style>
