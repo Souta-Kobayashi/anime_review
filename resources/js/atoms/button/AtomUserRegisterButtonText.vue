@@ -1,5 +1,9 @@
 <template>
-  <RouterLink to="/register" class="register-btn">
+  <RouterLink
+    to="/register"
+    class="register-btn"
+    aria-label="ユーザー登録ページに遷移する"
+  >
     登録
   </RouterLink>
 </template>

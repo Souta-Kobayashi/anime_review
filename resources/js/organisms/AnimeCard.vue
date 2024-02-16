@@ -10,7 +10,10 @@
       @mouseover="displayOverlayOnPc(anime.id)"
       @mouseleave="hideOverlayOnPc()"
     >
-      <RouterLink :to="`/anime/${anime.id}`">
+      <RouterLink
+        :to="`/anime/${anime.id}`"
+        aria-label="アニメ詳細ページに遷移する"
+      >
         <v-card
           class="anime-card"
           color="#0d3b3a"

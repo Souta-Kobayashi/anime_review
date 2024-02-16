@@ -4,6 +4,7 @@
     icon="mdi-menu"
     size="large"
     @click="$emit('toggleHamburgerMenu')"
+    aria-label="メニューを開く"
   />
 </template>
 
