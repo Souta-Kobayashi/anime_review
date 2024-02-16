@@ -3,7 +3,6 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import vuetify from 'vite-plugin-vuetify';
 import { visualizer } from 'rollup-plugin-visualizer';
-import purgecss from '@fullhuman/postcss-purgecss';
 
 export default defineConfig({
   build: {
@@ -14,25 +13,6 @@ export default defineConfig({
         chunkFileNames: `assets/[name].js`,
         assetFileNames: `assets/[name].[ext]`,
       },
-    },
-  },
-  css: {
-    postcss: {
-      plugins: [
-        purgecss({
-          content: ['./public/build/assets/*.js'],
-          safelist: [
-            /-(leave|enter|appear)(|-(to|from|active))$/,
-            /^(?!(|.*?:)cursor-move).+-move$/,
-            /^router-link(|-exact)-active$/,
-            /data-v-.*/,
-            /v-.*/,
-            /text-.*/,
-            /bg-.*/,
-            /rounded-circle/,
-          ],
-        }),
-      ],
     },
   },
   plugins: [
