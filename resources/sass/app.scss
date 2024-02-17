@@ -1,5 +1,13 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+/* noto-sans-javanese-regular - javanese */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Noto Sans Javanese';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/noto-sans-javanese-v23-javanese-regular.woff2')
+    format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
 // Variables
 @import 'variables';
@@ -16,6 +24,8 @@
 @import 'custom_vuetify';
 
 body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
   overflow-x: hidden;
 }
 

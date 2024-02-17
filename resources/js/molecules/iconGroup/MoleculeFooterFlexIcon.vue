@@ -3,6 +3,7 @@
     <ul class="d-flex justify-content-center p-0">
       <li class="mr-12">
         <a
+          aria-label="Xに遷移する"
           href="https://twitter.com/soutaAppservice"
           target="_blank"
         >
@@ -16,6 +17,7 @@
       </li>
       <li>
         <AtomIconLink
+          aria-label="GitHubに遷移する"
           href="https://github.com/Souta-Kobayashi"
           mdiIcon="mdi-github"
         />
