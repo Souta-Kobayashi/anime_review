@@ -8,8 +8,12 @@
   >
     <template v-if="isFetching">
       <v-skeleton-loader
+        class="justify-content-around mb-3"
+        type="subtitle"
+      ></v-skeleton-loader>
+      <v-skeleton-loader
         class="justify-content-around"
-        type="subtitle,list-item,list-item,list-item,list-item,list-item"
+        type="list-item,list-item,list-item,list-item,list-item"
       ></v-skeleton-loader>
     </template>
 
@@ -203,3 +207,12 @@ watch(
   }
 );
 </script>
+
+<style lang="scss" scoped>
+:deep(.v-skeleton-loader__list-item) {
+  margin: 12px 0;
+}
+:deep(.v-skeleton-loader__text) {
+  height: 16px;
+}
+</style>
