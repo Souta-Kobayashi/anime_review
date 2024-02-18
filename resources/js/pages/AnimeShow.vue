@@ -10,7 +10,9 @@
                 v-if="isFetching"
                 type="heading"
               ></v-skeleton-loader>
-              {{ animeDetail.anime_name }}
+              <template v-else>
+                {{ animeDetail.anime_name }}
+              </template>
             </h4>
           </v-col>
         </v-row>
@@ -39,12 +41,14 @@
                 v-if="isFetching"
                 type="heading"
               ></v-skeleton-loader>
-              {{ animeDetail.anime_name }}
+              <template v-else>
+                {{ animeDetail.anime_name }}
+              </template>
             </h4>
           </v-col>
 
           <AnimeRating
-            :isFetching="isFetching"
+            :is-fetching="isFetching"
             :review-average="animeDetail.review_average"
             :review-story="animeDetail.review_story"
             :review-drawing="animeDetail.review_drawing"
@@ -63,9 +67,9 @@
 
         <v-row class="w-100 m-auto flex-column">
           <AnimeInfoEditor
-            :isFetching="isFetching"
+            :is-fetching="isFetching"
             :categories="animeDetail.categories"
-            :categoryItems="allCategoryItems"
+            :category-items="allCategoryItems"
             :watched-status="animeDetail.watched_status"
             :broadcast-date="animeDetail.broadcast_date"
             :genre="animeDetail.genre"
@@ -308,7 +312,8 @@ const destroyAnime = async () => {
     max-width: 1200px !important;
   }
 }
-.v-skeleton-loader__list-item {
-  margin: 12px !important;
+.show-page-anime-title :deep(.v-skeleton-loader__heading) {
+  margin: 10px 0 0;
+  height: 30px;
 }
 </style>

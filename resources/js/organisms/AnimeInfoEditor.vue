@@ -1,11 +1,11 @@
 <template>
   <v-sheet class="pt-5">
     <template v-if="isFetching">
-      <v-sheet class="pt-5">
+      <v-sheet>
         <v-skeleton-loader
           v-for="index in animeInfoEditorCount"
           :key="index"
-          type="table-heading,text"
+          type="heading,text"
         ></v-skeleton-loader>
       </v-sheet>
     </template>
@@ -164,3 +164,13 @@ defineExpose({
   editorVisibleToggle,
 });
 </script>
+
+<style lang="scss" scoped>
+:deep(.v-skeleton-loader__heading) {
+  height: 42px;
+  margin: 12px 0;
+}
+:deep(.v-skeleton-loader__text) {
+  margin: 12px 0;
+}
+</style>
