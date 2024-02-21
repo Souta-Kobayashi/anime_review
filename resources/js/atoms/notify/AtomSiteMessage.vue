@@ -11,6 +11,7 @@
       >本サイトはポートフォリオです。データは定期的にリフレッシュされます
     </v-alert>
   </v-container>
+  <div v-else class="main-margin-top"></div>
 </template>
 
 <script setup>
@@ -21,6 +22,10 @@ const { visibleSiteMessage } = useSiteMessage();
 
 <style lang="scss" scoped>
 .v-container {
+  margin-top: 60px;
   padding: 1rem 1rem 0 !important;
+}
+.main-margin-top {
+  margin-top: 60px;
 }
 </style>
