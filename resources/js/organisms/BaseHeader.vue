@@ -21,36 +21,19 @@
       <MoleculeSpNavMenu
         v-if="isDataReady"
         :is-login-status="isLoginStatus"
-        @toggle-hamburger-menu="
-          toggleHamburgerMenu = !toggleHamburgerMenu
-        "
+        :hamburger-menu-toggle="hamburgerMenuToggle"
         @user-logout="showLogoutDialog = true"
+        @set-hamburger-menu-toggle="
+          hamburgerMenuToggle = !hamburgerMenuToggle
+        "
       />
     </div>
 
     <MoleculeHamburgerMenu
       :is-login-status="isLoginStatus"
-      :toggle-hamburger-menu="toggleHamburgerMenu"
-      @set-hamburger-contents="
-        e => (hamburgerContents = e.value)
-      "
-      @show-hamburger="
-        e => (e.style.height = e.scrollHeight + 'px')
-      "
-      @close-hamburger="e => (e.style.height = '0')"
-      @show-hamburger-inner="
-        e =>
-          changeHamburgerMenuHeight({
-            e,
-            increaseHeight: true,
-          })
-      "
-      @close-hamburger-inner="
-        e =>
-          changeHamburgerMenuHeight({
-            e,
-            increaseHeight: false,
-          })
+      :hamburger-menu-toggle="hamburgerMenuToggle"
+      @set-hamburger-menu-toggle="
+        hamburgerMenuToggle = !hamburgerMenuToggle
       "
     />
     <LogoutDialog
@@ -88,9 +71,8 @@ const { apiPostRequest } = useApiRequest();
 
 const route = useRoute();
 const path = computed(() => route.path);
-const toggleHamburgerMenu = ref(false);
-const hamburgerContents = ref(null);
 const showLogoutDialog = ref(false);
+const hamburgerMenuToggle = ref(false);
 
 // ログイン判定
 (async () => {
@@ -120,19 +102,5 @@ const userLogout = async () => {
   const result = await apiPostRequest('/api/logout');
   if (result.status) setLoginStatus(false);
   showLogoutDialog.value = false;
-};
-
-// ハンバーガーメニューのinnerのtoggleに併せてheightを変更
-const changeHamburgerMenuHeight = ({
-  e,
-  increaseHeight,
-}) => {
-  const currentHeight = parseInt(
-    hamburgerContents.value.style.height
-  );
-  const newHeight = increaseHeight
-    ? currentHeight + parseInt(e.scrollHeight)
-    : currentHeight - parseInt(e.scrollHeight);
-  hamburgerContents.value.style.height = newHeight + 'px';
 };
 </script>

@@ -1,65 +1,43 @@
 <template>
-  <Transition
-    name="show-hamburger"
-    @enter="e => $emit('showHamburger', e)"
-    @leave="e => $emit('closeHamburger', e)"
-  >
+  <Transition name="sp-menu" :duration="200">
     <div
-      v-show="toggleHamburgerMenu"
-      ref="hamburgerContents"
-      id="hamburgerContents"
-      class="container hamburger-contents"
+      class="sp-menu"
+      v-show="hamburgerMenuToggle"
+      @click.self="emit('setHamburgerMenuToggle')"
     >
-      <div>
-        <ul class="sp-menu-wrapper">
-          <AtomMenuLink
-            v-for="(item, key) in hamburgerItems"
-            :key="key"
-            :href="item.href"
-            li-class-name="sp-menu-item"
-          >
-            {{ item.title }}
-          </AtomMenuLink>
-          <MoleculeSpNavRegisterMenu
-            v-if="isLoginStatus"
-            @show-hamburger-inner="
-              e => $emit('showHamburgerInner', e)
-            "
-            @close-hamburger-inner="
-              e => $emit('closeHamburgerInner', e)
-            "
-          />
-        </ul>
-      </div>
+      <ul class="inner">
+        <AtomMenuLink
+          v-for="(item, key) in hamburgerItems"
+          :key="key"
+          :href="item.href"
+          li-class-name="sp-menu-item"
+        >
+          {{ item.title }}
+        </AtomMenuLink>
+        <MoleculeHamburgerRegisterMenu
+          v-if="isLoginStatus"
+        />
+      </ul>
     </div>
   </Transition>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import AtomMenuLink from '../../atoms/menu/AtomMenuLink.vue';
-import MoleculeSpNavRegisterMenu from './MoleculeSpNavRegisterMenu.vue';
+import MoleculeHamburgerRegisterMenu from './MoleculeHamburgerRegisterMenu.vue';
 
 const props = defineProps({
   isLoginStatus: {
     type: Boolean,
     default: false,
   },
-  toggleHamburgerMenu: {
+  hamburgerMenuToggle: {
     type: Boolean,
     default: false,
   },
 });
+const emit = defineEmits(['setHamburgerMenuToggle']);
 
-const emit = defineEmits([
-  'setHamburgerContents',
-  'showHamburger',
-  'closeHamburger',
-  'showHamburgerInner',
-  'closeHamburgerInner',
-]);
-
-const hamburgerContents = ref(null);
 const hamburgerItems = {
   top: {
     title: 'TOP',
@@ -74,21 +52,50 @@ const hamburgerItems = {
     href: '/category',
   },
 };
-
-onMounted(() => {
-  emit('setHamburgerContents', hamburgerContents);
-});
 </script>
 
-<style lang="scss">
-.show-hamburger-enter-from {
-  height: 0;
+<style lang="scss" scoped>
+.sp-menu {
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0.8;
+  background: #000;
+  padding: 20px 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+
+  .sp-menu-item {
+    margin: 0 0 10px 0;
+  }
+}
+.sp-menu-enter-active,
+.sp-menu-leave-active {
+  transition: all 0.25s;
+}
+.sp-menu-enter-from,
+.sp-menu-leave-to {
   opacity: 0;
 }
-.show-hamburger-enter-to {
-  opacity: 1;
+.sp-menu-leave-from,
+.sp-menu-enter-to {
+  opacity: 0.8;
 }
-.show-hamburger-leave-active {
+
+.sp-menu-enter-active .inner,
+.sp-menu-leave-active .inner {
+  transition: all 0.15s ease-in-out;
+}
+
+.sp-menu-enter-active .inner {
+  transition-delay: 0.05s;
+}
+.sp-menu-enter-from .inner,
+.sp-menu-leave-to .inner {
+  transform: translateX(-100px);
   opacity: 0;
 }
 </style>
