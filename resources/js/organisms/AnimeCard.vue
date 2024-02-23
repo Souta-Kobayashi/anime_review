@@ -6,6 +6,7 @@
       cols="12"
       sm="6"
       lg="4"
+      :id="`anime-${anime.id}`"
       class="anime-card-wrapper"
       @mouseover="displayOverlayOnPc(anime.id)"
       @mouseleave="hideOverlayOnPc()"
@@ -30,6 +31,7 @@
               "
             />
             <MoleculeAnimeCardDescription
+              :anime-id="anime.id"
               :anime-name="anime.animeName"
               :categories="anime.categories"
               :rating="anime.rating"
