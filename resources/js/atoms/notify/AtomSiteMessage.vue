@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useSiteMessage } from '../../composables/useSiteMessage';
+import { useSiteMessage } from "../../composables/useSiteMessage";
 
 const { visibleSiteMessage } = useSiteMessage();
 </script>

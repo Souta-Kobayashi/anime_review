@@ -1,8 +1,8 @@
-import router from '../router';
-import { reactive } from 'vue';
-import { useVuelidate } from '@vuelidate/core';
-import { getValidationRules } from './useValidationRules';
-import { useHelpers } from './useHelpers';
+import router from "../router";
+import { reactive } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { getValidationRules } from "./useValidationRules";
+import { useHelpers } from "./useHelpers";
 
 const helpers = useHelpers();
 
@@ -24,7 +24,7 @@ export function useValidate(form) {
 
   // フォーカスが外れた時実行される
   const blurExecVuelidate = field => {
-    serverValidationErrMessage[field] = ''; // サーバーエラーメッセージ削除
+    serverValidationErrMessage[field] = ""; // サーバーエラーメッセージ削除
     // 初回フロントバリデーション用の処理
     // NOTE: $touch()によって、バリデーションの実行に加えて初回バリデーションを行ったフラグが立てられる
     // 以降は入力に応じて自動でバリデーションが行われる
@@ -38,7 +38,7 @@ export function useValidate(form) {
     if (fieldErrors && fieldErrors.length !== 0)
       return fieldErrors
         .map(error => error.$message)
-        .join(', ');
+        .join(", ");
 
     // サーバーからのエラーメッセージ
     const serverErrors =

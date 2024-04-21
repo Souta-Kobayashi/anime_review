@@ -2,14 +2,14 @@
   <div>
     <div class="broadcast-year">
       <AtomBroadcastYearInput
-        @update:broadcastYear="
+        @update:broadcast-year="
           e => $emit('update:broadcastYear', e)
         "
       />
     </div>
     <div class="broadcast-season">
       <AtomAnimeSeasonRadioButton
-        @update:broadcastSeason="
+        @update:broadcast-season="
           e => $emit('update:broadcastSeason', e)
         "
       />
@@ -18,21 +18,21 @@
 </template>
 
 <script setup>
-import AtomBroadcastYearInput from '../../atoms/input/AtomBroadcastYearInput.vue';
-import AtomAnimeSeasonRadioButton from '../../atoms/radio/AtomAnimeSeasonRadioButton.vue';
+import AtomBroadcastYearInput from "../../atoms/input/AtomBroadcastYearInput.vue";
+import AtomAnimeSeasonRadioButton from "../../atoms/radio/AtomAnimeSeasonRadioButton.vue";
 
-const props = defineProps({
+defineProps({
   broadcastYear: {
     type: String,
-    default: '',
+    default: "",
   },
   broadcastSeason: {
     type: String,
-    default: '',
+    default: "",
   },
 });
-const emit = defineEmits([
-  'update:broadcastYear',
-  'update:broadcastSeason',
+defineEmits([
+  "update:broadcastYear",
+  "update:broadcastSeason",
 ]);
 </script>

@@ -6,27 +6,27 @@
     placeholder="例）学園"
     variant="underlined"
     @blur="blurExecVuelidate('name')"
-    @update:modelValue="
+    @update:model-value="
       e => $emit('update:categoryName', e)
     "
   ></v-text-field>
 </template>
 
 <script setup>
-import { reactive, watch, onMounted } from 'vue';
-import { useValidate } from '../../composables/useValidation';
+import { reactive, watch, onMounted } from "vue";
+import { useValidate } from "../../composables/useValidation";
 
 const props = defineProps({
   categoryName: {
     type: String,
-    default: '',
+    default: "",
   },
   serverErrorMessage: {
     type: Object,
-    default: {},
+    default: () => ({}),
   },
 });
-const emit = defineEmits(['update:categoryName']);
+defineEmits(["update:categoryName"]);
 
 // NOTE:
 // vuelidateによるバリデーションを行うためpropsを再度リアクティブで宣言かつ、

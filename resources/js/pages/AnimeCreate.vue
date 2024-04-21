@@ -41,7 +41,7 @@
             "
           />
           <AtomAnimeCreateSubmitButton
-            :isPassed="isPassed"
+            :is-passed="isPassed"
             :loading="loading"
             @submit-anime-register="submitAnimeRegister"
           />
@@ -49,39 +49,39 @@
       </v-form>
     </v-sheet>
     <LeavingConfirmationDialog
+      v-model="showConfirmationDialog"
       @go-next-page="goNextPage"
       @hide-navigation-confirm-dialog="
         hideNavigationConfirmDialog
       "
-      v-model="showConfirmationDialog"
     />
   </main>
   <BaseFooter />
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue';
-import router from '../router';
-import { useApiRequest } from '../composables/useApiRequest';
-import { useValidate } from '../composables/useValidation';
-import { useHelpers } from '../composables/useHelpers';
-import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
-import AtomAnimeNameInput from '../atoms/input/AtomAnimeNameInput.vue';
-import AtomAnimeGenreRadioButton from '../atoms/radio/AtomAnimeGenreRadioButton.vue';
-import AtomAnimeSynopsisTextarea from '../atoms/textarea/AtomAnimeSynopsisTextarea.vue';
-import AtomAnimeCreateSubmitButton from '../atoms/button/AtomAnimeCreateSubmitButton.vue';
-import MoleculeAnimeBroadcastField from '../molecules/dataEntry/MoleculeAnimeBroadcastField.vue';
-import MoleculeAnimeKeyVisualField from '../molecules/dataEntry/MoleculeAnimeKeyVisualField.vue';
-import LeavingConfirmationDialog from '../organisms/LeavingConfirmationDialog.vue';
+import { ref, reactive, computed } from "vue";
+import router from "../router";
+import { useApiRequest } from "../composables/useApiRequest";
+import { useValidate } from "../composables/useValidation";
+import { useHelpers } from "../composables/useHelpers";
+import { useVueRouterBeforeRouteLeave } from "../composables/useVueRouterBeforeRouteLeave";
+import AtomAnimeNameInput from "../atoms/input/AtomAnimeNameInput.vue";
+import AtomAnimeGenreRadioButton from "../atoms/radio/AtomAnimeGenreRadioButton.vue";
+import AtomAnimeSynopsisTextarea from "../atoms/textarea/AtomAnimeSynopsisTextarea.vue";
+import AtomAnimeCreateSubmitButton from "../atoms/button/AtomAnimeCreateSubmitButton.vue";
+import MoleculeAnimeBroadcastField from "../molecules/dataEntry/MoleculeAnimeBroadcastField.vue";
+import MoleculeAnimeKeyVisualField from "../molecules/dataEntry/MoleculeAnimeKeyVisualField.vue";
+import LeavingConfirmationDialog from "../organisms/LeavingConfirmationDialog.vue";
 
 const form = reactive({
-  animeName: '',
-  broadcastYear: '',
-  broadcastSeason: '',
-  genre: '',
-  synopsis: '',
-  keyVisualImage: '',
-  keyVisualReference: '',
+  animeName: "",
+  broadcastYear: "",
+  broadcastSeason: "",
+  genre: "",
+  synopsis: "",
+  keyVisualImage: [],
+  keyVisualReference: "",
 });
 const isPassed = ref(false);
 const serverErrorMessage = reactive({});
@@ -105,40 +105,40 @@ const {
 
 // エラーメッセージ
 const nameErrorMessage = computed(() =>
-  getErrMessage('animeName')
+  getErrMessage("animeName")
 );
 const synopsisErrorMessage = computed(() =>
-  getErrMessage('synopsis')
+  getErrMessage("synopsis")
 );
 const imageErrorMessage = computed(() =>
-  getErrMessage('keyVisualImage')
+  getErrMessage("keyVisualImage")
 );
 const referenceErrorMessage = computed(() =>
-  getErrMessage('keyVisualReference')
+  getErrMessage("keyVisualReference")
 );
 
 // apiリクエストするフォーム作成
 const makeRequestFormData = async () => {
   const formData = new FormData();
-  const broadcastYear = form.broadcastYear ?? '';
+  const broadcastYear = form.broadcastYear ?? "";
   let keyVisualImage;
 
-  formData.append('name', form.animeName);
+  formData.append("name", form.animeName);
   formData.append(
-    'broadcast_date',
+    "broadcast_date",
     `${broadcastYear},${form.broadcastSeason}`
   );
-  formData.append('genre', form.genre);
-  formData.append('synopsis', form.synopsis);
+  formData.append("genre", form.genre);
+  formData.append("synopsis", form.synopsis);
 
   if (form.keyVisualImage[0]) {
     keyVisualImage = form.keyVisualImage[0];
   } else {
-    keyVisualImage = '';
+    keyVisualImage = "";
   }
-  formData.append('key_visual_image', keyVisualImage);
+  formData.append("key_visual_image", keyVisualImage);
   formData.append(
-    'key_visual_reference',
+    "key_visual_reference",
     form.keyVisualReference
   );
 
@@ -151,18 +151,18 @@ const submitAnimeRegister = async () => {
 
   const formData = await makeRequestFormData();
   const result = await apiPostRequest(
-    '/api/anime/create',
+    "/api/anime/create",
     formData,
     {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     }
   );
 
   if (result.status === 201) {
     setNavigationBlocked(false);
-    router.push({ name: 'home' });
+    router.push({ name: "home" });
   } else if (result.status === 422) {
     // prettier-ignore
     const convertServerData = function (key) {

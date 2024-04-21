@@ -89,26 +89,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import MoleculeAnimeCategoryView from '../molecules/dataDisplay/MoleculeAnimeCategoryView.vue';
-import MoleculeAnimeWatchedStatusView from '../molecules/dataDisplay/MoleculeAnimeWatchedStatusView.vue';
-import MoleculeAnimeBroadcastView from '../molecules/dataDisplay/MoleculeAnimeBroadcastView.vue';
-import MoleculeAnimeGenreView from '../molecules/dataDisplay/MoleculeAnimeGenreView.vue';
-import MoleculeAnimeSynopsisView from '../molecules/dataDisplay/MoleculeAnimeSynopsisView.vue';
-import MoleculeAnimeCommentView from '../molecules/dataDisplay/MoleculeAnimeCommentView.vue';
+import { ref } from "vue";
+import MoleculeAnimeCategoryView from "../molecules/dataDisplay/MoleculeAnimeCategoryView.vue";
+import MoleculeAnimeWatchedStatusView from "../molecules/dataDisplay/MoleculeAnimeWatchedStatusView.vue";
+import MoleculeAnimeBroadcastView from "../molecules/dataDisplay/MoleculeAnimeBroadcastView.vue";
+import MoleculeAnimeGenreView from "../molecules/dataDisplay/MoleculeAnimeGenreView.vue";
+import MoleculeAnimeSynopsisView from "../molecules/dataDisplay/MoleculeAnimeSynopsisView.vue";
+import MoleculeAnimeCommentView from "../molecules/dataDisplay/MoleculeAnimeCommentView.vue";
 
-const props = defineProps({
+defineProps({
   isFetching: {
     type: Boolean,
     default: true,
   },
   categories: {
     type: Array,
-    default: [],
+    default: () => [],
   },
   categoryItems: {
     type: Array,
-    default: [],
+    default: () => [],
   },
   watchedStatus: {
     type: Number,
@@ -116,7 +116,7 @@ const props = defineProps({
   },
   broadcastDate: {
     type: String,
-    default: '',
+    default: "",
   },
   genre: {
     type: Number,
@@ -124,11 +124,11 @@ const props = defineProps({
   },
   synopsis: {
     type: String,
-    default: '',
+    default: "",
   },
   comment: {
     type: String,
-    default: '',
+    default: "",
   },
   isLoginStatus: {
     type: Boolean,
@@ -136,12 +136,12 @@ const props = defineProps({
   },
   isLoading: {
     type: Object,
-    default: {},
+    default: () => ({}),
   },
 });
 const emit = defineEmits([
-  'updateAnimeInfo',
-  'setNavigationBlocked',
+  "updateAnimeInfo",
+  "setNavigationBlocked",
 ]);
 
 const isEditorVisible = ref({
@@ -156,7 +156,7 @@ const animeInfoEditorCount = 6;
 
 // 選択されたフィールドのエディターの表示非表示を制御
 const editorVisibleToggle = (type, isVisible) => {
-  emit('setNavigationBlocked', isVisible);
+  emit("setNavigationBlocked", isVisible);
   isEditorVisible.value[type] = isVisible;
 };
 

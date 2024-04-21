@@ -19,17 +19,17 @@
       </span>
     </dt>
     <dd v-if="!isEditorVisible" class="anime-info-text">
-      {{ broadcastDate !== '' ? broadcastDate : '未選択' }}
+      {{ broadcastDate !== "" ? broadcastDate : "未選択" }}
     </dd>
-    <dd v-else="isEditorVisible">
+    <dd v-else>
       <div>
         <AtomBroadcastYearInput
-          class="anime-info-text broadcast-year"
           v-model="year"
+          class="anime-info-text broadcast-year"
         />
         <AtomAnimeSeasonRadioButton
-          class="px-3"
           v-model="season"
+          class="px-3"
         />
       </div>
       <MoleculeUpdateAndCancelButton
@@ -53,16 +53,16 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
-import AtomBroadcastYearInput from '../../atoms/input/AtomBroadcastYearInput.vue';
-import AtomAnimeSeasonRadioButton from '../../atoms/radio/AtomAnimeSeasonRadioButton.vue';
-import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
+import { ref, watch } from "vue";
+import AtomPencilIcon from "../../atoms/icon/AtomPencilIcon.vue";
+import AtomBroadcastYearInput from "../../atoms/input/AtomBroadcastYearInput.vue";
+import AtomAnimeSeasonRadioButton from "../../atoms/radio/AtomAnimeSeasonRadioButton.vue";
+import MoleculeUpdateAndCancelButton from "../buttonGroup/MoleculeUpdateAndCancelButton.vue";
 
 const props = defineProps({
   broadcastDate: {
     type: String,
-    default: '',
+    default: "",
   },
   isLoginStatus: {
     type: Boolean,
@@ -77,23 +77,20 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits([
-  'updateAnimeInfo',
-  'editorVisibleToggle',
-]);
+defineEmits(["updateAnimeInfo", "editorVisibleToggle"]);
 
-const year = ref('');
-const season = ref('');
+const year = ref("");
+const season = ref("");
 
 const extractValues = () => {
   if (props.broadcastDate) {
     const yearMatch = props.broadcastDate.match(/\d{4}年/);
-    year.value = yearMatch ? yearMatch[0] : '';
+    year.value = yearMatch ? yearMatch[0] : "";
 
     const seasonMatch = props.broadcastDate.match(
       /秋アニメ|冬アニメ|春アニメ|夏アニメ/
     );
-    season.value = seasonMatch ? seasonMatch[0] : '';
+    season.value = seasonMatch ? seasonMatch[0] : "";
   }
 };
 

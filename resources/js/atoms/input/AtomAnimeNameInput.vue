@@ -3,20 +3,20 @@
     label="アニメ名"
     placeholder="例）呪術廻戦"
     variant="underlined"
-    @update:modelValue="e => $emit('update:animeName', e)"
+    @update:model-value="e => $emit('update:animeName', e)"
   ></v-text-field>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   animeName: {
     type: String,
-    default: '',
+    default: "",
   },
   serverErrorMessage: {
     type: Object,
-    default: {},
+    default: () => ({}),
   },
 });
-const emit = defineEmits(['update:animeName']);
+defineEmits(["update:animeName"]);
 </script>

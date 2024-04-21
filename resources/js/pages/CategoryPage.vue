@@ -16,9 +16,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useApiRequest } from '../composables/useApiRequest';
-import CategoriesTable from '../organisms/CategoriesTable.vue';
+import { ref } from "vue";
+import { useApiRequest } from "../composables/useApiRequest";
+import CategoriesTable from "../organisms/CategoriesTable.vue";
 
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();
@@ -31,7 +31,7 @@ const isFetching = ref(true);
 
 // カテゴリの取得
 const fetchCategory = async () => {
-  const result = await apiGetRequest('/api/category');
+  const result = await apiGetRequest("/api/category");
   isFetching.value = false;
   if (result.status === 200) {
     categories.value = result.data;

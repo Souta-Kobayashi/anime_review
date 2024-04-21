@@ -62,13 +62,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
-import { useIsLoggedIn } from '../composables/useIsLoggedIn';
-import AnimeRatingUpdateDialog from '../organisms/AnimeRatingUpdateDialog.vue';
-import MoleculeAnimeRating from '../molecules/rating/MoleculeAnimeRating.vue';
-import AtomAnimeRatingComprehensive from '../atoms/text/AtomAnimeRatingComprehensive.vue';
-import AtomRateAnimeTextButton from '../atoms/button/AtomRateAnimeTextButton.vue';
+import { ref, watch } from "vue";
+import { useIsLoggedIn } from "../composables/useIsLoggedIn";
+import AnimeRatingUpdateDialog from "../organisms/AnimeRatingUpdateDialog.vue";
+import MoleculeAnimeRating from "../molecules/rating/MoleculeAnimeRating.vue";
+import AtomAnimeRatingComprehensive from "../atoms/text/AtomAnimeRatingComprehensive.vue";
+import AtomRateAnimeTextButton from "../atoms/button/AtomRateAnimeTextButton.vue";
 
 const props = defineProps({
   isFetching: {
@@ -105,36 +104,36 @@ const props = defineProps({
   },
 });
 const emit = defineEmits([
-  'saveRating',
-  'setNavigationBlocked',
+  "saveRating",
+  "setNavigationBlocked",
 ]);
 
 const { isLoginStatus } = useIsLoggedIn();
 const showRatingUpdateDialog = ref(false);
 const ratingItemsMaster = [
   {
-    ratingName: 'reviewStory',
-    ratingTitle: 'ストーリー',
+    ratingName: "reviewStory",
+    ratingTitle: "ストーリー",
     ratingValue: props.reviewStory,
   },
   {
-    ratingName: 'reviewDrawing',
-    ratingTitle: '作画',
+    ratingName: "reviewDrawing",
+    ratingTitle: "作画",
     ratingValue: props.reviewDrawing,
   },
   {
-    ratingName: 'reviewVoiceActor',
-    ratingTitle: '声優',
+    ratingName: "reviewVoiceActor",
+    ratingTitle: "声優",
     ratingValue: props.reviewVoiceActor,
   },
   {
-    ratingName: 'reviewMusic',
-    ratingTitle: '音楽',
+    ratingName: "reviewMusic",
+    ratingTitle: "音楽",
     ratingValue: props.reviewMusic,
   },
   {
-    ratingName: 'reviewCharacters',
-    ratingTitle: 'キャラクター',
+    ratingName: "reviewCharacters",
+    ratingTitle: "キャラクター",
     ratingValue: props.reviewCharacters,
   },
 ];
@@ -173,12 +172,12 @@ const dialogRatingItemsUpdate = (index, v) => {
 };
 
 const showDialog = () => {
-  emit('setNavigationBlocked', true);
+  emit("setNavigationBlocked", true);
   showRatingUpdateDialog.value = true;
 };
 
 const hideDialog = () => {
-  emit('setNavigationBlocked', false);
+  emit("setNavigationBlocked", false);
   showRatingUpdateDialog.value = false;
 
   // NOTE: ダイアログが消える前にpropsの更新処理が走りratingの値が
@@ -200,7 +199,7 @@ const hideDialog = () => {
 watch(
   () => props.closeDialog,
   closeDialog => {
-    emit('setNavigationBlocked', false);
+    emit("setNavigationBlocked", false);
     showRatingUpdateDialog.value = closeDialog
       ? false
       : true;

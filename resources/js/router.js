@@ -1,51 +1,51 @@
-import { createRouter, createWebHistory } from 'vue-router';
-const BASE_URL = '/';
+import { createRouter, createWebHistory } from "vue-router";
+const BASE_URL = "/";
 
 const routes = [
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('./pages/Login.vue'),
+    path: "/login",
+    name: "login",
+    component: () => import("./pages/LoginPage.vue"),
   },
   {
-    path: '/register',
-    name: 'register',
-    component: () => import('./pages/Register.vue'),
+    path: "/register",
+    name: "register",
+    component: () => import("./pages/RegisterPage.vue"),
   },
   {
-    path: '/',
-    name: 'home',
-    component: () => import('./pages/Home.vue'),
+    path: "/",
+    name: "home",
+    component: () => import("./pages/HomePage.vue"),
   },
   {
     // アニメ一覧
-    path: '/anime',
-    name: 'anime',
-    component: () => import('./pages/Anime.vue'),
+    path: "/anime",
+    name: "anime",
+    component: () => import("./pages/AnimePage.vue"),
   },
   {
     // アニメ登録
-    path: '/anime/create',
-    name: 'anime-create',
-    component: () => import('./pages/AnimeCreate.vue'),
+    path: "/anime/create",
+    name: "anime-create",
+    component: () => import("./pages/AnimeCreate.vue"),
   },
   {
     // アニメ詳細
-    path: '/anime/:id(\\d+)',
-    name: 'anime-show',
-    component: () => import('./pages/AnimeShow.vue'),
+    path: "/anime/:id(\\d+)",
+    name: "anime-show",
+    component: () => import("./pages/AnimeShow.vue"),
   },
   {
     // カテゴリリスト
-    path: '/category',
-    name: 'category',
-    component: () => import('./pages/Category.vue'),
+    path: "/category",
+    name: "category",
+    component: () => import("./pages/CategoryPage.vue"),
   },
   {
     // カテゴリ登録
-    path: '/category/create',
-    name: 'category-create',
-    component: () => import('./pages/CategoryCreate.vue'),
+    path: "/category/create",
+    name: "category-create",
+    component: () => import("./pages/CategoryCreate.vue"),
   },
   // {
   //   path: '/about',
@@ -53,9 +53,9 @@ const routes = [
   //   component: About,
   // },
   {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('./pages/NotFoundView.vue'),
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("./pages/NotFoundView.vue"),
   },
 ];
 
@@ -67,7 +67,7 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     // ブラウザの進む/戻る操作時の挙動
     if (savedPosition) {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         setTimeout(() => {
           resolve(savedPosition);
         }, 1000);

@@ -24,21 +24,18 @@
 </template>
 
 <script setup>
-import AtomMenuLink from '../../atoms/menu/AtomMenuLink.vue';
+import AtomMenuLink from "../../atoms/menu/AtomMenuLink.vue";
 
-const emit = defineEmits([
-  'showHamburgerInner',
-  'closeHamburgerInner',
-]);
+defineEmits(["showHamburgerInner", "closeHamburgerInner"]);
 
 const registerItems = {
   register: {
-    title: 'アニメ登録',
-    href: '/anime/create',
+    title: "アニメ登録",
+    href: "/anime/create",
   },
   anime: {
-    title: 'カテゴリ登録',
-    href: '/category/create',
+    title: "カテゴリ登録",
+    href: "/category/create",
   },
 };
 </script>

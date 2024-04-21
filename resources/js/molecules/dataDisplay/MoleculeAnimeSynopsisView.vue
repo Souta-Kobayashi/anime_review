@@ -15,9 +15,9 @@
       </span>
     </dt>
     <dd v-if="!isEditorVisible" class="anime-info-text">
-      {{ synopsis !== '' ? synopsis : '未入力' }}
+      {{ synopsis !== "" ? synopsis : "未入力" }}
     </dd>
-    <dd v-else="isEditorVisible">
+    <dd v-else>
       <v-textarea
         v-model="synopsisLocal"
         class="anime-info-text"
@@ -42,14 +42,14 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
-import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
+import { ref, watch } from "vue";
+import AtomPencilIcon from "../../atoms/icon/AtomPencilIcon.vue";
+import MoleculeUpdateAndCancelButton from "../buttonGroup/MoleculeUpdateAndCancelButton.vue";
 
 const props = defineProps({
   synopsis: {
     type: String,
-    default: '',
+    default: "",
   },
   isLoginStatus: {
     type: Boolean,
@@ -64,10 +64,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits([
-  'updateAnimeInfo',
-  'editorVisibleToggle',
-]);
+defineEmits(["updateAnimeInfo", "editorVisibleToggle"]);
 
 const synopsisLocal = ref(props.synopsis);
 

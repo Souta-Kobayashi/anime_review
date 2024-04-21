@@ -9,14 +9,14 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   href: {
     type: String,
-    default: '#',
+    default: "#",
   },
   mdiIcon: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 </script>

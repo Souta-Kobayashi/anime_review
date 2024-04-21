@@ -1,7 +1,7 @@
 <template>
   <v-container
-    class="position-relative d-flex"
     v-if="isFetching"
+    class="position-relative d-flex"
   >
     <v-row align="start">
       <v-col
@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   isFetching: {
     type: Boolean,
     default: true,

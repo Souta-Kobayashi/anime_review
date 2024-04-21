@@ -12,14 +12,14 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   src: {
     type: String,
-    default: '/image/no_image.png',
+    default: "/image/no_image.png",
   },
   keyVisualReference: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 </script>

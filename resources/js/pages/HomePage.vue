@@ -18,12 +18,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useFetchAnimeList } from '../composables/useFetchAnimeList';
-import { useHelpers } from '../composables/useHelpers';
-import AtomToAnimeListButton from '../atoms/button/AtomToAnimeListButton.vue';
-import AnimeCard from '../organisms/AnimeCard.vue';
-import AnimeCardSkeletonLoader from '../organisms/AnimeCardSkeletonLoader.vue';
+import { ref, onMounted } from "vue";
+import { useFetchAnimeList } from "../composables/useFetchAnimeList";
+import { useHelpers } from "../composables/useHelpers";
+import AtomToAnimeListButton from "../atoms/button/AtomToAnimeListButton.vue";
+import AnimeCard from "../organisms/AnimeCard.vue";
+import AnimeCardSkeletonLoader from "../organisms/AnimeCardSkeletonLoader.vue";
 
 const { fetchAnimeList } = useFetchAnimeList();
 const helpers = useHelpers();
@@ -51,9 +51,11 @@ const fetchAndDisplayAnimeList = async () => {
 const addMoreButtonClass = () => {
   // もっと見るボタン、グラデーションクラスを追加
   showMoreButton.value = true;
-  document
-    .getElementById('more-contents')
-    .classList.add('more-contents');
+  const moreContents =
+    document.getElementById("more-contents");
+  if (moreContents) {
+    moreContents.classList.add("more-contents");
+  }
 };
 
 onMounted(() => {

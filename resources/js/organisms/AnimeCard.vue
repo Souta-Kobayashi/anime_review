@@ -2,11 +2,11 @@
   <v-row align="start">
     <v-col
       v-for="anime in displayAnimeList"
+      :id="`anime-${anime.id}`"
       :key="anime.id"
       cols="12"
       sm="6"
       lg="4"
-      :id="`anime-${anime.id}`"
       class="anime-card-wrapper"
       @mouseover="displayOverlayOnPc(anime.id)"
       @mouseleave="hideOverlayOnPc()"
@@ -53,14 +53,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import AtomAnimeCardImage from '../atoms/image/AtomAnimeCardImage.vue';
-import MoleculeAnimeCardDescription from '../molecules/card/MoleculeAnimeCardDescription.vue';
+import { ref } from "vue";
+import AtomAnimeCardImage from "../atoms/image/AtomAnimeCardImage.vue";
+import MoleculeAnimeCardDescription from "../molecules/card/MoleculeAnimeCardDescription.vue";
 
-const props = defineProps({
+defineProps({
   displayAnimeList: {
     type: Array,
-    default: [],
+    default: () => [],
   },
 });
 

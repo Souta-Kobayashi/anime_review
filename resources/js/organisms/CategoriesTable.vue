@@ -34,6 +34,9 @@
         "
         @hide-dialog="hideDialog('edit')"
         @update-category="updateCategory"
+        @update:edit-category-name="
+          newValue => (selectCategoryName = newValue)
+        "
       />
       <CategoryDestroyDialog
         :is-destroy-dialog-visible="isDestroyDialogVisible"
@@ -48,11 +51,11 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import MoleculeCategoryTableRow from '../molecules/table/MoleculeCategoryTableRow.vue';
-import CategoryEditDialog from '../organisms/CategoryEditDialog.vue';
-import CategoryDestroyDialog from '../organisms/CategoryDestroyDialog.vue';
-import CategoriesTableSkeltonLoader from '../organisms/CategoriesTableSkeltonLoader.vue';
+import { ref, watch } from "vue";
+import MoleculeCategoryTableRow from "../molecules/table/MoleculeCategoryTableRow.vue";
+import CategoryEditDialog from "../organisms/CategoryEditDialog.vue";
+import CategoryDestroyDialog from "../organisms/CategoryDestroyDialog.vue";
+import CategoriesTableSkeltonLoader from "../organisms/CategoriesTableSkeltonLoader.vue";
 
 const props = defineProps({
   isFetching: {
@@ -61,7 +64,7 @@ const props = defineProps({
   },
   categories: {
     type: Array,
-    default: [],
+    default: () => [],
   },
   isCategoryUpdated: {
     type: Boolean,
@@ -77,18 +80,18 @@ const props = defineProps({
   },
 });
 const emit = defineEmits([
-  'updateCategory',
-  'destroyCategory',
+  "updateCategory",
+  "destroyCategory",
 ]);
 
 const isDestroyDialogVisible = ref(false);
 const isEditDialogVisible = ref(false);
 
 const selectCategoryId = ref(null);
-const selectCategoryName = ref('');
+const selectCategoryName = ref("");
 
 const showDialog = (type, categoryId, categoryName) => {
-  if (type === 'edit') {
+  if (type === "edit") {
     isEditDialogVisible.value = true;
   } else {
     isDestroyDialogVisible.value = true;
@@ -98,7 +101,7 @@ const showDialog = (type, categoryId, categoryName) => {
 };
 
 const hideDialog = type => {
-  if (type === 'edit') {
+  if (type === "edit") {
     isEditDialogVisible.value = false;
   } else {
     isDestroyDialogVisible.value = false;
@@ -107,7 +110,7 @@ const hideDialog = type => {
 
 const updateCategory = newCategoryName => {
   emit(
-    'updateCategory',
+    "updateCategory",
     newCategoryName,
     selectCategoryId.value
   );

@@ -15,8 +15,8 @@
 </template>
 
 <script setup>
-import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
-import AtomOkTextButton from '../atoms/button/AtomOkTextButton.vue';
+import AtomCancelTextButton from "../atoms/button/AtomCancelTextButton.vue";
+import AtomOkTextButton from "../atoms/button/AtomOkTextButton.vue";
 
-defineEmits(['closeDialog', 'userLogout']);
+defineEmits(["closeDialog", "userLogout"]);
 </script>

@@ -27,8 +27,8 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
-import AtomRating from '../../atoms/rating/AtomRating.vue';
+import { computed, onMounted } from "vue";
+import AtomRating from "../../atoms/rating/AtomRating.vue";
 const props = defineProps({
   animeId: {
     type: Number,
@@ -36,11 +36,11 @@ const props = defineProps({
   },
   animeName: {
     type: String,
-    default: '',
+    default: "",
   },
   categories: {
     type: Array,
-    default: [],
+    default: () => [],
   },
   rating: {
     type: Number,
@@ -48,13 +48,13 @@ const props = defineProps({
   },
   synopsis: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 
 // レビュー4.0以上は色を変える
 const ratingColor = computed(() =>
-  props.rating >= 4.0 ? 'red-lighten-2' : 'amber'
+  props.rating >= 4.0 ? "red-lighten-2" : "amber"
 );
 
 onMounted(() => {
@@ -71,7 +71,7 @@ onMounted(() => {
   //   カード全体のheight(350px) - 上下のpadding(20px) - あらすじ以外の要素のheight
   const newSynopsisHeight =
     350 - 20 - animeDescriptionHeight;
-  synopsis.style.height = newSynopsisHeight + 'px';
+  synopsis.style.height = newSynopsisHeight + "px";
 
   // カテゴリのchip数に応じてあらすじ部のheightが変化するため、
   // -webkit-line-clampの値を出し分けている

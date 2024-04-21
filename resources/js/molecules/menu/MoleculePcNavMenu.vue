@@ -11,20 +11,20 @@
 </template>
 
 <script setup>
-import AtomMenuLink from '../../atoms/menu/AtomMenuLink.vue';
+import AtomMenuLink from "../../atoms/menu/AtomMenuLink.vue";
 
 const navigationItems = {
   top: {
-    title: 'TOP',
-    href: '/',
+    title: "TOP",
+    href: "/",
   },
   anime: {
-    title: 'アニメ一覧',
-    href: '/anime',
+    title: "アニメ一覧",
+    href: "/anime",
   },
   category: {
-    title: 'カテゴリ',
-    href: '/category',
+    title: "カテゴリ",
+    href: "/category",
   },
 };
 </script>
