@@ -13,7 +13,7 @@ export function useHelpers() {
     },
     clearObjectValues: obj => {
       Object.keys(obj).forEach(key => {
-        obj[key] = '';
+        obj[key] = "";
       });
       return obj;
     },

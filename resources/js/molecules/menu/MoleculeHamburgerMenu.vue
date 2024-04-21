@@ -1,8 +1,8 @@
 <template>
   <Transition name="sp-menu" :duration="200">
     <div
-      class="sp-menu"
       v-show="hamburgerMenuToggle"
+      class="sp-menu"
       @click.self="emit('setHamburgerMenuToggle')"
     >
       <ul class="inner">
@@ -23,10 +23,10 @@
 </template>
 
 <script setup>
-import AtomMenuLink from '../../atoms/menu/AtomMenuLink.vue';
-import MoleculeHamburgerRegisterMenu from './MoleculeHamburgerRegisterMenu.vue';
+import AtomMenuLink from "../../atoms/menu/AtomMenuLink.vue";
+import MoleculeHamburgerRegisterMenu from "./MoleculeHamburgerRegisterMenu.vue";
 
-const props = defineProps({
+defineProps({
   isLoginStatus: {
     type: Boolean,
     default: false,
@@ -36,20 +36,20 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits(['setHamburgerMenuToggle']);
+const emit = defineEmits(["setHamburgerMenuToggle"]);
 
 const hamburgerItems = {
   top: {
-    title: 'TOP',
-    href: '/',
+    title: "TOP",
+    href: "/",
   },
   anime: {
-    title: 'アニメ一覧',
-    href: '/anime',
+    title: "アニメ一覧",
+    href: "/anime",
   },
   category: {
-    title: 'カテゴリ',
-    href: '/category',
+    title: "カテゴリ",
+    href: "/category",
   },
 };
 </script>

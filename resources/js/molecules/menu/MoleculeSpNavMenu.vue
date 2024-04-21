@@ -1,9 +1,9 @@
 <template>
   <div class="sp-header-contents">
-    <div class="register-btn-wrapper" v-if="!isLoginStatus">
+    <div v-if="!isLoginStatus" class="register-btn-wrapper">
       <AtomUserRegisterButtonText />
     </div>
-    <div class="sp-login-btn-wrapper" v-if="!isLoginStatus">
+    <div v-if="!isLoginStatus" class="sp-login-btn-wrapper">
       <AtomUserLoginLinkIcon />
     </div>
     <div
@@ -34,11 +34,11 @@
 </template>
 
 <script setup>
-import AtomUserRegisterButtonText from '../../atoms/button/AtomUserRegisterButtonText.vue';
-import AtomUserLoginLinkIcon from '../../atoms/icon/AtomUserLoginLinkIcon.vue';
-import AtomUserLogoutLinkIcon from '../../atoms/icon/AtomUserLogoutLinkIcon.vue';
+import AtomUserRegisterButtonText from "../../atoms/button/AtomUserRegisterButtonText.vue";
+import AtomUserLoginLinkIcon from "../../atoms/icon/AtomUserLoginLinkIcon.vue";
+import AtomUserLogoutLinkIcon from "../../atoms/icon/AtomUserLogoutLinkIcon.vue";
 
-const props = defineProps({
+defineProps({
   isLoginStatus: {
     type: Boolean,
     default: false,
@@ -49,8 +49,8 @@ const props = defineProps({
   },
 });
 const emit = defineEmits([
-  'userLogout',
-  'setHamburgerMenuToggle',
+  "userLogout",
+  "setHamburgerMenuToggle",
 ]);
 </script>
 

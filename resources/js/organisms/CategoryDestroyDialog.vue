@@ -2,7 +2,7 @@
   <v-dialog
     v-model="isDestroyDialogVisibleLocal"
     max-width="500"
-    @update:modelValue="$emit('hideDialog')"
+    @update:model-value="$emit('hideDialog')"
   >
     <v-card>
       <p class="text-center fs-5 py-2 px-4">
@@ -23,9 +23,9 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
-import AtomDeleteTextButton from '../atoms/button/AtomDeleteTextButton.vue';
+import { ref, watch } from "vue";
+import AtomCancelTextButton from "../atoms/button/AtomCancelTextButton.vue";
+import AtomDeleteTextButton from "../atoms/button/AtomDeleteTextButton.vue";
 
 const props = defineProps({
   isDestroyDialogVisible: {
@@ -34,10 +34,10 @@ const props = defineProps({
   },
   selectCategoryName: {
     type: String,
-    default: '',
+    default: "",
   },
 });
-const emit = defineEmits(['hideDialog', 'destroyCategory']);
+defineEmits(["hideDialog", "destroyCategory"]);
 
 const isDestroyDialogVisibleLocal = ref(false);
 

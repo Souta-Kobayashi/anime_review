@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed } from "vue";
 import {
   minLength,
   required,
@@ -6,7 +6,7 @@ import {
   sameAs,
   helpers,
   not,
-} from '@vuelidate/validators';
+} from "@vuelidate/validators";
 
 class CustomValidationRules {
   constructor(currentUrl, form) {
@@ -16,11 +16,11 @@ class CustomValidationRules {
 
   // エラーメッセージの日本語化対応
   requiredCustomMessage() {
-    return helpers.withMessage('必須入力です', required);
+    return helpers.withMessage("必須入力です", required);
   }
   emailCustomMessage() {
     return helpers.withMessage(
-      '無効なメールアドレスです',
+      "無効なメールアドレスです",
       email
     );
   }
@@ -32,13 +32,13 @@ class CustomValidationRules {
   }
   sameAsPasswordCustomMessage(password) {
     return helpers.withMessage(
-      'パスワードと一致しません',
+      "パスワードと一致しません",
       sameAs(password)
     );
   }
   sameAsCategoryNameCustomMessage(categoryName) {
     return helpers.withMessage(
-      '異なるカテゴリー名を入力してください',
+      "異なるカテゴリー名を入力してください",
       not(sameAs(categoryName))
     );
   }
@@ -110,18 +110,18 @@ class CustomValidationRules {
 
   getRules() {
     switch (this.currentUrl) {
-      case '/register':
+      case "/register":
         return this.registerRules();
-      case '/login':
+      case "/login":
         return this.loginRules();
-      case '/anime/create':
+      case "/anime/create":
         return this.animeCreateRules();
-      case '/category/create':
+      case "/category/create":
         return this.categoryCreateRules();
-      case '/category': // category edit dialog
+      case "/category": // category edit dialog
         return this.categoryUpdateRules();
       default:
-        console.log('Unknown Rules.');
+        console.log("Unknown Rules.");
     }
   }
 }

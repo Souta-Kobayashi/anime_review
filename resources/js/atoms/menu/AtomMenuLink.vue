@@ -1,24 +1,28 @@
 <template>
   <li :class="liClassName">
-    <RouterLink :to="href" :class="aClassName" active-class="text-white">
+    <RouterLink
+      :to="href"
+      :class="aClassName"
+      active-class="text-white"
+    >
       <slot></slot>
     </RouterLink>
   </li>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   href: {
     type: String,
-    default: '',
+    default: "",
   },
   liClassName: {
     type: String,
-    default: '',
+    default: "",
   },
   aClassName: {
     type: String,
-    default: '',
+    default: "",
   },
 });
 </script>

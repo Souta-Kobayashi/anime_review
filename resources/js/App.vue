@@ -1,6 +1,6 @@
 <script setup>
-import { RouterView } from 'vue-router';
-import AtomToast from './atoms/notify/AtomToast.vue';
+import { RouterView } from "vue-router";
+import AtomToast from "./atoms/notify/AtomToast.vue";
 </script>
 
 <template>

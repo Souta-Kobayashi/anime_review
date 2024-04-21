@@ -6,16 +6,16 @@
     rounded="circle"
     size="25"
     total-visible="5"
-    @update:modelValue="e => $emit('pageChange', e)"
+    @update:model-value="e => $emit('pageChange', e)"
   ></v-pagination>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   paginationLength: {
     type: Number,
     default: 1,
   },
 });
-const emit = defineEmits(['pageChange']);
+defineEmits(["pageChange"]);
 </script>

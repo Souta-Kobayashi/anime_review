@@ -17,7 +17,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '../../sass/_mixin.scss';
+@import "../../sass/_mixin.scss";
 
 .v-container {
   padding: 0 !important;

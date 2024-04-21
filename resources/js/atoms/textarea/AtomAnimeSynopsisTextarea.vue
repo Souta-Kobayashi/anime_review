@@ -3,16 +3,16 @@
     auto-grow
     label="物語のあらすじ"
     variant="outlined"
-    @update:modelValue="e => $emit('update:synopsis', e)"
+    @update:model-value="e => $emit('update:synopsis', e)"
   ></v-textarea>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   synopsis: {
     type: String,
-    default: '',
+    default: "",
   },
 });
-const emit = defineEmits(['update:synopsis']);
+defineEmits(["update:synopsis"]);
 </script>

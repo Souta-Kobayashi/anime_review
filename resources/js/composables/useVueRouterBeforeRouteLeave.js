@@ -1,5 +1,5 @@
-import { ref } from 'vue';
-import { useRouter, onBeforeRouteLeave } from 'vue-router';
+import { ref } from "vue";
+import { useRouter, onBeforeRouteLeave } from "vue-router";
 
 export function useVueRouterBeforeRouteLeave() {
   const isNavigationBlocked = ref(false);
@@ -26,7 +26,7 @@ export function useVueRouterBeforeRouteLeave() {
   /**
    * フォームが変更されている場合に確認ダイアログを表示
    */
-  onBeforeRouteLeave((to, from) => {
+  onBeforeRouteLeave(to => {
     // フォーム編集中は画面遷移させずダイアログ表示
     if (isNavigationBlocked.value) {
       showConfirmationDialog.value = true;

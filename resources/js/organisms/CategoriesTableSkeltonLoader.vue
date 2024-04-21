@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   isFetching: {
     type: Boolean,
     default: true,

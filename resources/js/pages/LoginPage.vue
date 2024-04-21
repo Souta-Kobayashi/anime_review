@@ -20,8 +20,8 @@
         ></v-text-field>
 
         <v-text-field
-          class="mb-4"
           v-model="form.password"
+          class="mb-4"
           :type="showPassword ? 'text' : 'password'"
           :error-messages="getErrMessage('password')"
           :append-inner-icon="
@@ -33,7 +33,7 @@
           prepend-inner-icon="mdi-lock-outline"
           variant="underlined"
           autocomplete="new-password"
-          @click:appendInner="showPassword = !showPassword"
+          @click:append-inner="showPassword = !showPassword"
           @blur="blurExecVuelidate('password')"
         ></v-text-field>
 
@@ -56,16 +56,16 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
-import router from '../router';
-import { useApiRequest } from '../composables/useApiRequest';
-import { useValidate } from '../composables/useValidation';
-import { useIsLoggedIn } from '../composables/useIsLoggedIn';
+import { ref, reactive } from "vue";
+import router from "../router";
+import { useApiRequest } from "../composables/useApiRequest";
+import { useValidate } from "../composables/useValidation";
+import { useIsLoggedIn } from "../composables/useIsLoggedIn";
 
 // form
 const form = reactive({
-  email: '',
-  password: '',
+  email: "",
+  password: "",
 });
 
 // composables
@@ -81,12 +81,12 @@ const isPassed = ref(false);
 // submit
 const submitLogin = async () => {
   setLoading(true);
-  const result = await apiPostRequest('/api/login', form);
+  const result = await apiPostRequest("/api/login", form);
 
   // NOTE: 認証エラーはサーバーからのエラーメッセージは表示させないことにした
   // "ログインに失敗"文言以上のヒントは不要と判断
   if (result.status === 200) {
-    router.push({ name: 'home' });
+    router.push({ name: "home" });
     setLoginStatus(true);
   }
   setLoading(false);

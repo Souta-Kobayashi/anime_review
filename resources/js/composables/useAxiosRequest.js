@@ -4,11 +4,11 @@ import {
   isObject,
   mapValues,
   mapKeys,
-} from 'lodash';
+} from "lodash";
 
 export function useAxiosRequest() {
   const axiosGetCsrfCookie = () => {
-    return axios.get('/sanctum/csrf-cookie');
+    return axios.get("/sanctum/csrf-cookie");
   };
 
   const axiosLoginPost = async (url, form) => {
@@ -16,14 +16,14 @@ export function useAxiosRequest() {
     return axios.post(url, form);
   };
 
-  const axiosPost = (url, form = '', header = '') => {
-    if (url === '/api/login') {
+  const axiosPost = (url, form = "", header = "") => {
+    if (url === "/api/login") {
       return axiosLoginPost(url, form);
     }
     return axios.post(url, form, header);
   };
 
-  const axiosPut = (url, form = '', header = '') => {
+  const axiosPut = (url, form = "", header = "") => {
     const mapKeysDeep = (data, callback) => {
       if (isArray(data)) {
         return data.map(innerData =>
@@ -49,7 +49,7 @@ export function useAxiosRequest() {
         },
         error => {
           console.error(
-            'Request interceptor error:',
+            "Request interceptor error:",
             error
           );
           return Promise.reject(error);
@@ -63,6 +63,7 @@ export function useAxiosRequest() {
   };
 
   const axiosDelete = url => {
+    console.log("test");
     return axios.delete(url);
   };
 

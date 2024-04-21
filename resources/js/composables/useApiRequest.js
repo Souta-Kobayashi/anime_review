@@ -1,7 +1,7 @@
-import { ref } from 'vue';
-import { useAxiosRequest } from './useAxiosRequest';
-import { useGetErrorMessage } from './useGetErrorMessage';
-import { toast } from 'vuetify-sonner';
+import { ref } from "vue";
+import { useAxiosRequest } from "./useAxiosRequest";
+import { useGetErrorMessage } from "./useGetErrorMessage";
+import { toast } from "vuetify-sonner";
 
 const { axiosPost, axiosPut, axiosDelete, axiosGet } =
   useAxiosRequest();
@@ -15,20 +15,17 @@ export function useApiRequest() {
   };
 
   const apiGetRequest = async url => {
-    let response;
     try {
-      response = await axiosGet(url);
+      return await axiosGet(url);
     } catch (error) {
-      response = error.response;
-    } finally {
-      return response;
+      return error.response;
     }
   };
 
   const apiPostRequest = async (
     url,
-    data = '',
-    contentType = ''
+    data = "",
+    contentType = ""
   ) => {
     let snackbarMessage;
     let response;
@@ -36,6 +33,7 @@ export function useApiRequest() {
       response = await axiosPost(url, data, contentType);
       snackbarMessage = response.data.message;
       toast.success(snackbarMessage);
+      return response;
     } catch (error) {
       snackbarMessage = getErrorMessage(
         url,
@@ -43,15 +41,14 @@ export function useApiRequest() {
       );
       response = error.response;
       toast.warning(snackbarMessage);
-    } finally {
       return response;
     }
   };
 
   const apiPutRequest = async (
     url,
-    data = '',
-    contentType = ''
+    data = "",
+    contentType = ""
   ) => {
     let snackbarMessage;
     let response;
@@ -59,15 +56,15 @@ export function useApiRequest() {
       response = await axiosPut(url, data, contentType);
       snackbarMessage = response.data.message;
       toast.success(snackbarMessage);
+      return response;
     } catch (error) {
       snackbarMessage = getErrorMessage(
         url,
         error.response.status,
-        'put'
+        "put"
       );
       toast.warning(snackbarMessage);
       response = error.response;
-    } finally {
       return response;
     }
   };
@@ -79,15 +76,15 @@ export function useApiRequest() {
       response = await axiosDelete(url);
       snackbarMessage = response.data.message;
       toast.success(snackbarMessage);
+      return response;
     } catch (error) {
       snackbarMessage = getErrorMessage(
         url,
         error.response.status,
-        'delete'
+        "delete"
       );
       toast.warning(snackbarMessage);
       response = error.response;
-    } finally {
       return response;
     }
   };

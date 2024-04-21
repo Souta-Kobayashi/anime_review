@@ -15,9 +15,9 @@
       </span>
     </dt>
     <dd v-if="!isEditorVisible" class="anime-info-text">
-      {{ comment !== '' ? comment : '未入力' }}
+      {{ comment !== "" ? comment : "未入力" }}
     </dd>
-    <dd v-else="isEditorVisible">
+    <dd v-else>
       <v-textarea
         v-model="commentLocal"
         class="anime-info-text"
@@ -38,14 +38,14 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
-import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
+import { ref, watch } from "vue";
+import AtomPencilIcon from "../../atoms/icon/AtomPencilIcon.vue";
+import MoleculeUpdateAndCancelButton from "../buttonGroup/MoleculeUpdateAndCancelButton.vue";
 
 const props = defineProps({
   comment: {
     type: String,
-    default: '',
+    default: "",
   },
   isLoginStatus: {
     type: Boolean,
@@ -60,10 +60,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits([
-  'updateAnimeInfo',
-  'editorVisibleToggle',
-]);
+defineEmits(["updateAnimeInfo", "editorVisibleToggle"]);
 
 const commentLocal = ref(props.comment);
 

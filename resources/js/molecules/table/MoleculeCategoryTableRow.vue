@@ -18,20 +18,20 @@
 </template>
 
 <script setup>
-import { useIsLoggedIn } from '../../composables/useIsLoggedIn';
-import MoleculeCategoryActionMenu from '../iconGroup/MoleculeCategoryActionMenu.vue';
+import { useIsLoggedIn } from "../../composables/useIsLoggedIn";
+import MoleculeCategoryActionMenu from "../iconGroup/MoleculeCategoryActionMenu.vue";
 
-const props = defineProps({
+defineProps({
   categoryId: {
     type: Number,
     default: null,
   },
   categoryName: {
     type: String,
-    default: '',
+    default: "",
   },
 });
-const emit = defineEmits(['showDialog']);
+defineEmits(["showDialog"]);
 
 const { isLoginStatus } = useIsLoggedIn();
 </script>

@@ -17,18 +17,18 @@
     <dd v-if="!isEditorVisible" class="anime-info-category">
       <span v-if="categories.length === 0">未選択</span>
       <v-chip
-        v-else
         v-for="(category, index) in categories"
+        v-else
         :key="index"
         variant="tonal"
         class="me-2 mb-2"
         >{{ category.category_name }}
       </v-chip>
     </dd>
-    <dd v-else="isEditorVisible">
+    <dd v-else>
       <v-select
-        class="anime-info-text"
         v-model="currentCategoriesLocal"
+        class="anime-info-text"
         :items="categoryItemsLocal"
         chips
         variant="underlined"
@@ -48,18 +48,18 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
-import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
+import { ref, watch } from "vue";
+import AtomPencilIcon from "../../atoms/icon/AtomPencilIcon.vue";
+import MoleculeUpdateAndCancelButton from "../buttonGroup/MoleculeUpdateAndCancelButton.vue";
 
 const props = defineProps({
   categories: {
     type: Array,
-    default: [],
+    default: () => [],
   },
   categoryItems: {
     type: Array,
-    default: [],
+    default: () => [],
   },
   isLoginStatus: {
     type: Boolean,
@@ -75,19 +75,19 @@ const props = defineProps({
   },
 });
 const emit = defineEmits([
-  'updateAnimeInfo',
-  'editorVisibleToggle',
+  "updateAnimeInfo",
+  "editorVisibleToggle",
 ]);
 
 const currentCategoriesLocal = ref([]);
 const categoryItemsLocal = ref([]);
 
 const categorySet = (categories, type) => {
-  if (type === 'current') {
+  if (type === "current") {
     currentCategoriesLocal.value = categories.map(
       item => item.category_name
     );
-  } else if (type === 'list') {
+  } else if (type === "list") {
     categoryItemsLocal.value = categories.map(
       item => item.category_name
     );
@@ -96,21 +96,21 @@ const categorySet = (categories, type) => {
 
 // 初期データセット
 (async () => {
-  categorySet(props.categories, 'current');
-  categorySet(props.categoryItems, 'list');
+  categorySet(props.categories, "current");
+  categorySet(props.categoryItems, "list");
 })();
 
 watch(
   () => props.categories,
   v => {
-    categorySet(v, 'current');
+    categorySet(v, "current");
   }
 );
 
 watch(
   () => props.categoryItems,
   v => {
-    categorySet(v, 'list');
+    categorySet(v, "list");
   }
 );
 
@@ -124,8 +124,8 @@ const updateAnimeInfo = () => {
   );
 
   emit(
-    'updateAnimeInfo',
-    'categories',
+    "updateAnimeInfo",
+    "categories",
     filteredCategoryItems
   );
 };

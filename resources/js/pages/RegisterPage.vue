@@ -45,7 +45,7 @@
           variant="underlined"
           hint="※8文字以上の英数字"
           autocomplete="new-password"
-          @click:appendInner="showPassword = !showPassword"
+          @click:append-inner="showPassword = !showPassword"
           @blur="blurExecVuelidate('password')"
         ></v-text-field>
 
@@ -68,7 +68,7 @@
           prepend-inner-icon="mdi-lock-outline"
           variant="underlined"
           autocomplete="new-password"
-          @click:appendInner="
+          @click:append-inner="
             showConfirmationPassword =
               !showConfirmationPassword
           "
@@ -100,17 +100,17 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
-import router from '../router';
-import { useApiRequest } from '../composables/useApiRequest';
-import { useValidate } from '../composables/useValidation';
+import { ref, reactive } from "vue";
+import router from "../router";
+import { useApiRequest } from "../composables/useApiRequest";
+import { useValidate } from "../composables/useValidation";
 
 // form
 const form = reactive({
-  name: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
+  name: "",
+  email: "",
+  password: "",
+  password_confirmation: "",
   terms: false,
 });
 
@@ -131,14 +131,14 @@ const isPassed = ref(false);
 const submitRegisterUser = async () => {
   setLoading(true);
   const result = await apiPostRequest(
-    '/api/register',
+    "/api/register",
     form
   );
   if (result.status === 422) {
     const errObject = result.data.errors;
     setServerValidationError(errObject);
   } else if (result.status === 200) {
-    router.push({ name: 'home' });
+    router.push({ name: "home" });
   }
   setLoading(false);
 };

@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   isPassed: {
     type: Boolean,
     default: false,
@@ -24,5 +24,5 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits(['submitCategoryRegister']);
+defineEmits(["submitCategoryRegister"]);
 </script>

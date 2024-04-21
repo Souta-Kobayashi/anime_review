@@ -16,14 +16,14 @@
 </template>
 
 <script setup>
-import AtomDeleteIcon from '../../atoms/icon/AtomDeleteIcon.vue';
-import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
+import AtomDeleteIcon from "../../atoms/icon/AtomDeleteIcon.vue";
+import AtomPencilIcon from "../../atoms/icon/AtomPencilIcon.vue";
 
-const props = defineProps({
+defineProps({
   isLoginStatus: {
     type: Boolean,
     default: false,
   },
 });
-const emit = defineEmits(['showDialog']);
+defineEmits(["showDialog"]);
 </script>

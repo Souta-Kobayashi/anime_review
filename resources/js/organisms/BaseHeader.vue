@@ -7,7 +7,7 @@
         >
       </div>
 
-      <div class="menu-wrapper" v-if="isDataReady">
+      <div v-if="isDataReady" class="menu-wrapper">
         <ul class="menu-contents">
           <MoleculePcNavMenu />
           <MoleculePcNavRegisterMenu v-if="isLoginStatus" />
@@ -46,17 +46,17 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import { useApiRequest } from '../composables/useApiRequest';
-import AtomSiteMessage from '../atoms/notify/AtomSiteMessage.vue';
-import MoleculePcNavMenu from '../molecules/menu/MoleculePcNavMenu.vue';
-import MoleculePcNavRegisterMenu from '../molecules/menu/MoleculePcNavRegisterMenu.vue';
-import MoleculePcNavUserMenu from '../molecules/menu/MoleculePcNavUserMenu.vue';
-import MoleculeSpNavMenu from '../molecules/menu/MoleculeSpNavMenu.vue';
-import MoleculeHamburgerMenu from '../molecules/menu/MoleculeHamburgerMenu.vue';
-import LogoutDialog from '../organisms/LogoutDialog.vue';
-import { useIsLoggedIn } from '../composables/useIsLoggedIn';
+import { ref, computed, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { useApiRequest } from "../composables/useApiRequest";
+import AtomSiteMessage from "../atoms/notify/AtomSiteMessage.vue";
+import MoleculePcNavMenu from "../molecules/menu/MoleculePcNavMenu.vue";
+import MoleculePcNavRegisterMenu from "../molecules/menu/MoleculePcNavRegisterMenu.vue";
+import MoleculePcNavUserMenu from "../molecules/menu/MoleculePcNavUserMenu.vue";
+import MoleculeSpNavMenu from "../molecules/menu/MoleculeSpNavMenu.vue";
+import MoleculeHamburgerMenu from "../molecules/menu/MoleculeHamburgerMenu.vue";
+import LogoutDialog from "../organisms/LogoutDialog.vue";
+import { useIsLoggedIn } from "../composables/useIsLoggedIn";
 
 // prettier-ignore
 const {
@@ -84,22 +84,22 @@ const hamburgerMenuToggle = ref(false);
 onMounted(() => {
   // ページ遷移時にドロップダウンが閉じない現象を修正
   watch(path, () => {
-    const el = document.querySelector('nav .dropdown ul');
-    if (el) el.classList.remove('show');
+    const el = document.querySelector("nav .dropdown ul");
+    if (el) el.classList.remove("show");
   });
 });
 
 // ドロップダウン内のリンクを開いているか判定
-const isDropdownItemActive = computed(() => {
-  return (
-    path.value === '/anime/create' ||
-    path.value === '/category/create'
-  );
-});
+// const isDropdownItemActive = computed(() => {
+//   return (
+//     path.value === '/anime/create' ||
+//     path.value === '/category/create'
+//   );
+// });
 
 // logout
 const userLogout = async () => {
-  const result = await apiPostRequest('/api/logout');
+  const result = await apiPostRequest("/api/logout");
   if (result.status) setLoginStatus(false);
   showLogoutDialog.value = false;
 };

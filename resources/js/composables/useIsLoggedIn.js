@@ -1,5 +1,5 @@
-import { ref } from 'vue';
-import { useAxiosRequest } from './useAxiosRequest';
+import { ref } from "vue";
+import { useAxiosRequest } from "./useAxiosRequest";
 
 const { axiosGet } = useAxiosRequest();
 
@@ -17,7 +17,7 @@ export function useIsLoggedIn() {
 
   const fetchLoginStatus = async () => {
     try {
-      return await axiosGet('/api/isLoggedIn');
+      return await axiosGet("/api/isLoggedIn");
     } catch (error) {
       return null;
     }

@@ -11,9 +11,9 @@
 
         <v-container class="anime-rating">
           <div
-            class="position-relative rating-item"
             v-for="(rating, index) in ratingItemsLocal"
             :key="rating.ratingTitle"
+            class="position-relative rating-item"
           >
             <span class="rating-title"
               >{{ rating.ratingTitle }}：</span
@@ -37,7 +37,7 @@
             @click="$emit('hideDialog')"
           />
           <AtomUpdateTextButton
-            isPassed
+            is-passed
             @click="$emit('saveRating')"
           />
         </v-card-actions>
@@ -47,10 +47,10 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
-import AtomRating from '../atoms/rating/AtomRating.vue';
-import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
-import AtomUpdateTextButton from '../atoms/button/AtomUpdateTextButton.vue';
+import { ref, computed, watch } from "vue";
+import AtomRating from "../atoms/rating/AtomRating.vue";
+import AtomCancelTextButton from "../atoms/button/AtomCancelTextButton.vue";
+import AtomUpdateTextButton from "../atoms/button/AtomUpdateTextButton.vue";
 
 const props = defineProps({
   showRatingUpdateDialog: {
@@ -59,14 +59,14 @@ const props = defineProps({
   },
   ratingItems: {
     type: Array,
-    default: [],
+    default: () => [],
   },
 });
 const emit = defineEmits([
-  'hideDialog',
-  'update:showRatingUpdateDialog',
-  'dialogRatingItemsUpdate',
-  'saveRating', // レーティングのAPIリクエスト
+  "hideDialog",
+  "update:showRatingUpdateDialog",
+  "dialogRatingItemsUpdate",
+  "saveRating", // レーティングのAPIリクエスト
 ]);
 
 const showRatingUpdateDialogLocal = computed({
@@ -74,7 +74,7 @@ const showRatingUpdateDialogLocal = computed({
     return props.showRatingUpdateDialog;
   },
   set(v) {
-    emit('update:showRatingUpdateDialog', v);
+    emit("update:showRatingUpdateDialog", v);
   },
 });
 

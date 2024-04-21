@@ -1,7 +1,7 @@
 <template>
   <v-radio-group
     inline
-    @update:modelValue="
+    @update:model-value="
       e => $emit('update:broadcastSeason', e)
     "
   >
@@ -14,5 +14,5 @@
 </template>
 
 <script setup>
-const emit = defineEmits(['update:broadcastSeason']);
+defineEmits(["update:broadcastSeason"]);
 </script>
