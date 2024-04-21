@@ -7,8 +7,8 @@
       <v-card-actions class="justify-content-center">
         <AtomBackTextButton @click="$emit('goNextPage')" />
         <AtomCancelTextButton
-          @click="$emit('hideNavigationConfirmDialog')"
           color="deep-orange-darken-4"
+          @click="$emit('hideNavigationConfirmDialog')"
         />
       </v-card-actions>
     </v-card>
@@ -16,11 +16,8 @@
 </template>
 
 <script setup>
-import AtomBackTextButton from '../atoms/button/AtomLeavePageTextButton.vue';
-import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
+import AtomBackTextButton from "../atoms/button/AtomLeavePageTextButton.vue";
+import AtomCancelTextButton from "../atoms/button/AtomCancelTextButton.vue";
 
-const emit = defineEmits([
-  'goNextPage',
-  'hideNavigationConfirmDialog',
-]);
+defineEmits(["goNextPage", "hideNavigationConfirmDialog"]);
 </script>

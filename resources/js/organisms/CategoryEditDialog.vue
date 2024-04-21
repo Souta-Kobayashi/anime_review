@@ -2,7 +2,7 @@
   <v-dialog
     v-model="showDialogEditLocal"
     max-width="500"
-    @update:modelValue="$emit('hideDialog')"
+    @update:model-value="$emit('hideDialog')"
   >
     <v-form v-model="isPassed" @submit.prevent>
       <v-card>
@@ -45,10 +45,10 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
-import AtomCategoryNameEditInput from '../atoms/input/AtomCategoryNameEditInput.vue';
-import AtomUpdateTextButton from '../atoms/button/AtomUpdateTextButton.vue';
+import { computed, ref, watch } from "vue";
+import AtomCancelTextButton from "../atoms/button/AtomCancelTextButton.vue";
+import AtomCategoryNameEditInput from "../atoms/input/AtomCategoryNameEditInput.vue";
+import AtomUpdateTextButton from "../atoms/button/AtomUpdateTextButton.vue";
 
 const props = defineProps({
   isDialogEdit: {
@@ -57,15 +57,24 @@ const props = defineProps({
   },
   editCategoryName: {
     type: String,
-    default: '',
+    default: "",
   },
   categoryUpdateErrorData: {
     type: Object,
     default: null,
   },
 });
-const emit = defineEmits(['hideDialog', 'updateCategory']);
+const emits = defineEmits([
+  "hideDialog",
+  "updateCategory",
+  "update:editCategoryName",
+]);
 
+const editCategoryName = computed({
+  get: () => props.editCategoryName,
+  set: newValue =>
+    emits("update:editCategoryName", newValue),
+});
 const isPassed = ref(false);
 const showDialogEditLocal = ref(false);
 

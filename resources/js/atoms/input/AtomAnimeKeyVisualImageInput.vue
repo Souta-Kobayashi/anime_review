@@ -3,12 +3,12 @@
     clearable
     label="キービジュアル画像"
     variant="underlined"
-    @update:modelValue="
+    @update:model-value="
       e => $emit('update:keyVisualImage', e)
     "
   ></v-file-input>
 </template>
 
 <script setup>
-const emit = defineEmits(['update:keyVisualImage']);
+defineEmits(["update:keyVisualImage"]);
 </script>

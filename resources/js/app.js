@@ -1,19 +1,19 @@
-import './bootstrap';
+import "./bootstrap";
 
-import { createApp } from 'vue';
-import router from './router';
-import App from './App.vue';
+import { createApp } from "vue";
+import router from "./router";
+import App from "./App.vue";
 
 // Vuetify
-import 'vuetify/styles';
-import { createVuetify } from 'vuetify';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
-import '@mdi/font/css/materialdesignicons.css'; // Ensure you are using css-loader
+import "vuetify/styles";
+import { createVuetify } from "vuetify";
+import { aliases, mdi } from "vuetify/iconsets/mdi";
+import "@mdi/font/css/materialdesignicons.css"; // Ensure you are using css-loader
 
 const vuetify = createVuetify({
   theme: {
     dark: false,
-    default: 'light',
+    default: "light",
     disable: false,
     options: {
       cspNonce: undefined,
@@ -23,18 +23,18 @@ const vuetify = createVuetify({
     },
     themes: {
       light: {
-        primary: '#1976D2',
-        secondary: '#424242',
-        accent: '#82B1FF',
-        error: '#FF5252',
-        info: '#2196F3',
-        success: '#4CAF50',
-        warning: '#FB8C00',
+        primary: "#1976D2",
+        secondary: "#424242",
+        accent: "#82B1FF",
+        error: "#FF5252",
+        info: "#2196F3",
+        success: "#4CAF50",
+        warning: "#FB8C00",
       },
     },
   },
   icons: {
-    defaultSet: 'mdi',
+    defaultSet: "mdi",
     aliases,
     sets: {
       mdi,
@@ -43,19 +43,19 @@ const vuetify = createVuetify({
 });
 
 /* fontawesome */
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faXTwitter } from '@fortawesome/free-brands-svg-icons/faXTwitter';
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons/faXTwitter";
 library.add(faXTwitter);
 
 // custom components
-import BaseHeader from './organisms/BaseHeader.vue';
-import BaseFooter from './organisms/BaseFooter.vue';
+import BaseHeader from "./organisms/BaseHeader.vue";
+import BaseFooter from "./organisms/BaseFooter.vue";
 
 const app = createApp(App);
 app
-  .component('FontAwesomeIcon', FontAwesomeIcon)
-  .component('BaseHeader', BaseHeader)
-  .component('BaseFooter', BaseFooter);
+  .component("FontAwesomeIcon", FontAwesomeIcon)
+  .component("BaseHeader", BaseHeader)
+  .component("BaseFooter", BaseFooter);
 app.use(router).use(vuetify);
-app.mount('#app');
+app.mount("#app");

@@ -1,7 +1,7 @@
 <template>
   <v-radio-group
     label="ジャンル"
-    @update:modelValue="e => $emit('update:genre', e)"
+    @update:model-value="e => $emit('update:genre', e)"
   >
     <v-radio
       class="anime-genre"
@@ -22,11 +22,11 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   genre: {
     type: String,
-    default: '',
+    default: "",
   },
 });
-const emit = defineEmits(['update:genre']);
+defineEmits(["update:genre"]);
 </script>

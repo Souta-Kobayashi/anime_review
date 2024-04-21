@@ -6,11 +6,11 @@
 </template>
 
 <script setup>
-import AtomRating from '../../atoms/rating/AtomRating.vue';
-const props = defineProps({
+import AtomRating from "../../atoms/rating/AtomRating.vue";
+defineProps({
   ratingTitle: {
     type: String,
-    default: '',
+    default: "",
   },
   ratingValue: {
     type: Number,

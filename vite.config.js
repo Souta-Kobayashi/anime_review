@@ -1,9 +1,10 @@
-import { splitVendorChunkPlugin, defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import vue from '@vitejs/plugin-vue';
-import vuetify from 'vite-plugin-vuetify';
-import { visualizer } from 'rollup-plugin-visualizer';
-import viteCompression from 'vite-plugin-compression';
+import { splitVendorChunkPlugin, defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import vue from "@vitejs/plugin-vue";
+import vuetify from "vite-plugin-vuetify";
+import { visualizer } from "rollup-plugin-visualizer";
+import viteCompression from "vite-plugin-compression";
+// import { fileURLToPath, URL } from 'node:url';
 
 export default defineConfig({
   build: {
@@ -21,14 +22,15 @@ export default defineConfig({
     vuetify({
       styles: {
         configFile:
-          './resources/sass/vuetify_settings.scss',
+          "./resources/sass/vuetify_settings.scss",
       },
     }),
     laravel({
       input: [
-        'resources/css/app.css',
-        'resources/sass/app.scss',
-        'resources/js/app.js',
+        "resources/css/app.css",
+        "resources/sass/app.scss",
+        "resources/js/app.js",
+        // 'resources/js/app.ts',
       ],
       refresh: true,
     }),
@@ -37,3 +39,31 @@ export default defineConfig({
     viteCompression(),
   ],
 });
+
+//vitejs.dev/config/
+// export default defineConfig({
+//   plugins: [
+//     vue(),
+//     vuetify({
+//       styles: {
+//         configFile:
+//           './resources/sass/vuetify_settings.scss',
+//       },
+//     }),
+//     laravel({
+//       input: [
+//         'resources/css/app.css',
+//         'resources/sass/app.scss',
+//         'resources/js/app.ts',
+//       ],
+//       refresh: true,
+//     }),
+//   ],
+//   resolve: {
+//     alias: {
+//       '@': fileURLToPath(
+//         new URL('./resources/js', import.meta.url)
+//       ),
+//     },
+//   },
+// });

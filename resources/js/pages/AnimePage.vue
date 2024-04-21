@@ -19,13 +19,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
-import { useFetchAnimeList } from '../composables/useFetchAnimeList';
-import { useVueScrollTo } from '../composables/useVueScrollTo';
-import AtomPagination from '../atoms/pagination/AtomPagination.vue';
-import AnimeCard from '../organisms/AnimeCard.vue';
-import AnimeCardSkeletonLoader from '../organisms/AnimeCardSkeletonLoader.vue';
+import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useFetchAnimeList } from "../composables/useFetchAnimeList";
+import { useVueScrollTo } from "../composables/useVueScrollTo";
+import AtomPagination from "../atoms/pagination/AtomPagination.vue";
+import AnimeCard from "../organisms/AnimeCard.vue";
+import AnimeCardSkeletonLoader from "../organisms/AnimeCardSkeletonLoader.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -75,6 +75,6 @@ const pageChange = pageNumber => {
 
   setPageAnimeItems(pageNumber);
   // トップまでスクロール
-  vueScrollTo.scrollTo('#app', options);
+  vueScrollTo.scrollTo("#app", options);
 };
 </script>

@@ -1,7 +1,7 @@
 import {
   ERROR_MESSAGES,
   CONSOLE_MESSAGES,
-} from '../const/Messages';
+} from "../const/Messages";
 
 export function useGetErrorMessage() {
   const getErrorMessage = (url, status, method) => {
@@ -21,15 +21,15 @@ export function useGetErrorMessage() {
     const animeRequestError = /api\/anime\/\d+/;
     if (animeRequestError.test(url)) {
       switch (method) {
-        case 'put':
-          if (animeRequestError.test('rating')) {
+        case "put":
+          if (animeRequestError.test("rating")) {
             message =
               ERROR_MESSAGES.animeRatingUpdateFailed;
           } else {
             message = ERROR_MESSAGES.animeInfoUpdateFailed;
           }
           break;
-        case 'delete':
+        case "delete":
           message = ERROR_MESSAGES.animeDeleteFailed;
           break;
         default:
@@ -43,9 +43,9 @@ export function useGetErrorMessage() {
     if (categoryUpdateOrDelete.test(url)) {
       switch (status) {
         case 422:
-          if (method === 'put') {
+          if (method === "put") {
             message = ERROR_MESSAGES.categoryUpdateFailed;
-          } else if (method === 'delete') {
+          } else if (method === "delete") {
             message = ERROR_MESSAGES.categoryDeleteFailed;
           }
           break;

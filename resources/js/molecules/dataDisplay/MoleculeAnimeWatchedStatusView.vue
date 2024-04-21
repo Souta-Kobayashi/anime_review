@@ -22,7 +22,7 @@
     <dd v-if="!isEditorVisible" class="anime-info-text">
       {{ watchedStatusName }}
     </dd>
-    <dd v-else="isEditorVisible">
+    <dd v-else>
       <MoleculeAnimeWatchedStatusRadioGroup
         v-model="watchedStatusLocal"
         inline
@@ -49,10 +49,10 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
-import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
-import MoleculeAnimeWatchedStatusRadioGroup from '../radioGroup/MoleculeAnimeWatchedStatusRadioGroup.vue';
-import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
+import { ref, computed, watch } from "vue";
+import AtomPencilIcon from "../../atoms/icon/AtomPencilIcon.vue";
+import MoleculeAnimeWatchedStatusRadioGroup from "../radioGroup/MoleculeAnimeWatchedStatusRadioGroup.vue";
+import MoleculeUpdateAndCancelButton from "../buttonGroup/MoleculeUpdateAndCancelButton.vue";
 
 const props = defineProps({
   watchedStatus: {
@@ -72,10 +72,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits([
-  'updateAnimeInfo',
-  'editorVisibleToggle',
-]);
+defineEmits(["updateAnimeInfo", "editorVisibleToggle"]);
 
 const watchedStatusLocal = ref(props.watchedStatus);
 

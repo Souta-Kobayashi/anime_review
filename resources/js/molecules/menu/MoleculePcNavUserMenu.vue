@@ -17,16 +17,16 @@
 </template>
 
 <script setup>
-import AtomUserRegisterButtonWithIcon from '../../atoms/button/AtomUserRegisterButtonWithIcon.vue';
-import AtomUserLoginButtonWithIcon from '../../atoms/button/AtomUserLoginButtonWithIcon.vue';
-import AtomUserLogoutButtonWithIcon from '../../atoms/button/AtomUserLogoutButtonWithIcon.vue';
+import AtomUserRegisterButtonWithIcon from "../../atoms/button/AtomUserRegisterButtonWithIcon.vue";
+import AtomUserLoginButtonWithIcon from "../../atoms/button/AtomUserLoginButtonWithIcon.vue";
+import AtomUserLogoutButtonWithIcon from "../../atoms/button/AtomUserLogoutButtonWithIcon.vue";
 
-const props = defineProps({
+defineProps({
   isLoginStatus: {
     type: Boolean,
     default: false,
   },
 });
 
-const emit = defineEmits(['userLogout']);
+defineEmits(["userLogout"]);
 </script>

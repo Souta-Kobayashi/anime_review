@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from "vue";
 const props = defineProps({
   reviewAverage: {
     type: Number,
@@ -40,7 +40,7 @@ const startRatingAverageAnimation = () => {
 
   const animate = () => {
     reviewAverageView.value =
-      reviewAverageView.value === 'ー'
+      reviewAverageView.value === "ー"
         ? 0
         : reviewAverageView.value;
 
@@ -58,7 +58,7 @@ const startRatingAverageAnimation = () => {
       reviewAverageView.value =
         reviewAverageView.value !== 0
           ? props.reviewAverage.toFixed(1)
-          : 'ー';
+          : "ー";
       return;
     }
 

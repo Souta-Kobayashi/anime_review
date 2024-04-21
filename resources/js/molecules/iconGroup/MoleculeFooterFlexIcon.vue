@@ -19,7 +19,7 @@
         <AtomIconLink
           aria-label="GitHubに遷移する"
           href="https://github.com/Souta-Kobayashi"
-          mdiIcon="mdi-github"
+          mdi-icon="mdi-github"
         />
       </li>
     </ul>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import AtomIconLink from '../../atoms/icon/AtomIconLink.vue';
+import AtomIconLink from "../../atoms/icon/AtomIconLink.vue";
 </script>
 
 <style lang="scss" scoped>

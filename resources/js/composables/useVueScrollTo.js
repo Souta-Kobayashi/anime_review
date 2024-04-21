@@ -1,9 +1,9 @@
-import vueScrollTo from 'vue-scrollto';
+import vueScrollTo from "vue-scrollto";
 
 const options = {
-  container: 'body',
+  container: "body",
   duration: 100,
-  easing: 'ease',
+  easing: "ease",
   offset: 0,
   force: true,
   cancelable: true,

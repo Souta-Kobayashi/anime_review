@@ -1,42 +1,42 @@
 <template>
   <v-text-field
-    v-model="editCategoryNameLocal.name"
+    v-model="editCategoryName.name"
     :error-messages="categoryNameErrorMessage"
     label="カテゴリ名"
     @blur="blurExecVuelidate('name')"
-    @update:modelValue="
+    @update:model-value="
       e => $emit('update:editCategoryName', e)
     "
   ></v-text-field>
 </template>
 
 <script setup>
-import { reactive, watch, computed } from 'vue';
-import { useValidate } from '../../composables/useValidation';
+import { reactive, watch, computed } from "vue";
+import { useValidate } from "../../composables/useValidation";
 
 const props = defineProps({
   editCategoryName: {
     type: String,
-    default: '',
+    default: "",
   },
   categoryUpdateErrorData: {
     type: Object,
     default: null,
   },
 });
-const emit = defineEmits(['update:editCategoryName']);
+defineEmits(["update:editCategoryName"]);
 
-const editCategoryNameLocal = reactive({
+const editCategoryName = reactive({
   name: props.editCategoryName,
 });
 const {
   getErrMessage,
   blurExecVuelidate,
   setServerValidationError,
-} = useValidate(editCategoryNameLocal);
+} = useValidate(editCategoryName);
 
 const categoryNameErrorMessage = computed(() =>
-  getErrMessage('name')
+  getErrMessage("name")
 );
 
 watch(

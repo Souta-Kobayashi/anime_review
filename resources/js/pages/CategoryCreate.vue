@@ -24,14 +24,14 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
-import router from '../router';
-import { useApiRequest } from '../composables/useApiRequest';
-import AtomCategoryNameInput from '../atoms/input/AtomCategoryNameInput.vue';
-import AtomCategoryCreateSubmitButton from '../atoms/button/AtomCategoryCreateSubmitButton.vue';
+import { ref, reactive } from "vue";
+import router from "../router";
+import { useApiRequest } from "../composables/useApiRequest";
+import AtomCategoryNameInput from "../atoms/input/AtomCategoryNameInput.vue";
+import AtomCategoryCreateSubmitButton from "../atoms/button/AtomCategoryCreateSubmitButton.vue";
 
 const form = reactive({
-  categoryName: '',
+  categoryName: "",
 });
 const isPassed = ref(false);
 const serverErrorMessage = reactive({});
@@ -42,12 +42,12 @@ const { loading, setLoading, apiPostRequest } =
 const submitCategoryRegister = async () => {
   setLoading(true);
   const result = await apiPostRequest(
-    '/api/category/create',
+    "/api/category/create",
     { name: form.categoryName }
   );
 
   if (result.status === 201) {
-    router.push({ name: 'category' });
+    router.push({ name: "category" });
   } else if (result.status === 422) {
     // サーバーエラーメッセージを生成
     for (const key in result.data.errors) {

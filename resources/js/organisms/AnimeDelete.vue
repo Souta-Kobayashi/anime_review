@@ -4,7 +4,6 @@
     color="brown-lighten-2"
     icon="mdi-trash-can-outline"
     size="small"
-    @delete-anime="$emit('deleteAnime')"
     @click="showDialog"
   ></v-btn>
 
@@ -31,17 +30,17 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import AtomCancelTextButton from '../atoms/button/AtomCancelTextButton.vue';
-import AtomDeleteTextButton from '../atoms/button/AtomDeleteTextButton.vue';
+import { ref } from "vue";
+import AtomCancelTextButton from "../atoms/button/AtomCancelTextButton.vue";
+import AtomDeleteTextButton from "../atoms/button/AtomDeleteTextButton.vue";
 
-const props = defineProps({
+defineProps({
   animeName: {
     type: String,
-    default: '',
+    default: "",
   },
 });
-const emit = defineEmits(['destroyAnime']);
+defineEmits(["destroyAnime"]);
 
 const isDestroyDialogVisible = ref(false);
 const showDialog = () => {

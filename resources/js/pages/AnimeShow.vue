@@ -67,6 +67,7 @@
 
         <v-row class="w-100 m-auto flex-column">
           <AnimeInfoEditor
+            ref="animeInfoEditorRef"
             :is-fetching="isFetching"
             :categories="animeDetail.categories"
             :category-items="allCategoryItems"
@@ -79,7 +80,6 @@
             :is-loading="isLoading"
             @update-anime-info="updateAnimeInfo"
             @set-navigation-blocked="setNavigationBlocked"
-            ref="animeInfoEditorRef"
           />
         </v-row>
 
@@ -95,11 +95,11 @@
       </v-container>
 
       <LeavingConfirmationDialog
+        v-model="showConfirmationDialog"
         @go-next-page="goNextPage"
         @hide-navigation-confirm-dialog="
           hideNavigationConfirmDialog
         "
-        v-model="showConfirmationDialog"
       />
     </main>
     <BaseFooter />
@@ -110,24 +110,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import router from '../router';
-import { useRoute } from 'vue-router';
-import { useApiRequest } from '../composables/useApiRequest';
-import { useIsLoggedIn } from '../composables/useIsLoggedIn';
-import { useFetchCategories } from '../composables/useFetchCategories';
-import { useHelpers } from '../composables/useHelpers';
-import { useVueRouterBeforeRouteLeave } from '../composables/useVueRouterBeforeRouteLeave';
-import AnimeRating from '../organisms/AnimeRating.vue';
-import AnimeInfoEditor from '../organisms/AnimeInfoEditor.vue';
-import AnimeDelete from '../organisms/AnimeDelete.vue';
-import LeavingConfirmationDialog from '../organisms/LeavingConfirmationDialog.vue';
-import NotFoundView from '../pages/NotFoundView.vue';
+import { ref } from "vue";
+import router from "../router";
+import { useRoute } from "vue-router";
+import { useApiRequest } from "../composables/useApiRequest";
+import { useIsLoggedIn } from "../composables/useIsLoggedIn";
+import { useFetchCategories } from "../composables/useFetchCategories";
+import { useHelpers } from "../composables/useHelpers";
+import { useVueRouterBeforeRouteLeave } from "../composables/useVueRouterBeforeRouteLeave";
+import AnimeRating from "../organisms/AnimeRating.vue";
+import AnimeInfoEditor from "../organisms/AnimeInfoEditor.vue";
+import AnimeDelete from "../organisms/AnimeDelete.vue";
+import LeavingConfirmationDialog from "../organisms/LeavingConfirmationDialog.vue";
+import NotFoundView from "../pages/NotFoundView.vue";
 
 const { apiGetRequest, apiPutRequest, apiDeleteRequest } =
   useApiRequest();
 const { fetchCategories } = useFetchCategories();
-const { isLoginStatus, isDataReady } = useIsLoggedIn();
+const { isLoginStatus } = useIsLoggedIn();
 const helpers = useHelpers();
 
 const route = useRoute();
@@ -171,8 +171,8 @@ const fetchAnimeDetail = async () => {
   if (result.status === 200) {
     animeDetail.value = result.data;
     // 各評価がオール0の場合は総合評価を棒線
-    if (animeDetail.value.review_average === '0') {
-      animeDetail.value.review_average = 'ー';
+    if (animeDetail.value.review_average === "0") {
+      animeDetail.value.review_average = "ー";
     }
   } else {
     // NotFoundを表示
@@ -233,9 +233,9 @@ const shouldSkipUpdate = (type, data) => {
 
 // 放送時期のデータをAPIリクエスト用に加工
 const formatBroadcastForBackend = (type, data) => {
-  if (type === 'broadcast_date') {
+  if (type === "broadcast_date") {
     // 放送西暦のプルダウンは値がないとnullとなるため空文字に置換
-    data.year = data.year ?? '';
+    data.year = data.year ?? "";
     return `${data.year},${data.season}`;
   }
   return data;
@@ -243,7 +243,7 @@ const formatBroadcastForBackend = (type, data) => {
 
 // 放送時期のデータをフロント表示用に加工
 const formatBroadcastForDisplay = (type, data) => {
-  if (!(type === 'broadcast_date')) {
+  if (!(type === "broadcast_date")) {
     return data;
   }
 
@@ -251,11 +251,11 @@ const formatBroadcastForDisplay = (type, data) => {
   if (pattern.test(data)) {
     // 西暦、季節ともに入力されている場合はスペースに置換
     // e.g.) 2023年,春アニメ
-    data = data.replace(/,/g, ' ');
+    data = data.replace(/,/g, " ");
   } else {
     // 西暦、季節どちらか入力されている場合は空文字に置換
     // e.g.) ,春アニメ | 2023年,
-    data = data.replace(/,/g, '');
+    data = data.replace(/,/g, "");
   }
   return data;
 };
@@ -294,7 +294,7 @@ const destroyAnime = async () => {
   const result = await apiDeleteRequest(baseUrl);
   if (result.status === 200) {
     // 削除後homeにリダイレクト
-    router.push({ name: 'home' });
+    router.push({ name: "home" });
   }
 };
 

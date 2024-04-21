@@ -16,7 +16,7 @@
     <dd v-if="!isEditorVisible" class="anime-info-text">
       {{ genreName }}
     </dd>
-    <dd v-else="isEditorVisible">
+    <dd v-else>
       <MoleculeAnimeGenreRadioGroup
         v-model="genreLocal"
         inline
@@ -35,10 +35,10 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
-import AtomPencilIcon from '../../atoms/icon/AtomPencilIcon.vue';
-import MoleculeAnimeGenreRadioGroup from '../radioGroup/MoleculeAnimeGenreRadioGroup.vue';
-import MoleculeUpdateAndCancelButton from '../buttonGroup/MoleculeUpdateAndCancelButton.vue';
+import { ref, computed, watch } from "vue";
+import AtomPencilIcon from "../../atoms/icon/AtomPencilIcon.vue";
+import MoleculeAnimeGenreRadioGroup from "../radioGroup/MoleculeAnimeGenreRadioGroup.vue";
+import MoleculeUpdateAndCancelButton from "../buttonGroup/MoleculeUpdateAndCancelButton.vue";
 
 const props = defineProps({
   genre: {
@@ -58,10 +58,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits([
-  'updateAnimeInfo',
-  'editorVisibleToggle',
-]);
+defineEmits(["updateAnimeInfo", "editorVisibleToggle"]);
 
 const genreLocal = ref(props.genre);
 
